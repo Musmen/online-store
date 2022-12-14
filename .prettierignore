@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/coverage
+/tmp
+/.vscode
+/.idea
+/assets/fonts
+package-lock.json
+package.json
+/.husky

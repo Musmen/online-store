@@ -1,0 +1,6 @@
+node_modules
+dist
+global.d.ts
+webpack.config.js
+*.html
+/.husky
