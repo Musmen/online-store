@@ -1,0 +1,13 @@
+/node_modules
+/dist
+/coverage
+/tmp
+/nginx
+/.vscode
+/.idea
+/assets/fonts
+k8s/*
+package-lock.json
+package.json
+yarn.lock
+/.husky
