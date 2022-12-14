@@ -1,8 +1,6 @@
 node_modules
 dist
 global.d.ts
-postcss.config.js
 webpack.config.js
-webpack.config.prod.js
 *.html
 /.husky
