@@ -11,6 +11,7 @@ class CInputText extends BaseComponent {
   public create(): HTMLInputElement | undefined {
     const root: HTMLInputElement = document.createElement('input');
     this.root = root;
+    this.attributes();
     return root;
   }
 
