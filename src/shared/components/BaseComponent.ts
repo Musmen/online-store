@@ -1,7 +1,7 @@
 abstract class BaseComponent {
   protected root: HTMLElement | HTMLInputElement | undefined;
 
-  get Root() {
+  public get Root() {
     return this.root;
   }
 
