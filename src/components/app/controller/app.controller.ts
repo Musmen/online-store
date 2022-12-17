@@ -1,8 +1,5 @@
-import storage from '../storage/storage';
-
-import headerComponent from '../../../header/header';
-import footerComponent from '../../../footer/footer';
-import mainPageComponent from '../../../main-page/main-page';
+import headerComponent from '../../header/header';
+import footerComponent from '../../footer/footer';
 
 class Controller {
   #elements: { [key: string]: HTMLElement | null } = {};
@@ -17,10 +14,6 @@ class Controller {
     this.#elements.appContainer?.insertAdjacentHTML('afterbegin', headerComponent.render());
   }
 
-  #renderMainPage(): void {
-    this.#elements.appContainer?.insertAdjacentHTML('beforeend', mainPageComponent.render());
-  }
-
   #renderFooter(): void {
     this.#elements.appContainer?.insertAdjacentHTML('beforeend', footerComponent.render());
   }
@@ -28,10 +21,6 @@ class Controller {
   init(): void {
     this.#renderHeader();
     headerComponent.init();
-
-    this.#renderMainPage();
-    mainPageComponent.init();
-    mainPageComponent.renderProducts(storage.getProducts());
 
     this.#renderFooter();
   }

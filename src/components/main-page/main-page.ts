@@ -1,4 +1,5 @@
 import './scss/main-page.styles.scss';
+import storage from '../app/storage/storage';
 
 class MainPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
@@ -10,10 +11,11 @@ class MainPageComponent {
   }
 
   init(): void {
-    console.log('Init Main Page Component');
     this.#elements = {
       productsList: document.querySelector('.products-list'),
     };
+
+    this.renderProducts();
   }
 
   unmount(): void {
@@ -23,14 +25,14 @@ class MainPageComponent {
   render(): string {
     return `
       <section class="main-page">
-        <h2>This is Main Page Component.</h2>
+        <h2 class="title">This is Main Page Component.</h2>
         <p> Products list:</p>
         <ul class="products-list"></ul>
       </section>
     `;
   }
 
-  renderProducts(products: unknown[]): void {
+  renderProducts(products: unknown[] = storage.getProducts()): void {
     this.#elements.productsList?.insertAdjacentHTML(
       'afterbegin',
       products

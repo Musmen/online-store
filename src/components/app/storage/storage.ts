@@ -1,4 +1,4 @@
-import { fetchProducts } from '../../../../services/api.service';
+import { fetchProducts } from '../../../services/api.service';
 
 class Storage {
   products: unknown[] = [];

@@ -20,7 +20,7 @@ class CartComponent {
   render(): string {
     return `
       <section class="cart-page">
-        <h2>This is Cart Component</h2>
+        <h2 class="title">This is Cart Component</h2>
       </section>
     `;
   }
