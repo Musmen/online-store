@@ -8,6 +8,7 @@ class FooterComponent {
   render(): string {
     return `
       <footer class="main-footer">
+        <hr>
         <h2>Main Footer</h2>
       </footer>
     `;

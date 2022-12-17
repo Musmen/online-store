@@ -20,7 +20,7 @@ class ProductPageComponent {
   render(): string {
     return `
       <section class="product-page">
-        <h2>This is Product Page Component</h2>
+        <h2 class="title">This is Product Page Component</h2>
       </section>
     `;
   }
