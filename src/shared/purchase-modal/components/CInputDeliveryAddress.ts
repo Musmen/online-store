@@ -48,27 +48,6 @@ class CInputDeliveryAddress extends BaseComponent {
     `;
     return root.trim();
   }
-  // public create(): HTMLInputElement {
-  //   const root: HTMLInputElement = document.createElement('input');
-  //   root.classList.add('input__personal-details');
-  //   this.root = root;
-  //   this.attributes();
-  //   root.addEventListener('input', this.onInput);
-  //   root.addEventListener('focus', this.onInputFocus);
-  //   root.addEventListener('focusout', this.onInputFocusOut);
-  //   return root;
-  // }
-
-  // protected attributes(): void {
-  //   this.root?.setAttribute('type', 'text');
-  //   this.root?.setAttribute('type', 'text');
-  //   this.root?.setAttribute('placeholder', this.placeholder);
-  // this.root?.setAttribute('style', this.style());
-  // }
-
-  // protected style(): string {
-  //   return `width: 100%`;
-  // }
 
   private country: string;
 
