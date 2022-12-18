@@ -32,12 +32,22 @@ class WPurchaseModal {
     this.inputs.email.init();
     const root: HTMLElement | null = document.querySelector('.purchase-modal');
     if (root !== null) {
-      root.addEventListener('click', this.onModal.bind(this));
+      root.addEventListener('click', this.onModal);
       this.root = root;
     }
   }
 
-  public create(): string {
+  public unmount(): void {
+    this.inputs.name.unmount();
+    this.inputs.surname.unmount();
+    this.inputs.phone.unmount();
+    this.inputs.deliveryAddress.unmount();
+    this.inputs.creditCard.unmount();
+    this.inputs.email.unmount();
+    this.root?.removeEventListener('click', this.onModal);
+  }
+
+  public render(): string {
     const elem = `
       <div class="purchase-modal">
         <div class="modal__purchase-modal">
@@ -70,6 +80,7 @@ class WPurchaseModal {
     // if (event.target.closest('.purchase-modal')) {
     if (event.target.className === 'purchase-modal') {
       this.root.style.display = 'none';
+      this.unmount();
       console.log(event.target);
     }
   };
