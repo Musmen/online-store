@@ -9,20 +9,12 @@ abstract class BaseComponent {
     //
   }
 
-  public create(): HTMLInputElement {
-    return this.create();
+  public unmount(): void {
+    //
   }
 
   public make(): string {
     return this.make();
-  }
-
-  protected attributes(): void {
-    /* */
-  }
-
-  protected style(): string {
-    return '';
   }
 }
 
