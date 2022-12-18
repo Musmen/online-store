@@ -24,6 +24,10 @@ class CInputCvvCode extends BaseComponent {
     }
   }
 
+  public unmount(): void {
+    this.root?.addEventListener('input', this.onInput);
+  }
+
   public make(): string {
     const root = `
       <input id="${this.id}"
