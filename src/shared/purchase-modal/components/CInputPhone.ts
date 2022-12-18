@@ -23,6 +23,12 @@ class CInputPhone extends BaseComponent {
     }
   }
 
+  public unmount(): void {
+    this.root?.removeEventListener('input', this.onInputValue);
+    this.root?.removeEventListener('focus', this.onInputFocus);
+    this.root?.removeEventListener('focusout', this.onInputEnd);
+  }
+
   public make(): string {
     const root = `
       <input id="${this.id}"
