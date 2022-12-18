@@ -1,29 +1,40 @@
-import './scss/product-item.styles.scss';
+import { convertToRomane } from '../../common/common.helper';
+import { ProductItem } from '../../models/product-item.model';
 
-class ProductItemComponent {
-  #elements: { [key: string]: HTMLElement | null } = {};
+export default class ProductItemComponent {
+  #product: ProductItem | null = null;
 
-  constructor() {
-    this.init = this.init.bind(this);
-    this.unmount = this.unmount.bind(this);
+  constructor(product: ProductItem) {
+    this.#product = product;
     this.render = this.render.bind(this);
   }
 
-  init(): void {
-    console.log('Init Product Item Component');
-  }
-
-  unmount(): void {
-    console.log('Unmount Product Item Component');
-  }
-
   render(): string {
+    if (!this.#product) return '';
+
+    const { id, name, short_name, price, tier, nation, tank_type, images } = this.#product;
+
+    const flagClassName = `flag flag_${nation}`;
+    const tankTypeClassName = `tank-type tank-type_${tank_type?.toLowerCase()}`;
+
+    const linkToProductPage = `#/product/${id}`;
+    const isInCart = false;
+
     return `
-      <article class="product-item">
-        <h2>This is Product Item Component</h2>
-      </article>
-    `;
+      <article class="card" data-id="${id}">
+        <a href="${linkToProductPage}" class="card-info">
+          <img class="card-img" src="${images[0]}" alt="Image of ${name}" />
+          <div class="card-specifications">
+            <h2 class="item-text">
+              <span class="${flagClassName}"></span>
+              <span class="${tankTypeClassName}"></span>
+              <span class="level">${convertToRomane(tier || 0)}</span>
+              <span class="item-name">${short_name || name}</span>
+            </h2>
+            <p class="price">${price} $</p>
+          </div>
+        </a>
+        <button class="add-cart-btn ${isInCart ? 'add-cart-btn_active' : ''}">Add To Cart</button>
+      </article>`;
   }
 }
-
-export default new ProductItemComponent();

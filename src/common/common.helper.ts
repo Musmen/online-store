@@ -1,4 +1,4 @@
-import { DEFAULT_ERROR_MESSAGE } from './common.constants';
+import { DEFAULT_ERROR_MESSAGE, ROMAN_DIGITS } from './common.constants';
 
 export const fetchData = async <T>(url: string) => {
   const response: Response = await fetch(url);
@@ -6,3 +6,5 @@ export const fetchData = async <T>(url: string) => {
   const result: T = await response.json();
   return result;
 };
+
+export const convertToRomane = (number: number | string): string => ROMAN_DIGITS[Number(number)];

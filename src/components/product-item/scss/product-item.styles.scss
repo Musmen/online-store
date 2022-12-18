@@ -1,3 +1,230 @@
-.product-item {
-  color: #0f0;
+@import '../../../scss/variables';
+
+.card {
+  position: relative;
+  display: block;
+  height: calc(100vw / 4 - 10px);
+  max-height: 260px;
+
+  background-color: $card-background;
+
+  transition: all 300ms;
+
+  .card-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .card-img {
+      width: calc(100vw / 4 - 10px);
+      max-width: 300px;
+      max-height: 260px;
+
+      transition: $card-transition;
+      object-fit: contain;
+    }
+
+    .card-specifications {
+      position: absolute;
+      left: 27px;
+      bottom: 30px;
+
+      transition: $card-transition;
+
+      .item-text {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        margin-bottom: 10px;
+
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $title-text-color;
+
+        .level {
+          margin-right: 8px;
+        }
+      }
+
+      .price {
+        display: inline-block;
+
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $price-now-color;
+      }
+    }
+  }
+
+  .add-cart-btn {
+    position: absolute;
+    left: 26px;
+    bottom: 30px;
+
+    width: 150px;
+    height: 45px;
+
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+
+    border-radius: 3px;
+    border: 1px solid $purchase-button-background;
+
+    background: none;
+
+    transition: $app-standard-transition;
+    opacity: 0;
+
+    &_active {
+      background-color: $purchase-button-background;
+    }
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .card {
+    height: calc(100vw / 3 - 10px);
+    max-height: 200px;
+
+    .card-info {
+      .card-img {
+        width: calc(100vw / 3 - 10px);
+        max-width: 300px;
+        max-height: 200px;
+      }
+
+      .card-specifications {
+        left: 14px;
+        bottom: 14px;
+
+        .item-text {
+          align-items: baseline;
+          margin-bottom: 4px;
+
+          font-size: 15px;
+
+          .flag,
+          .tank-type,
+          .level {
+            margin-right: 3px;
+          }
+
+          .item-name {
+            overflow-wrap: anywhere;
+          }
+
+          .flag,
+          .tank-type {
+            margin-bottom: 1px;
+
+            transform: scale(0.8);
+          }
+        }
+      }
+
+      .price {
+        font-size: 15px;
+      }
+    }
+
+    .add-cart-btn {
+      bottom: 30px;
+
+      width: 100px;
+      height: 45px;
+
+      font-size: 14px;
+      left: 14px;
+    }
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .card {
+    height: calc(100vw / 2 - 2px);
+    max-height: 158px;
+
+    background-color: $card-hover-background;
+
+    .card-info {
+      .card-img {
+        width: calc(100vw / 2 - 2px);
+        max-height: 158px;
+      }
+
+      .card-specifications {
+        left: 14px;
+        bottom: 14px;
+
+        .item-text {
+          font-size: 14px;
+
+          .flag,
+          .tank-type,
+          .level {
+            align-self: center;
+          }
+        }
+      }
+
+      .price {
+        font-size: 14px;
+      }
+    }
+
+    &:hover .card-specifications {
+      bottom: 14px;
+    }
+
+    .add-cart-btn {
+      display: none;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .card {
+    .add-cart-btn:hover {
+      background-color: $purchase-button-background;
+    }
+
+    .add-cart-btn_active:hover {
+      color: $purchase-button-background;
+      background-color: $purchase-text-color;
+    }
+
+    &:hover {
+      background-color: $card-hover-background;
+      transition: $card-transition;
+
+      .card-img {
+        opacity: 0.65;
+        transition: $card-transition;
+      }
+
+      .card-specifications {
+        bottom: 85px;
+        transition: $card-transition;
+
+        .item-text {
+          color: $hover-text-color;
+        }
+      }
+
+      .add-cart-btn {
+        opacity: 1;
+        transition: all 600ms;
+      }
+    }
+  }
 }
