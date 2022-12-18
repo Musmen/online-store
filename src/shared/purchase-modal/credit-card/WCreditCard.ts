@@ -22,6 +22,12 @@ class WCreditCard {
     }
   }
 
+  public unmount(): void {
+    this.inputs.cardNumber.unmount();
+    this.inputs.cardVP.unmount();
+    this.inputs.cardCvvCode.unmount();
+  }
+
   public make(): string {
     const root = `
       <div class="credit-card">
