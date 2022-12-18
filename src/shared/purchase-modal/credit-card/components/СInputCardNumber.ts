@@ -23,6 +23,10 @@ class CInputCardNumber extends BaseComponent {
     }
   }
 
+  public unmount(): void {
+    this.root?.removeEventListener('input', this.onInput);
+  }
+
   public make(): string {
     const root = `
       <input id="${this.id}"
