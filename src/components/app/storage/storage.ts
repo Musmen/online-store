@@ -1,18 +1,19 @@
-import { fetchProducts } from '../../../services/api.service';
+import products from './data/products';
+
+import { ProductItem } from '../../../models/product-item.model';
 
 class Storage {
-  products: unknown[] = [];
+  products: ProductItem[] = [];
 
-  setProducts(products: unknown[]): void {
+  setProducts(products: ProductItem[]): void {
     this.products = products;
   }
 
-  getProducts(): unknown[] {
+  getProducts(): ProductItem[] {
     return this.products;
   }
 
-  async init(): Promise<void> {
-    const products: unknown[] = await fetchProducts();
+  init(): void {
     this.setProducts(products);
   }
 }
