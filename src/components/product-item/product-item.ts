@@ -12,10 +12,10 @@ export default class ProductItemComponent {
   render(): string {
     if (!this.#product) return '';
 
-    const { id, name, short_name, price, tier, nation, tank_type, images } = this.#product;
+    const { id, name, short_name, price, tier, nation, type, images } = this.#product;
 
     const flagClassName = `flag flag_${nation}`;
-    const tankTypeClassName = `tank-type tank-type_${tank_type?.toLowerCase()}`;
+    const typeClassName = `tank-type tank-type_${type?.toLowerCase()}`;
 
     const linkToProductPage = `#/product/${id}`;
     const isInCart = false;
@@ -27,7 +27,7 @@ export default class ProductItemComponent {
           <div class="card-specifications">
             <h2 class="item-text">
               <span class="${flagClassName}"></span>
-              <span class="${tankTypeClassName}"></span>
+              <span class="${typeClassName}"></span>
               <span class="level">${convertToRomane(tier || 0)}</span>
               <span class="item-name">${short_name || name}</span>
             </h2>

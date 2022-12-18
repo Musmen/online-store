@@ -7,5 +7,5 @@ export interface ProductItem {
   description: string;
   tier: number;
   nation: string;
-  tank_type: string;
+  type: string;
 }

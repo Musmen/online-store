@@ -6,28 +6,8 @@
   height: 14px;
   margin-right: 8px;
 
-  &_china {
-    background: url('/src/assets/flags/china.png');
-  }
-
-  &_czech {
-    background: url('/src/assets/flags/czech.png');
-  }
-
-  &_france {
-    background: url('/src/assets/flags/france.png');
-  }
-
   &_germany {
     background: url('/src/assets/flags/germany.png');
-  }
-
-  &_poland {
-    background: url('/src/assets/flags/poland.png');
-  }
-
-  &_sweden {
-    background: url('/src/assets/flags/sweden.png');
   }
 
   &_uk {
@@ -40,17 +20,5 @@
 
   &_ussr {
     background: url('/src/assets/flags/ussr.png');
-  }
-
-  &_italy {
-    background: url('/src/assets/flags/italy.png');
-  }
-
-  &_japan {
-    background: url('/src/assets/flags/japan.png');
-  }
-
-  &_merc {
-    background: url('/src/assets/flags/marc.png');
   }
 }
