@@ -1,0 +1,39 @@
+.credit-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  background-color: rgb(83, 83, 83);
+  border-radius: 10px;
+
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.input__credit-card {
+  margin: 0;
+  padding: 5px 0;
+
+  font-size: 18px;
+  text-align: center;
+
+  &::placeholder {
+    font-size: 18px;
+  }
+}
+
+.validity-period__credit-card {
+  width: 120px;
+}
+
+.cvv-code__credit-card {
+  width: 120px;
+}
