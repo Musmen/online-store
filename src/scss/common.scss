@@ -1,0 +1,22 @@
+@import './variables.scss';
+
+.body {
+  margin: 0;
+
+  font-family: $app-font-family;
+
+  background-color: #00000080;
+}
+
+.router-page-container {
+  min-height: calc(100vh - 251px);
+}
+
+.list {
+  margin: 0;
+  list-style: none;
+}
+
+.title {
+  text-align: center;
+}
