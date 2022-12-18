@@ -1,0 +1,91 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.purchase-modal {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__purchase-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // transform: translate(-50%, -50%);
+  margin: auto;
+  padding: 10px;
+  width: 700px;
+  height: 700px;
+
+  background-color: #181a1c;
+  border: 1px solid orange;
+  border-radius: 10px;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.personal-details__purchase-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+
+  & * {
+    margin-bottom: 20px;
+  }
+
+  & *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.personal-details__purchase-modal > span {
+  font-size: 25px;
+  color: #ffae1a;
+}
+
+.credit-card-details__purchase-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.credit-card-details__purchase-modal > span {
+  font-size: 25px;
+  color: #ffae1a;
+}
+
+.submit__purchase-modal {
+  margin: auto;
+  padding: 5px 50px;
+  background-color: #3f1010;
+  border: 1px solid orange;
+  border-radius: 0.5rem;
+
+  font-size: 18px;
+  color: orange;
+
+  transition: transform 0.4s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
