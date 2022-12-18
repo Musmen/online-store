@@ -1,25 +1,6 @@
 .main-header {
-  color: #f0f;
-  text-align: center;
-}
-
-.main-header__navigation-list {
-  display: flex;
-  justify-content: center;
-}
-
-.main-header__navigation-link {
-  display: block;
-  padding: 20px;
+  margin: 10px 0;
 
   color: #fff;
-
-  border: 1px solid #fff;
-
-  &:hover,
-  &:focus,
-  &:active {
-    color: #000;
-    background-color: #fff;
-  }
+  text-align: center;
 }
