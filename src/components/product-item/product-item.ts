@@ -12,7 +12,7 @@ export default class ProductItemComponent {
   render(): string {
     if (!this.#product) return '';
 
-    const { id, name, short_name, price, tier, nation, type, images } = this.#product;
+    const { id, name, short_name, price, tier, nation, type, images, amount } = this.#product;
 
     const flagClassName = `flag flag_${nation}`;
     const typeClassName = `tank-type tank-type_${type?.toLowerCase()}`;
@@ -31,7 +31,10 @@ export default class ProductItemComponent {
               <span class="level">${convertToRomane(tier || 0)}</span>
               <span class="item-name">${short_name || name}</span>
             </h2>
-            <p class="price">${price} $</p>
+            <div class="card-wrapper">
+              <p class="price">${price} $</p>
+              <p class="amount">AMOUNT: ${amount}</p>
+            </div>
           </div>
         </a>
         <button class="add-cart-btn ${isInCart ? 'add-cart-btn_active' : ''}">Add To Cart</button>

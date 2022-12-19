@@ -51,7 +51,12 @@
         }
       }
 
-      .price {
+      .card-wrapper {
+        display: flex;
+      }
+
+      .price,
+      .amount {
         display: inline-block;
 
         font-size: 15px;
@@ -59,6 +64,15 @@
         font-weight: 400;
         letter-spacing: 0.1em;
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+      }
+
+      .amount {
+        color: $title-text-color;
+      }
+
+      .price {
+        margin-right: 15px;
+
         color: $price-now-color;
       }
     }
@@ -130,10 +144,15 @@
             transform: scale(0.8);
           }
         }
-      }
 
-      .price {
-        font-size: 15px;
+        .price,
+        .amount {
+          font-size: 14px;
+        }
+
+        .price {
+          margin-right: 10px;
+        }
       }
     }
 
@@ -175,10 +194,11 @@
             align-self: center;
           }
         }
-      }
 
-      .price {
-        font-size: 14px;
+        .price,
+        .amount {
+          font-size: 13px;
+        }
       }
     }
 

@@ -3,6 +3,7 @@ export interface ProductItem {
   name: string;
   short_name?: string;
   price: string | number;
+  amount: string | number;
   images: string[];
   description: string;
   tier: number;

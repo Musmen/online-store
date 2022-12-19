@@ -3,14 +3,14 @@ import products from './data/products.js';
 import { ProductItem } from '../../../models/product-item.model';
 
 class Storage {
-  products: ProductItem[] = [];
+  #products: ProductItem[] = [];
 
   setProducts(products: ProductItem[]): void {
-    this.products = products;
+    this.#products = products;
   }
 
   getProducts(): ProductItem[] {
-    return this.products;
+    return this.#products;
   }
 
   init(): void {
