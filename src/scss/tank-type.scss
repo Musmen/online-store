@@ -1,0 +1,31 @@
+.tank-type {
+  flex: 0 0 auto;
+
+  display: inline-block;
+  width: 9px;
+  height: 15px;
+  margin-right: 8px;
+
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &_at-spg {
+    background-image: url('/src/assets/types/at-spg.png');
+  }
+
+  &_heavytank {
+    background-image: url('/src/assets/types/heavytank.png');
+  }
+
+  &_lighttank {
+    background-image: url('/src/assets/types/lighttank.png');
+  }
+
+  &_mediumtank {
+    background-image: url('/src/assets/types/mediumtank.png');
+  }
+
+  &_spg {
+    background-image: url('/src/assets/types/spg.png');
+  }
+}
