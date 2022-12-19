@@ -57,7 +57,7 @@ const config = {
     new CopyWebpackPlugin({
       patterns: [
         { from: path.resolve(__dirname, './src/assets/favicon'), to: './assets/favicon/' },
-        // { from: path.resolve(__dirname, './src/assets/public'), to: './assets/images' },
+        { from: path.resolve(__dirname, './src/assets/public'), to: './assets/images' },
       ],
     }),
     new CleanWebpackPlugin(), // clean dist directory

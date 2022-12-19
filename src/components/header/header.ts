@@ -9,15 +9,48 @@ class HeaderComponent {
   }
 
   init(): void {
-    console.log('Init Header');
+    const headerElement = document.querySelector('.main-header');
+    if (!headerElement) return;
+
+    this.#elements = {
+      cartCount: headerElement.querySelector('.cart-quantity'),
+      totalCost: headerElement.querySelector('.total-cost'),
+    };
+  }
+
+  updateCartCount(cartCount: number | string): void {
+    if (!this.#elements.cartCount) return;
+
+    this.#elements.cartCount.textContent = `(${cartCount})`;
+  }
+
+  updateTotalCost(totalCost: number | string): void {
+    if (!this.#elements.totalCost) return;
+
+    this.#elements.totalCost.textContent = `${totalCost} $`;
   }
 
   render(): string {
     return `
-      <header class="main-header">
-        <h1>Main Header. Logo</h1>
-      </header>
-    `;
+    <header class="main-header">
+      <h1 class="visually-hidden">Tanks Online Store</h1>
+      <nav class="nav">
+        <a class="link logo-link" href="#">
+          <svg class="logo-icon">
+            <use xlink:href="assets/images/logo.svg#WGLogo"></use>
+          </svg>
+          <span class="text logo-text">Online Store</span>
+        </a>
+        <p class="total-cost-wrapper">
+          <span class="text">Total cost: </span>
+          <span class="text total-cost">0 $</span>
+        </p>
+        <a class="link cart-link" href="#/cart">
+          <span class="text cart-text">Shopping cart</span>
+          <span class="text cart-quantity">(0)</span>
+        </a>
+      </nav>
+    </header>`;
   }
 }
 
