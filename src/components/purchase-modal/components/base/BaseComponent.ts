@@ -22,6 +22,20 @@ abstract class BaseComponent {
   public checkValidity(): boolean {
     return false;
   }
+
+  protected addClassStyleValidationError(): void {
+    if (!(this.root instanceof HTMLInputElement)) return;
+    this.root.classList.add('validation-error');
+    this.root.value = this.errorText;
+  }
+
+  protected removeClassStyleValidationError(): void {
+    if (!(this.root instanceof HTMLInputElement)) return;
+    if (this.root.classList.contains('validation-error')) {
+      this.root.classList.remove('validation-error');
+      this.root.value = this.tempValue;
+    }
+  }
 }
 
 export default BaseComponent;
