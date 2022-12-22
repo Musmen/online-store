@@ -1,5 +1,7 @@
 abstract class BaseComponent {
   protected root: HTMLElement | HTMLInputElement | undefined;
+  protected tempValue = '';
+  protected errorText = 'Error';
 
   public get Root() {
     return this.root;
@@ -15,6 +17,10 @@ abstract class BaseComponent {
 
   public make(): string {
     return this.make();
+  }
+
+  public checkValidity(): boolean {
+    return false;
   }
 }
 
