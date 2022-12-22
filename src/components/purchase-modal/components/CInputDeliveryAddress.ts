@@ -1,28 +1,19 @@
+import MaskDelivertAddress from '../common/MaskDeliveryAddress';
+import Test from '../common/Test';
 import '../style/с-input-style.scss';
 import BaseComponent from './base/BaseComponent';
 
-enum DAddress {
-  COUNTRY,
-  CITY,
-  STREET,
-  HOUSE,
-  ROOM,
-  END,
-}
-
+// TODO Rework
 class CInputDeliveryAddress extends BaseComponent {
   private readonly id: string = 'delivery-address';
   private placeholder: string;
 
+  private mask: MaskDelivertAddress = new MaskDelivertAddress();
+  private test: Test = new Test();
+
   constructor(placeholder = 'placeholder') {
     super();
     this.placeholder = placeholder;
-
-    this.country = 'страна:';
-    this.city = 'город:';
-    this.street = 'улица:';
-    this.house = 'дом:';
-    this.room = 'квартира:';
   }
 
   public init(): void {
@@ -49,57 +40,44 @@ class CInputDeliveryAddress extends BaseComponent {
     return root.trim();
   }
 
-  private country: string;
-
-  private city: string;
-
-  private street: string;
-
-  private house: string;
-
-  private room: string;
-
-  private da: DAddress = DAddress.COUNTRY;
-
   private onInput = (event: Event) => {
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
-
-    if (event.data === ' ') {
-      if (this.da === DAddress.END) return;
-
-      switch (this.da) {
-        case DAddress.CITY:
-          this.root.value += this.city;
-          this.da = DAddress.STREET;
-          break;
-        case DAddress.STREET:
-          this.root.value += this.street;
-          this.da = DAddress.HOUSE;
-          break;
-        case DAddress.HOUSE:
-          this.root.value += this.house;
-          this.da = DAddress.ROOM;
-          break;
-        case DAddress.ROOM:
-          this.root.value += this.room;
-          this.da = DAddress.END;
-          break;
-      }
+    if (event.inputType === 'deleteContentBackward') {
+      // this.enumSwitchLastCharDelete();
+      this.test.removeLastChar();
+      this.root.value = this.test.Result;
+    } else if (event.data === ' ') {
+      // this.enumRaiseDown();
+      // this.mask.enumDown();
+      this.test.add(event.data);
+      this.root.value = this.test.Result;
+    } else {
+      // this.addText(event.data);
+      // const result = this.mask.getResult(event.data);
+      // this.root.value = result;
+      this.test.add(event.data);
+      this.root.value = this.test.Result;
     }
   };
 
   private onInputFocus = () => {
     if (!(this.root instanceof HTMLInputElement)) return;
-    this.root.value = this.country;
-    this.da = DAddress.CITY;
+    if (this.root.value === '') {
+      this.root.value = this.test.Result;
+    }
   };
 
   private onInputFocusOut = () => {
     if (!(this.root instanceof HTMLInputElement)) return;
-    if (this.root.value === this.country) this.root.value = '';
-    this.da = DAddress.COUNTRY;
+    this.root.value = '';
   };
+
+  public checkValidity(): boolean {
+    if (!(this.root instanceof HTMLInputElement)) return false;
+
+    return true;
+  }
 }
 
 export default CInputDeliveryAddress;
