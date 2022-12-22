@@ -1,9 +1,11 @@
 import Common from '../../common/Common';
 import BaseComponent from '../../components/base/BaseComponent';
+import MaskInput from '../common/MaskInput';
 
 class CInputCardValidityPeriod extends BaseComponent {
   private id = 'validity-period';
   private placeholder: string;
+  private maskInput: MaskInput = new MaskInput('__/__', '_', ['/']);
 
   constructor(placeholder = 'placeholder') {
     super();
@@ -14,12 +16,14 @@ class CInputCardValidityPeriod extends BaseComponent {
     const input: HTMLInputElement | null = document.querySelector(`#${this.id}`);
     if (input !== null) {
       input.addEventListener('input', this.onInput);
+      input.addEventListener('focus', this.onInputFocus);
       this.root = input;
     }
   }
 
   public unmount(): void {
     this.root?.removeEventListener('input', this.onInput);
+    this.root?.removeEventListener('focus', this.onInputFocus);
   }
 
   public make(): string {
@@ -34,36 +38,44 @@ class CInputCardValidityPeriod extends BaseComponent {
     return root.trim();
   }
 
-  private temp = '';
-
   private onInput = (event: Event) => {
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
     if (event.inputType === 'deleteContentBackward') {
-      this.temp = this.temp.slice(0, -1);
-      this.root.value = this.temp;
-    } else if (Common.isCharNumber(event.data)) {
-      this.temp += event.data;
-      this.patternMonthAndDay(this.temp);
-      this.root.value = this.temp;
+      const result = this.maskInput.removeLastCharMask();
+      this.root.value = result;
+    } else if (Common.isCharNumber(event.data) && event.data !== null) {
+      const result = this.maskInput.getResult(event.data);
+      this.root.value = result;
     } else {
       const clear = this.root.value.split('');
       clear.pop();
       this.root.value = clear.join('');
     }
+
+    this.tempValue = this.root.value;
   };
 
-  private patternMonthAndDay(val: string | null): void {
-    if (val === null) return;
-    if (this.temp.length >= 4) {
-      this.temp.split('');
-      let result = this.temp[0];
-      result += this.temp[1];
-      result += '/';
-      result += this.temp[2];
-      result += this.temp[3];
-      this.temp = result;
+  private onInputFocus = () => {
+    if (!(this.root instanceof HTMLInputElement)) return;
+
+    if (this.root.classList.contains('validation-error')) {
+      this.root.classList.remove('validation-error');
+      this.root.value = this.tempValue;
     }
+  };
+
+  public checkValidity(): boolean {
+    if (!(this.root instanceof HTMLInputElement)) return false;
+    const check = this.root.value.split('/').join('');
+
+    if (check.length <= 0 || check.length < 4) {
+      this.root.classList.add('validation-error');
+      this.root.value = this.errorText;
+      return false;
+    }
+
+    return true;
   }
 }
 
