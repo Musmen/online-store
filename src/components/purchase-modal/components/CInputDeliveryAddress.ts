@@ -1,19 +1,17 @@
-import MaskDelivertAddress from '../common/MaskDeliveryAddress';
-import Test from '../common/Test';
+import TestDeliveryAddress from '../common/TestDeliveryAddress';
 import '../style/с-input-style.scss';
 import BaseComponent from './base/BaseComponent';
 
-// TODO Rework
 class CInputDeliveryAddress extends BaseComponent {
   private readonly id: string = 'delivery-address';
   private placeholder: string;
 
-  private mask: MaskDelivertAddress = new MaskDelivertAddress();
-  private test: Test = new Test();
+  private test: TestDeliveryAddress = new TestDeliveryAddress();
 
   constructor(placeholder = 'placeholder') {
     super();
     this.placeholder = placeholder;
+    this.errorText = 'Error: Format: Country, City, Street +';
   }
 
   public init(): void {
@@ -43,19 +41,16 @@ class CInputDeliveryAddress extends BaseComponent {
   private onInput = (event: Event) => {
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
+
     if (event.inputType === 'deleteContentBackward') {
-      // this.enumSwitchLastCharDelete();
       this.test.removeLastChar();
-      this.root.value = this.test.Result;
+      this.tempValue = this.test.Result;
+      this.root.value = this.tempValue;
     } else if (event.data === ' ') {
-      // this.enumRaiseDown();
-      // this.mask.enumDown();
       this.test.add(event.data);
-      this.root.value = this.test.Result;
+      this.tempValue = this.test.Result;
+      this.root.value = this.tempValue;
     } else {
-      // this.addText(event.data);
-      // const result = this.mask.getResult(event.data);
-      // this.root.value = result;
       this.test.add(event.data);
       this.root.value = this.test.Result;
     }
@@ -64,17 +59,56 @@ class CInputDeliveryAddress extends BaseComponent {
   private onInputFocus = () => {
     if (!(this.root instanceof HTMLInputElement)) return;
     if (this.root.value === '') {
-      this.root.value = this.test.Result;
+      this.tempValue = this.test.Result;
+      this.root.value = this.tempValue;
     }
+
+    this.removeClassStyleValidationError();
   };
 
   private onInputFocusOut = () => {
     if (!(this.root instanceof HTMLInputElement)) return;
-    this.root.value = '';
+    if (this.tempValue === '') this.root.value = '';
   };
 
   public checkValidity(): boolean {
     if (!(this.root instanceof HTMLInputElement)) return false;
+
+    const arr = this.test.ResultArr;
+    for (let i = 0; i < arr.length; i++) {
+      const elem = arr[i].split(':');
+      elem.shift();
+      arr[i] = elem.join('');
+    }
+
+    if (arr.length < 3) {
+      this.addClassStyleValidationError();
+      return false;
+    }
+
+    const arrB: boolean[] = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      const elem = arr[i];
+      if (elem.length < 5) {
+        arrB.push(false);
+      } else {
+        arrB.push(true);
+      }
+    }
+
+    let sumB = 0;
+    for (let i = 0; i < arrB.length; i++) {
+      const elem = arrB[i];
+      if (sumB > 3) break;
+      if (elem === false) {
+        sumB++;
+      }
+    }
+
+    if (sumB > 0) {
+      this.addClassStyleValidationError();
+    }
 
     return true;
   }
