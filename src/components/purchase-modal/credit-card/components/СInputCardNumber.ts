@@ -19,12 +19,14 @@ class CInputCardNumber extends BaseComponent {
     const input: HTMLInputElement | null = document.querySelector(`#${this.id}`);
     if (input !== null) {
       input.addEventListener('input', this.onInput);
+      input.addEventListener('focus', this.onInputFocus);
       this.root = input;
     }
   }
 
   public unmount(): void {
     this.root?.removeEventListener('input', this.onInput);
+    this.root?.removeEventListener('focus', this.onInputFocus);
   }
 
   public make(): string {
@@ -32,9 +34,9 @@ class CInputCardNumber extends BaseComponent {
       <input id="${this.id}"
               class="input__credit-card" 
               type="text" 
-              required minlength="19" 
-              required maxlength="19"
-              title="Error"
+              minlength="19" 
+              maxlength="19"
+              title="Format: 0000 0000 0000 0000"
               placeholder="${this.placeholder}">
     `;
     return root.trim();
@@ -54,6 +56,8 @@ class CInputCardNumber extends BaseComponent {
     } else {
       this.root.value = this.temp;
     }
+
+    this.tempValue = this.root.value;
   };
 
   private add(val: string | null): void {
@@ -78,6 +82,28 @@ class CInputCardNumber extends BaseComponent {
 
   private watchFirstNumber(val: string): void {
     this.creditCard?.getNum(val);
+  }
+
+  private onInputFocus = () => {
+    if (!(this.root instanceof HTMLInputElement)) return;
+
+    if (this.root.classList.contains('validation-error')) {
+      this.root.classList.remove('validation-error');
+      this.root.value = this.tempValue;
+    }
+  };
+
+  public checkValidity(): boolean {
+    if (!(this.root instanceof HTMLInputElement)) return false;
+    const check = this.root.value.split(' ').join('');
+
+    if (check.length !== 16) {
+      this.root.classList.add('validation-error');
+      this.root.value = 'Error';
+      return false;
+    }
+
+    return true;
   }
 }
 
