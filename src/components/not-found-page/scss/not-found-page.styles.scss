@@ -1,0 +1,63 @@
+@import '../../../scss/variables';
+
+.error-wrapper {
+  max-width: 860px;
+  margin: 5vh auto 0;
+
+  overflow: hidden;
+}
+
+.error-inner {
+  position: relative;
+
+  max-height: 420px;
+
+  font-size: 1.4em;
+  letter-spacing: -0.05em;
+  line-height: 0.7em;
+
+  background-image: url('../assets/images/not-found.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+@media all and (max-width: $app-max-media-query) {
+  .error-wrapper {
+    width: $app-medium-width;
+  }
+
+  .error-inner {
+    background-size: $app-medium-width - 100px;
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .error-wrapper {
+    width: $app-tablet-width;
+    height: 400px;
+    margin-top: 12vh;
+  }
+
+  .error-inner {
+    font-size: 1.1em;
+
+    background-size: $app-tablet-width - 20px;
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .error-wrapper {
+    width: $app-min-width;
+    height: 230px;
+    margin-top: 25vh;
+  }
+
+  .error-inner {
+    background-size: $app-min-width - 20px;
+  }
+}
