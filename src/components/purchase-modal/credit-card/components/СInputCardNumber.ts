@@ -13,6 +13,7 @@ class CInputCardNumber extends BaseComponent {
     super();
     this.placeholder = placeholde;
     this.creditCard = creditCard;
+    this.errorText = 'Error: Format: 0000 0000 0000 0000';
   }
 
   public init(): void {
@@ -99,7 +100,7 @@ class CInputCardNumber extends BaseComponent {
 
     if (check.length !== 16) {
       this.root.classList.add('validation-error');
-      this.root.value = 'Error';
+      this.root.value = this.errorText;
       return false;
     }
 

@@ -14,6 +14,7 @@ class CInputCvvCode extends BaseComponent {
   constructor(placeholder = 'placeholder') {
     super();
     this.placeholder = placeholder;
+    this.errorText = '333';
   }
 
   public init(): void {
@@ -79,7 +80,7 @@ class CInputCvvCode extends BaseComponent {
 
     if (check.length < 3 || this.root.value === 'Error') {
       this.root.classList.add('validation-error');
-      this.root.value = 'Error';
+      this.root.value = this.errorText;
       return false;
     }
 

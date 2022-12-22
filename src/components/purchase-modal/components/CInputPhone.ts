@@ -11,6 +11,7 @@ class CInputPhone extends BaseComponent {
     super();
     this.placeholder = placeholder;
     this.number = '';
+    this.errorText = 'Error: Format: +777777777';
   }
 
   public init(): void {

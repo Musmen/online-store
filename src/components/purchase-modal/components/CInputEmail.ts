@@ -8,6 +8,7 @@ class CInputEmail extends BaseComponent {
   constructor(placeholder = 'placeholder') {
     super();
     this.placeholder = placeholder;
+    this.errorText = 'Error: Format: lorem@lorem.ips';
   }
 
   public init(): void {

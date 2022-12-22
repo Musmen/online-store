@@ -10,6 +10,7 @@ class CInputCardValidityPeriod extends BaseComponent {
   constructor(placeholder = 'placeholder') {
     super();
     this.placeholder = placeholder;
+    this.errorText = 'month/year';
   }
 
   public init(): void {

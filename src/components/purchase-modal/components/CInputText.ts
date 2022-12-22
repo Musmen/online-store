@@ -5,6 +5,7 @@ import BaseComponent from './base/BaseComponent';
 class CInputText extends BaseComponent {
   private id = 'input-name-surname';
   private placeholder: string;
+
   constructor(placeholder = 'placeholder') {
     super();
     this.placeholder = placeholder;
