@@ -1,25 +1,148 @@
+@import '../../../scss/variables.scss';
+
 .main-header {
-  color: #f0f;
-  text-align: center;
-}
-
-.main-header__navigation-list {
   display: flex;
+  align-items: center;
   justify-content: center;
+  width: 100%;
+  min-height: 47px;
+  margin-bottom: 30px;
+
+  background: $header-background;
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: $app-max-width;
+    padding: 0 5px;
+
+    .logo-icon {
+      width: 19px;
+      height: 19px;
+      margin-right: 5px;
+
+      fill: $title-text-color;
+    }
+
+    .link,
+    .text {
+      font-size: 15px;
+      line-height: 30px;
+      font-weight: 400;
+      letter-spacing: 0.025em;
+    }
+
+    .link {
+      color: $link-text-color;
+      transition: $app-standard-transition;
+
+      &:hover {
+        color: $hover-text-color;
+
+        transition: $app-standard-transition;
+      }
+    }
+
+    .cart-link {
+      margin-right: 30px;
+    }
+
+    .cart-link::before {
+      position: relative;
+      top: 2px;
+      right: 5px;
+
+      content: url('../../../assets/images/cart.png');
+    }
+
+    .cart-link:hover.cart-link::before {
+      filter: $icon-brightness;
+    }
+
+    .cart-text {
+      text-transform: uppercase;
+    }
+
+    .total-cost-wrapper {
+      color: $title-text-color;
+
+      text-transform: uppercase;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      width: 154px;
+
+      font-size: 16px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: $title-text-color;
+
+      transition: $app-standard-transition;
+
+      &:hover {
+        .logo-icon {
+          fill: $hover-text-color;
+          transition: $app-standard-transition;
+        }
+      }
+    }
+  }
 }
 
-.main-header__navigation-link {
-  display: block;
-  padding: 20px;
+@media all and (max-width: $app-max-media-query) {
+  .main-header {
+    margin-bottom: 15px;
 
-  color: #fff;
+    .nav {
+      width: 90vw;
 
-  border: 1px solid #fff;
+      .logo {
+        width: 140px;
 
-  &:hover,
-  &:focus,
-  &:active {
-    color: #000;
-    background-color: #fff;
+        .logo-icon {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .main-header {
+    margin-bottom: 0;
+
+    .nav {
+      .logo-link {
+        width: initial;
+        margin-left: 10px;
+
+        .logo-icon {
+          width: 17px;
+          height: 17px;
+        }
+      }
+
+      .cart-link {
+        margin-right: 15px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .main-header {
+    .nav {
+      width: 100%;
+
+      .logo-text,
+      .cart-text {
+        display: none;
+      }
+    }
   }
 }

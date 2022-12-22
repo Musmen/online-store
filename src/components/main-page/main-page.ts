@@ -1,5 +1,8 @@
 import './scss/main-page.styles.scss';
+
 import storage from '../app/storage/storage';
+import ProductItemComponent from '../product-item/product-item';
+import { ProductItem } from '../../models/product-item.model';
 
 class MainPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
@@ -15,7 +18,8 @@ class MainPageComponent {
       productsList: document.querySelector('.products-list'),
     };
 
-    this.renderProducts();
+    const products: ProductItem[] = storage.getProducts();
+    this.renderProducts(products);
   }
 
   unmount(): void {
@@ -25,18 +29,20 @@ class MainPageComponent {
   render(): string {
     return `
       <section class="main-page">
-        <h2 class="title">This is Main Page Component.</h2>
-        <p> Products list:</p>
-        <ul class="products-list"></ul>
+        <h2 class="visually-hidden">Main Page. Shop Products List</h2>
+        <ul class="list products-list"></ul>
       </section>
     `;
   }
 
-  renderProducts(products: unknown[] = storage.getProducts()): void {
+  renderProducts(products: ProductItem[]): void {
     this.#elements.productsList?.insertAdjacentHTML(
       'afterbegin',
       products
-        .map((product: unknown) => `<li class="product-item">${JSON.stringify(product).slice(0, 200)}...</li>`)
+        .map(
+          (product) => `
+            <li class="product-item">${new ProductItemComponent(product).render()}</li>`
+        )
         .join('')
     );
   }
