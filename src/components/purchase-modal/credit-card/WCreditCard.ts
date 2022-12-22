@@ -50,13 +50,10 @@ class WCreditCard {
     const masterCard = `url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/MasterCard_1979_logo.svg/1200px-MasterCard_1979_logo.svg.png")`;
     const chinaUnionPay = `url("https://mapolist.com/assets/img/pay-methods/unionpay-Mapolist.2419b78d44e1.png")`;
     if (num === 4) {
-      // this.root.style.backgroundColor = `pink`;
       this.root.style.backgroundImage = visa;
     } else if (num === 5) {
-      // this.root.style.backgroundColor = `green`;
       this.root.style.backgroundImage = masterCard;
     } else if (num === 6) {
-      // this.root.style.backgroundColor = `black`;
       this.root.style.backgroundImage = chinaUnionPay;
     }
   }
