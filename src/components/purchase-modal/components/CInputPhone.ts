@@ -18,7 +18,7 @@ class CInputPhone extends BaseComponent {
     if (input !== null) {
       input.addEventListener('input', this.onInputValue);
       input.addEventListener('focus', this.onInputFocus);
-      input.addEventListener('focusout', this.onInputEnd);
+      input.addEventListener('focusout', this.onInputFocusOut);
       this.root = input;
     }
   }
@@ -26,7 +26,7 @@ class CInputPhone extends BaseComponent {
   public unmount(): void {
     this.root?.removeEventListener('input', this.onInputValue);
     this.root?.removeEventListener('focus', this.onInputFocus);
-    this.root?.removeEventListener('focusout', this.onInputEnd);
+    this.root?.removeEventListener('focusout', this.onInputFocusOut);
   }
 
   public make(): string {
@@ -34,13 +34,13 @@ class CInputPhone extends BaseComponent {
       <input id="${this.id}"
             class="input-modal"
             type="tel"
-            required minlength="10"
-            placeholder="${this.placeholder}" required>
+            minlength="10"
+            placeholder="${this.placeholder}">
     `;
     return root.trim();
   }
 
-  onInputValue = (event: Event) => {
+  private onInputValue = (event: Event) => {
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
 
@@ -58,20 +58,41 @@ class CInputPhone extends BaseComponent {
     } else {
       this.root.value = '+' + this.number;
     }
+
+    this.tempValue = this.root.value;
   };
 
-  onInputFocus = () => {
+  private onInputFocus = () => {
     if (this.root instanceof HTMLInputElement) {
-      if (!this.root.value[0]) {
+      if (!this.root.value[0] || this.root.value === this.errorText) {
         this.root.value = '+';
+      }
+
+      if (this.root.classList.contains('validation-error')) {
+        this.root.classList.remove('validation-error');
+        if (!this.tempValue[0]) this.tempValue = '+';
+        this.root.value = this.tempValue;
       }
     }
   };
 
-  onInputEnd = () => {
+  private onInputFocusOut = () => {
     if (!(this.root instanceof HTMLInputElement)) return;
     if (this.root.value === '+') this.root.value = '';
   };
+
+  public checkValidity(): boolean {
+    if (!(this.root instanceof HTMLInputElement)) return false;
+    const check = this.root.value.split('+').join('');
+
+    if (check.length < 9) {
+      this.root.classList.add('validation-error');
+      this.root.value = this.errorText;
+      return false;
+    }
+
+    return true;
+  }
 }
 
 export default CInputPhone;
