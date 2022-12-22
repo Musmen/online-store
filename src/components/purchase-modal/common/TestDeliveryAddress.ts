@@ -6,12 +6,17 @@ enum EAddress {
   ROOM,
 }
 
-class Test {
+class TestDeliveryAddress {
   private temp = '';
 
   public get Result() {
     return this.temp;
   }
+
+  public get ResultArr() {
+    return this.temp.split(' ');
+  }
+
   private data: string[][] = [
     ['country:', ''],
     ['city:', ''],
@@ -134,4 +139,4 @@ class Test {
   }
 }
 
-export default Test;
+export default TestDeliveryAddress;
