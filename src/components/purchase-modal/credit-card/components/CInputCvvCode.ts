@@ -11,21 +11,23 @@ class CInputCvvCode extends BaseComponent {
     return this.root.checkValidity();
   }
 
-  constructor(placeholde = 'placeholder') {
+  constructor(placeholder = 'placeholder') {
     super();
-    this.placeholder = placeholde;
+    this.placeholder = placeholder;
   }
 
   public init(): void {
     const input: HTMLInputElement | null = document.querySelector(`#${this.id}`);
     if (input !== null) {
       input.addEventListener('input', this.onInput);
+      input.addEventListener('focus', this.onInputFocus);
       this.root = input;
     }
   }
 
   public unmount(): void {
-    this.root?.addEventListener('input', this.onInput);
+    this.root?.removeEventListener('input', this.onInput);
+    this.root?.removeEventListener('focus', this.onInputFocus);
   }
 
   public make(): string {
@@ -33,7 +35,6 @@ class CInputCvvCode extends BaseComponent {
       <input id="${this.id}"
             class="input__credit-card cvv-code__credit-card"
             type="text"
-            pattern="[0-9]{3}"
             title="Формат:234"
             minlength="3"
             maxlength="3"
@@ -58,7 +59,32 @@ class CInputCvvCode extends BaseComponent {
       const remove = this.root.value.slice(0, -1);
       this.root.value = remove;
     }
+
+    this.tempValue = this.root.value;
   };
+
+  private onInputFocus = () => {
+    if (!(this.root instanceof HTMLInputElement)) return;
+
+    if (this.root.classList.contains('validation-error')) {
+      this.root.classList.remove('validation-error');
+      this.root.value = this.tempValue;
+    }
+  };
+
+  public checkValidity(): boolean {
+    if (!(this.root instanceof HTMLInputElement)) return false;
+
+    const check = this.root.value;
+
+    if (check.length < 3 || this.root.value === 'Error') {
+      this.root.classList.add('validation-error');
+      this.root.value = 'Error';
+      return false;
+    }
+
+    return true;
+  }
 }
 
 export default CInputCvvCode;
