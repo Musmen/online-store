@@ -1,58 +1,3 @@
-.input-card {
-  margin: 0;
-  padding: 0;
-  border: none;
-  width: 50px;
-  text-align: center;
-}
-
-// .input-card:valid {
-//   border-color: green;
-//   color: black;
-//   box-shadow: none;
-// }
-
-// .input-card:invalid {
-//   border-color: red;
-//   color: black;
-//   box-shadow: none;
-// }
-
-// .input-card:focus:valid {
-//   border-color: green;
-//   color: green;
-//   box-shadow: none;
-//   outline: 1px solid green;
-// }
-
-// .input-card:focus:invalid {
-//   border-color: red;
-//   color: red;
-//   box-shadow: none;
-//   outline: 1px solid red;
-// }
-
-.input-card:required:valid {
-  border-color: green;
-  color: green;
-  box-shadow: none;
-}
-
-.input-card:required:invalid {
-  border-color: red;
-  color: red;
-  box-shadow: none;
-}
-
-// personal detail
-.input__personal-details {
-  width: 100%;
-  text-align: center;
-
-  padding: 0;
-  border: none;
-}
-
 .input-modal {
   width: 100%;
   background-color: #181a1c;
@@ -62,12 +7,21 @@
   color: #afafaf;
   padding: 10px 0;
   text-align: center;
+
+  &::placeholder {
+    color: #afafaf;
+  }
+
+  &:focus {
+    outline: 2px solid white;
+  }
 }
 
-.input-modal::placeholder {
-  color: #afafaf;
-}
+.validation-error {
+  border: 1px solid red;
+  color: red;
 
-.input-modal:focus {
-  outline: 2px solid white;
+  &::placeholder {
+    color: red;
+  }
 }
