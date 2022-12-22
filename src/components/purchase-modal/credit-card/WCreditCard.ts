@@ -2,10 +2,10 @@ import './style/credit-card.scss';
 import CInputCardNumber from './components/СInputCardNumber';
 import CInputCardValidityPeriod from './components/CInputCardValidityPeriod';
 import CInputCvvCode from './components/CInputCvvCode';
+import BaseComponent from '../components/base/BaseComponent';
 
 class WCreditCard {
   private root: HTMLElement | undefined;
-  private isValidate = false;
   private inputs = {
     cardNumber: new CInputCardNumber('Card Number', this),
     cardVP: new CInputCardValidityPeriod('Validity Period'),
@@ -59,6 +59,28 @@ class WCreditCard {
       // this.root.style.backgroundColor = `black`;
       this.root.style.backgroundImage = chinaUnionPay;
     }
+  }
+
+  public checkValidity(): boolean {
+    const vals = Object.values(this.inputs);
+
+    if (this.isValidate(vals)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private isValidate(arr: unknown[]): boolean {
+    const temp = [];
+    for (let i = 0; i < arr.length; i++) {
+      const elem = arr[i];
+      if (elem instanceof BaseComponent) {
+        temp.push(elem.checkValidity());
+      }
+    }
+
+    return temp.every((a) => a === true);
   }
 }
 
