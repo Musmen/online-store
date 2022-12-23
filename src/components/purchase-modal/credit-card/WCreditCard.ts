@@ -30,7 +30,7 @@ class WCreditCard {
 
   public make(): string {
     const root = `
-      <div class="credit-card">
+      <div class="credit-card blank-card">
           ${this.inputs.cardNumber.make()}
 
           <div>
@@ -46,15 +46,28 @@ class WCreditCard {
     if (this.root === undefined) return;
     const num = Number(val);
     if (typeof num !== 'number') return;
-    const visa = `url("https://www.ttrweekly.com/site/wp-content/uploads/2019/11/VISA-logo.png")`;
-    const masterCard = `url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/MasterCard_1979_logo.svg/1200px-MasterCard_1979_logo.svg.png")`;
-    const chinaUnionPay = `url("https://mapolist.com/assets/img/pay-methods/unionpay-Mapolist.2419b78d44e1.png")`;
+    const blank = 'blank-card';
+    const visa = 'visa';
+    const masterCard = 'master-card';
+    const chinaUnionPay = 'unionpay';
     if (num === 4) {
-      this.root.style.backgroundImage = visa;
+      this.switchImageCreditCard(visa);
     } else if (num === 5) {
-      this.root.style.backgroundImage = masterCard;
+      this.switchImageCreditCard(masterCard);
     } else if (num === 6) {
-      this.root.style.backgroundImage = chinaUnionPay;
+      this.switchImageCreditCard(chinaUnionPay);
+    } else {
+      this.switchImageCreditCard(blank);
+    }
+  }
+
+  private switchImageCreditCard(img: string): void {
+    if (this.root === undefined) return;
+    if (this.root.classList[1] === undefined) {
+      this.root.classList.add(img);
+    } else {
+      this.root.classList.remove(this.root.classList[1]);
+      this.root.classList.add(img);
     }
   }
 
