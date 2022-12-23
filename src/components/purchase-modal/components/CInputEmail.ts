@@ -61,7 +61,7 @@ class CInputEmail extends BaseComponent {
 
   public checkValidity(): boolean {
     if (!(this.root instanceof HTMLInputElement)) return false;
-    const check = this.root.value.split(/[\\@.]+/).filter((x) => x);
+    const check = this.tempValue.split(/[\\@.]+/).filter((x) => x);
 
     if (check.length < 3) {
       this.root.classList.add('validation-error');
