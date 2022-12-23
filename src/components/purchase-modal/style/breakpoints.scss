@@ -1,0 +1,27 @@
+@media all and (max-width: 940px) {
+  .modal__purchase-modal {
+    width: 600px;
+  }
+}
+
+@media all and (max-width: 640px) {
+  .modal__purchase-modal {
+    width: 500px;
+  }
+
+  .close__purchase-modal {
+    display: block;
+  }
+}
+
+@media all and (max-width: 540px) {
+  .modal__purchase-modal {
+    width: 400px;
+  }
+}
+
+@media all and (max-width: 440px) {
+  .modal__purchase-modal {
+    width: 300px;
+  }
+}
