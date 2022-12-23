@@ -34,6 +34,7 @@ class CInputCardValidityPeriod extends BaseComponent {
               type="text" 
               required minlength="5" 
               maxlength="5"
+              title="month/year >> пример 12/25"
               placeholder="${this.placeholder}">
     `;
     return root.trim();
