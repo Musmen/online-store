@@ -37,7 +37,7 @@ class CInputCardNumber extends BaseComponent {
               type="text" 
               minlength="19" 
               maxlength="19"
-              title="Format: 0000 0000 0000 0000"
+              title="кол-во введенных цифр должно быть ровно 16"
               placeholder="${this.placeholder}">
     `;
     return root.trim();
