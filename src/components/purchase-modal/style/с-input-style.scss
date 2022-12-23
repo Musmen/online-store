@@ -1,8 +1,7 @@
 .input-modal {
   width: 100%;
-  background-color: #181a1c;
-  border: 1px solid orange;
-  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 245, 0.8);
+  border-radius: 10px;
   font-size: 18px;
   color: #afafaf;
   padding: 10px 0;
@@ -19,9 +18,9 @@
 
 .validation-error {
   border: 1px solid red;
-  color: red;
+  color: orangered;
 
   &::placeholder {
-    color: red;
+    color: orange;
   }
 }
