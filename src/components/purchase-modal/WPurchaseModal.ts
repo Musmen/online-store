@@ -5,7 +5,6 @@ import CInputPhone from './components/CInputPhone';
 import CInputText from './components/CInputText';
 import WCreditCard from './credit-card/WCreditCard';
 import './style/purchase-modal.scss';
-
 class WPurchaseModal {
   private root: HTMLElement | undefined;
   private span: HTMLElement | undefined;
@@ -57,7 +56,7 @@ class WPurchaseModal {
           <form>
             <div class="personal-details__purchase-modal">
               <span>Personal Detail</span>
-              <div class="close__purchase-modal"><img src="http://localhost:5000/assets/images/001f4ae8992062b94330.png" alt="Icon close"></div>
+              <div class="close__purchase-modal"><div></div></div>
               ${this.inputs.name.make()}
               ${this.inputs.phone.make()}
               ${this.inputs.deliveryAddress.make()}
