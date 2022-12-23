@@ -4,7 +4,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(1, 44, 78, 0.2);
 }
 
 .modal__purchase-modal {
@@ -16,10 +16,9 @@
 
   margin: auto;
   padding: 10px;
-  width: 30%;
-  height: 650px;
-  background-color: #181a1c;
-  border: 1px solid orange;
+  width: 700px;
+  height: 600px;
+  border: 2px solid rgba(255, 255, 245, 0.8);
   border-radius: 10px;
 
   & form {
@@ -33,10 +32,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   & * {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   & *:last-child {
@@ -46,7 +45,7 @@
 
 .personal-details__purchase-modal > span {
   font-size: 25px;
-  color: #ffae1a;
+  color: #fffff5cc;
 }
 
 .credit-card-details__purchase-modal {
@@ -56,24 +55,25 @@
 }
 
 .credit-card-details__purchase-modal > span {
+  margin-bottom: 10px;
   font-size: 25px;
-  color: #ffae1a;
+  color: #fffff5cc;
 }
 
 .submit__purchase-modal {
-  margin: auto;
+  margin: 0 auto;
   padding: 5px 50px;
-  background-color: #3f1010;
-  border: 1px solid orange;
-  border-radius: 0.5rem;
+  border: 2px solid #fffff5cc;
+  border-radius: 10px;
 
-  font-size: 18px;
-  color: orange;
+  font-size: 24px;
+  color: #fffff5cc;
 
-  transition: transform 0.4s;
+  transition: transform 0.1s;
 
   &:hover {
-    transform: scale(1.1);
+    border: 2px solid rgba(255, 93, 0, 0.8);
+    color: #ff5d00;
   }
 
   &:active {
@@ -92,26 +92,35 @@
   opacity: 0;
 }
 
-@media (max-width: 1030px) {
-  .modal__purchase-modal {
-    width: 40%;
+.close__purchase-modal {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  width: 45px;
+  height: 45px;
+  margin: 0;
+
+  & img {
+    width: 100%;
+    filter: invert(1);
+    pointer-events: none;
+  }
+
+  &:hover {
+    & img {
+      animation: rotate linear 2s infinite;
+    }
   }
 }
 
-@media (max-width: 770px) {
-  .modal__purchase-modal {
-    width: 60%;
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-@media (max-width: 520px) {
-  .modal__purchase-modal {
-    width: 80%;
-  }
-}
-
-@media (max-width: 390px) {
-  .modal__purchase-modal {
-    width: 90%;
-  }
-}
+@import './breakpoints.scss';
