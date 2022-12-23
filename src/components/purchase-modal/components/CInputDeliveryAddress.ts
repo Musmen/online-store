@@ -33,7 +33,7 @@ class CInputDeliveryAddress extends BaseComponent {
 
   public make(): string {
     const root = `
-      <input id="${this.id}" class="input-modal" type="text" title="страна, город, улица, дом, кв" placeholder="${this.placeholder}">
+      <input id="${this.id}" class="input-modal" type="text" title="не менее трех слов, длина каждого не менее 5 символов" placeholder="${this.placeholder}">
     `;
     return root.trim();
   }
@@ -68,7 +68,7 @@ class CInputDeliveryAddress extends BaseComponent {
 
   private onInputFocusOut = () => {
     if (!(this.root instanceof HTMLInputElement)) return;
-    if (this.tempValue === '') this.root.value = '';
+    if (this.tempValue === '' || this.tempValue === 'country:') this.root.value = '';
   };
 
   public checkValidity(): boolean {
