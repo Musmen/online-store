@@ -36,7 +36,7 @@ class CInputCvvCode extends BaseComponent {
       <input id="${this.id}"
             class="input__credit-card cvv-code__credit-card"
             type="text"
-            title="Формат:234"
+            title="длина 3 символа"
             minlength="3"
             maxlength="3"
             placeholder="${this.placeholder}">
@@ -76,9 +76,9 @@ class CInputCvvCode extends BaseComponent {
   public checkValidity(): boolean {
     if (!(this.root instanceof HTMLInputElement)) return false;
 
-    const check = this.root.value;
+    const check = this.tempValue;
 
-    if (check.length < 3 || this.root.value === 'Error') {
+    if (check.length < 3) {
       this.root.classList.add('validation-error');
       this.root.value = this.errorText;
       return false;
