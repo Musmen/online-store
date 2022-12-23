@@ -57,6 +57,7 @@ class WPurchaseModal {
           <form>
             <div class="personal-details__purchase-modal">
               <span>Personal Detail</span>
+              <div class="close__purchase-modal"><img src="http://localhost:5000/assets/images/001f4ae8992062b94330.png" alt="Icon close"></div>
               ${this.inputs.name.make()}
               ${this.inputs.phone.make()}
               ${this.inputs.deliveryAddress.make()}
@@ -67,8 +68,8 @@ class WPurchaseModal {
               <span>Credit Card Details</span>
               ${this.inputs.creditCard.make()}
             </div>
+            <span id="form-message" class="message__purchase-modal"></span>
             <button class="submit__purchase-modal" type="submit">CONFIRM</button>
-            <span id="form-message" class="message__purchase-modal">sad</span>
           <form>
         </div>
       </div>
@@ -80,7 +81,7 @@ class WPurchaseModal {
     if (this.root === undefined) return;
     if (!(event.target instanceof Element)) return;
     // if (event.target.closest('.purchase-modal')) {
-    if (event.target.className === 'purchase-modal') {
+    if (event.target.className === 'purchase-modal' || event.target.className === 'close__purchase-modal') {
       this.root.style.display = 'none';
       this.unmount();
       console.log(event.target);
