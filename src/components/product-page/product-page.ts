@@ -4,6 +4,7 @@ import initSwipers from './components/swiper/swiper';
 import productsService from '../../services/products.service';
 import { convertToRomane } from '../../common/common.helper';
 import { ProductItem } from '../../models/product-item.model';
+import { Breadcrumbs } from './models/breadcrumbs.model';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
@@ -33,6 +34,17 @@ class ProductPageComponent {
       .join('');
   }
 
+  #renderBreadcrumbs(breadcrumbs: Breadcrumbs[]): string {
+    return breadcrumbs
+      .map(
+        ({ path, pageName }) => `
+          <li class="list__item breadcrumbs__item">
+            <a class="link breadcrumbs__link" ${path ? `href="${path}"` : ''}>${pageName}</a>
+          </li>`
+      )
+      .join('');
+  }
+
   render(): string {
     const product: ProductItem | null = productsService.getCurrentProduct();
 
@@ -48,11 +60,19 @@ class ProductPageComponent {
 
     const isInCart = Math.random() > 0.5 ? true : false;
 
-    const productImages = `<img class="product-image" src="${images[0]}" alt="Image of ${name}">`;
+    const breadcrumbsList: Breadcrumbs[] = [
+      { path: '#', pageName: 'shop' },
+      { path: `#/?nation=${nation}`, pageName: nation },
+      { path: `#/?type=${type}`, pageName: type },
+      { path: '', pageName: short_name || name },
+    ];
 
     return `
       <div class="product-centralizer">
         <article class="product" data-id="${id}">
+          <ul class="list product__breadcrumbs">
+            ${this.#renderBreadcrumbs(breadcrumbsList)}
+          </ul>
           <div class="product__main-info">
             <div class="product-specifications">
               <h2 class="product-title">${name}</h2>
@@ -71,7 +91,7 @@ class ProductPageComponent {
                 <button class="purchase-btn">Purchase</button>
               </div>
             </div>
-            ${productImages}
+            <img class="product-image" src="${images[0]}" alt="Image of ${name}">
           </div>
           <div class="product-description">
             <h3 class="product-description__title">Details</h3>
