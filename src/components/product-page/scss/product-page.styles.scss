@@ -34,7 +34,7 @@
     z-index: 10;
 
     &_active {
-      background-color: #ff9d00;
+      background-color: $button-active-background;
     }
   }
 
@@ -138,7 +138,7 @@
 
     &__text {
       width: 80%;
-      margin-top: 20px;
+      margin: 10px 0;
 
       font-family: $app-font-family;
       font-size: 17px;
@@ -215,7 +215,6 @@
 
       &__text {
         width: 90%;
-        margin-top: 25px;
 
         font-size: 16px;
       }
@@ -295,7 +294,7 @@
 
       &__text {
         width: 90%;
-        margin-top: 10px;
+        margin-bottom: 0;
 
         font-size: 14px;
         line-height: 24px;

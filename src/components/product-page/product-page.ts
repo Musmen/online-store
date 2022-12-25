@@ -1,4 +1,6 @@
 import './scss/product-page.styles.scss';
+
+import initSwipers from './components/swiper/swiper';
 import productsService from '../../services/products.service';
 import { convertToRomane } from '../../common/common.helper';
 import { ProductItem } from '../../models/product-item.model';
@@ -16,12 +18,24 @@ class ProductPageComponent {
       cartButton: document.querySelector('.cart-btn'),
       purchaseButton: document.querySelector('.purchase-btn'),
     };
+
+    initSwipers();
+  }
+
+  #renderSwiperSlides(images: string[], imageClassName: string, name: string): string {
+    return images
+      .map(
+        (image) => `
+          <div class="swiper-slide">
+            <img class="swiper-image ${imageClassName}" src="${image}" alt="Image of ${name}">
+          </div>`
+      )
+      .join('');
   }
 
   render(): string {
     const product: ProductItem | null = productsService.getCurrentProduct();
 
-    // this.#swiper = product.images.length > 1 ? new Swiper() : null;
     if (!product) {
       window.location.hash = '#';
       return '';
@@ -62,6 +76,20 @@ class ProductPageComponent {
           <div class="product-description">
             <h3 class="product-description__title">Details</h3>
             <p class="product-description__text">${description}</p>
+          </div>
+          <h3 class="product-description__title">Gallery</h3>
+          <div class="product-swipers-container">
+            <div class="swiper thumbs-swiper">
+              <div class="swiper-wrapper thumbs-swiper-wrapper">
+                ${this.#renderSwiperSlides(images.slice(1), 'thumbs-swiper-image', name)}
+              </div>
+            </div>
+            <div class="swiper posters-swiper"> 
+              <div class="swiper-wrapper posters-swiper-wrapper">
+                ${this.#renderSwiperSlides(images.slice(1), 'posters-swiper-image', name)}
+              </div>
+              <div class="swiper-pagination posters-swiper-pagination"></div>
+            </div>
           </div>
         </article>
       </div>`;
