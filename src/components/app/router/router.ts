@@ -1,5 +1,9 @@
-import routes from './routes/routes';
+import productService from '../../../services/products.service';
+
 import { findPageByPath, getLocationPath } from './common/router.helper';
+import { PATHS } from './common/router.constants';
+import routes from './routes/routes';
+
 import { Page } from './models/page.model';
 
 class Router {
@@ -20,7 +24,14 @@ class Router {
     if (!this.#mainContainer) return;
 
     if (this.#previousPage && this.#previousPage.unmount) this.#previousPage.unmount();
-    const currentPath = getLocationPath();
+
+    let [currentPath] = getLocationPath().split('?');
+
+    if (currentPath.startsWith(PATHS.PRODUCT)) {
+      const productId = currentPath.slice(1).split('/').pop();
+      productService.updateCurrentProduct(productId);
+      currentPath = productService.getCurrentProduct() ? PATHS.PRODUCT : PATHS.NOT_FOUND;
+    }
 
     const { page } = findPageByPath(routes, currentPath);
     this.#previousPage = page;

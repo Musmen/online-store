@@ -9,7 +9,6 @@ class MainPageComponent {
 
   constructor() {
     this.init = this.init.bind(this);
-    this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
   }
 
@@ -20,10 +19,6 @@ class MainPageComponent {
 
     const products: ProductItem[] = storage.getProducts();
     this.renderProducts(products);
-  }
-
-  unmount(): void {
-    console.log('Unmount Main Page Component');
   }
 
   render(): string {
