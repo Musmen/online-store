@@ -37,7 +37,7 @@ class CInputCardNumber extends BaseComponent {
               type="text" 
               minlength="19" 
               maxlength="19"
-              title="кол-во введенных цифр должно быть ровно 16"
+              title="the number of entered digits must be exactly 16"
               placeholder="${this.placeholder}">
     `;
     return root.trim();
@@ -77,7 +77,6 @@ class CInputCardNumber extends BaseComponent {
   private remove() {
     if (!(this.root instanceof HTMLInputElement)) return;
     this.temp = this.temp.trim().slice(0, -1);
-    console.log(this.temp);
     this.root.value = this.temp;
   }
 

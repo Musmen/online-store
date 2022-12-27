@@ -28,7 +28,7 @@ class CInputText extends BaseComponent {
 
   public make(): string {
     const root = `
-      <input id = "${this.id}" class="input-modal" type="text" required minlength="3" title="не менее двух слов, длина каждого не менее 3 символов" placeholder="${this.placeholder}">
+      <input id = "${this.id}" class="input-modal" type="text" required minlength="3" title="at least two words, each at least 3 characters long" placeholder="${this.placeholder}">
     `;
     return root;
   }

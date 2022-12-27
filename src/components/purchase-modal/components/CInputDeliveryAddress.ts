@@ -33,7 +33,7 @@ class CInputDeliveryAddress extends BaseComponent {
 
   public make(): string {
     const root = `
-      <input id="${this.id}" class="input-modal" type="text" title="не менее трех слов, длина каждого не менее 5 символов" placeholder="${this.placeholder}">
+      <input id="${this.id}" class="input-modal" type="text" title="at least three words, each at least 5 characters long" placeholder="${this.placeholder}">
     `;
     return root.trim();
   }

@@ -35,7 +35,7 @@ class CInputPhone extends BaseComponent {
       <input id="${this.id}"
             class="input-modal"
             type="tel"
-            title="не короче 9 символов"
+            title="no shorter than 9 characters"
             minlength="10"
             placeholder="${this.placeholder}">
     `;

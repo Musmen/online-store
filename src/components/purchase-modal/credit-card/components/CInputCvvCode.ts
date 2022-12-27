@@ -36,7 +36,7 @@ class CInputCvvCode extends BaseComponent {
       <input id="${this.id}"
             class="input__credit-card cvv-code__credit-card"
             type="text"
-            title="длина 3 символа"
+            title="length 3 characters"
             minlength="3"
             maxlength="3"
             placeholder="${this.placeholder}">
