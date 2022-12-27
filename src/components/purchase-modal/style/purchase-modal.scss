@@ -1,20 +1,18 @@
 .purchase-modal {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   background-color: rgba(1, 44, 78, 0.2);
+  height: 100%;
 }
 
 .modal__purchase-modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  margin: auto;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 10px;
   width: 700px;
   height: 600px;
@@ -101,7 +99,7 @@
   height: 45px;
   margin: 0;
   
-  & div {
+  & button {
     background-image: url("../assets/icon-close.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -112,7 +110,7 @@
   }
 
   &:hover {
-    & div {
+    & button {
       animation: rotate linear 2s infinite;
     }
   }
