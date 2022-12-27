@@ -12,14 +12,10 @@ class WPurchaseModal {
   private inputs = {
     name: new CInputText('Name Surname'),
     phone: new CInputPhone('Phone'),
-    deliveryAddress: new CInputDeliveryAddress('Delivert address'),
+    deliveryAddress: new CInputDeliveryAddress('Delivery address'),
     email: new CInputEmail('E-mail'),
     creditCard: new WCreditCard(),
   };
-
-  constructor() {
-    //
-  }
 
   public init(): void {
     this.inputs.name.init();
@@ -56,7 +52,7 @@ class WPurchaseModal {
           <form>
             <div class="personal-details__purchase-modal">
               <span>Personal Detail</span>
-              <div class="close__purchase-modal"><div></div></div>
+              <div class="close__purchase-modal"><button></button></div>
               ${this.inputs.name.make()}
               ${this.inputs.phone.make()}
               ${this.inputs.deliveryAddress.make()}
@@ -79,15 +75,15 @@ class WPurchaseModal {
   private onModal = (event: Event) => {
     if (this.root === undefined) return;
     if (!(event.target instanceof Element)) return;
-    // if (event.target.closest('.purchase-modal')) {
+
     if (event.target.className === 'purchase-modal' || event.target.className === 'close__purchase-modal') {
       this.root.style.display = 'none';
       this.unmount();
-      console.log(event.target);
     }
   };
 
-  private onSubmit = () => {
+  private onSubmit = (event: Event) => {
+    event.preventDefault();
     if (this.span === undefined) return;
 
     const vals = Object.values(this.inputs);
@@ -100,7 +96,7 @@ class WPurchaseModal {
       this.span.textContent = 'SUCCESS: Please wait 3 seconds';
       setTimeout(() => {
         this.unmount();
-        window.location.replace('?#/');
+        window.location.hash = '#';
       }, 3000);
     } else {
       this.span.textContent = 'Invalide';
