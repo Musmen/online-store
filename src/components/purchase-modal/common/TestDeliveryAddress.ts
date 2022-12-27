@@ -47,7 +47,6 @@ class TestDeliveryAddress {
     const arr = this.temp.split(' ');
 
     for (let i = 0; i < arr.length; i++) {
-      console.log(this.currentData[0]);
       if (arr[i] === this.currentData[0]) {
         arr.splice(i, 1);
         this.enumUp();
@@ -56,12 +55,9 @@ class TestDeliveryAddress {
       }
     }
 
-    console.log(arr);
-    console.log(arr.join(' '));
     const result = arr.join(' ');
 
     if (result.length <= 0) {
-      console.log('shbfhbssfhbshbsfhb');
       this.temp = this.currentData[0];
       return;
     } else {
@@ -80,23 +76,18 @@ class TestDeliveryAddress {
   private enumCurrentPosition(): void {
     switch (this.enumAddress) {
       case EAddress.COUNTRY:
-        console.log('Curr Pos: COUNTRY');
         this.currentData = this.data[0]; // country
         break;
       case EAddress.CITY:
-        console.log('Curr Pos: CITY');
         this.currentData = this.data[1]; // city
         break;
       case EAddress.STREET:
-        console.log('Curr Pos: STREET');
         this.currentData = this.data[2]; // street
         break;
       case EAddress.HOUSE:
-        console.log('Curr Pos: HOUSE');
         this.currentData = this.data[3]; // house
         break;
       case EAddress.ROOM:
-        console.log('Curr Pos: ROOM');
         this.currentData = this.data[4]; // room
         break;
     }
