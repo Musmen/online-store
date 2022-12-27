@@ -6,7 +6,10 @@
     "module": "es6",
     "noImplicitAny": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "swiper": ["./node_modules/swiper/swiper.esm.js"]
+    }
   },
   "include": ["./src/"],
   "exclude": ["node_modules"]
