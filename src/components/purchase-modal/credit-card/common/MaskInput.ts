@@ -50,6 +50,9 @@ class MaskInput {
     if (Number(arr[0] + arr[1]) >= 12) {
       arr[0] = '1';
       arr[1] = '2';
+    } else if (Number(arr[0] + arr[1]) <= 0) {
+      arr[0] = '0';
+      arr[1] = '1';
     }
 
     if (Number(arr[3] + arr[4]) >= 99) {
