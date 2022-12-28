@@ -5,8 +5,9 @@ import './scss/cart.styles.scss';
 import data from '../app/storage/data/products';
 import { ISubsccribe } from '../../eventbus/interface/IMetka'; // << Test Event Bus
 import EventBus from '../../eventbus/EventBus'; // << Test Event Bus
+import { ProductItem } from '../../models/product-item.model';
 
-export class CartComponent implements ISubsccribe {
+export class CartComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
   private productCart: ProductCart = new ProductCart(this);
   private total: Total = new Total();
@@ -22,11 +23,12 @@ export class CartComponent implements ISubsccribe {
     this.productCart.init();
     this.total.init();
     // Test
-    this.productCart.add(data[0], 1);
-    this.productCart.add(data[1], 2);
-    this.productCart.add(data[2], 3);
-    this.productCart.add(data[3], 4);
-    this.productCart.add(data[4], 5);
+    EventBus.subscribe(this, 'product', this.onProduct);
+    // this.productCart.add(data[0], 1);
+    // this.productCart.add(data[1], 2);
+    // this.productCart.add(data[2], 3);
+    // this.productCart.add(data[3], 4);
+    // this.productCart.add(data[4], 5);
     // this.productCart.add(data[5], 6);
     // this.productCart.add(data[6], 7);
     // this.productCart.add(data[7], 8);
@@ -35,7 +37,9 @@ export class CartComponent implements ISubsccribe {
     // this.productCart.add(data[10], 11);
     // this.productCart.add(data[11], 12);
     // this.productCart.add(data[12], 13);
-    EventBus.subscribe(this, 'lol', this.subscribe); // << Test Event BusEventBus;
+    // EventBus.subscribe(this, 'lol', this.subscribe); // << Test Event BusEventBus;
+    console.log(this.BD);
+    this.useBD();
   }
 
   unmount(): void {
@@ -46,18 +50,28 @@ export class CartComponent implements ISubsccribe {
   public updateTotal(count: number, price: number): void {
     this.total.setProductCount(count);
     this.total.setPrice(price);
-    EventBus.emit('lol', price);
+    EventBus.emit('price', price);
+    EventBus.emit('counts', count);
   }
 
   //<<ISubsccribe
-  public subscribe(val: unknown): void {
-    console.log('subscribe: Сработал');
-    console.log(val);
-  }
+  // public subscribe(val: unknown): void {
+  //   console.log('subscribe: Сработал');
+  //   console.log(val);
+  // }
   //<<END
 
-  public addProduct(): void {
-    console.log(data);
+  private BD: ProductItem[] = [];
+  private onProduct = (product: unknown) => {
+    const prod = product as ProductItem;
+    this.BD.push(prod);
+  };
+
+  private useBD(): void {
+    for (let i = 0; i < this.BD.length; i++) {
+      const product = this.BD[i];
+      this.productCart.add(product, i);
+    }
   }
 
   // <h2 class="title">This is Cart Component</h2>
