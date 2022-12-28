@@ -1,3 +1,9 @@
+// .cart-page {
+//   color: #00f;
+// }
+
 .cart-page {
-  color: #00f;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
