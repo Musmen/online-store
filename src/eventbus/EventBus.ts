@@ -18,7 +18,7 @@ class EventBus {
     //
   }
 
-  public static emit(eventType: string, val: number): void {
+  public static emit(eventType: string, val: unknown): void {
     for (let i = 0; i < this.subscribers.length; i++) {
       const sub = this.subscribers[i];
       if (sub.event === eventType) {
