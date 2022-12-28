@@ -89,10 +89,10 @@
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 0.01em;
-    color: $purchase-text-color;
+    color: $button-text-color;
 
     border-radius: 3px;
-    border: 1px solid $purchase-button-background;
+    border: 1px solid $button-background;
 
     background: none;
 
@@ -100,7 +100,7 @@
     opacity: 0;
 
     &_active {
-      background-color: $purchase-button-background;
+      background-color: $button-background;
     }
   }
 }
@@ -157,13 +157,14 @@
     }
 
     .add-cart-btn {
-      bottom: 30px;
+      top: 5px;
+      left: 10px;
 
-      width: 100px;
-      height: 45px;
+      width: 60px;
+      height: 30px;
 
       font-size: 14px;
-      left: 14px;
+      opacity: 1;
     }
   }
 }
@@ -207,7 +208,25 @@
     }
 
     .add-cart-btn {
-      display: none;
+      top: 0;
+      left: 0;
+
+      background-color: $card-background;
+      background-image: url('../../../assets/images/cart.png');
+      background-repeat: no-repeat;
+      background-position: center;
+
+      font-size: 0;
+
+      width: 36px;
+      height: 36px;
+
+      border-radius: 0;
+      border-color: $card-background;
+
+      &_active {
+        background-color: $button-background;
+      }
     }
   }
 }
@@ -215,12 +234,12 @@
 @media (hover: hover) {
   .card {
     .add-cart-btn:hover {
-      background-color: $purchase-button-background;
+      background-color: $button-background;
     }
 
     .add-cart-btn_active:hover {
-      color: $purchase-button-background;
-      background-color: $purchase-text-color;
+      color: $button-background;
+      background-color: $button-text-color;
     }
 
     &:hover {

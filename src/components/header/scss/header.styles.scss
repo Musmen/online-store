@@ -6,7 +6,7 @@
   justify-content: center;
   width: 100%;
   min-height: 47px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 
   background: $header-background;
 
@@ -53,7 +53,7 @@
       top: 2px;
       right: 5px;
 
-      content: url('../assets/images/cart.png');
+      content: url('../../../assets/images/cart.png');
     }
 
     .cart-link:hover.cart-link::before {
@@ -95,7 +95,7 @@
 
 @media all and (max-width: $app-max-media-query) {
   .main-header {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     .nav {
       width: 90vw;

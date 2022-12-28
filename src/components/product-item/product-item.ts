@@ -18,12 +18,12 @@ export default class ProductItemComponent {
     const typeClassName = `tank-type tank-type_${type?.toLowerCase()}`;
 
     const linkToProductPage = `#/product/${id}`;
-    const isInCart = false;
+    const isInCart = Math.random() > 0.5 ? true : false;
 
     return `
       <article class="card" data-id="${id}">
         <a href="${linkToProductPage}" class="card-info">
-          <img class="card-img" src="${images[0]}" alt="Image of ${name}" />
+          <img class="card-img" src="${images[0]}" alt="Image of ${name}">
           <div class="card-specifications">
             <h2 class="item-text">
               <span class="${flagClassName}"></span>
@@ -37,7 +37,7 @@ export default class ProductItemComponent {
             </div>
           </div>
         </a>
-        <button class="add-cart-btn ${isInCart ? 'add-cart-btn_active' : ''}">Add To Cart</button>
+        <button class="add-cart-btn ${isInCart ? 'add-cart-btn_active' : ''}">Cart</button>
       </article>`;
   }
 }
