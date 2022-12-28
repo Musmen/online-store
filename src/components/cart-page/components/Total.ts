@@ -46,25 +46,27 @@ class Total {
 
   public make(): string {
     const elem = `
-    <div class="wraper">
+    <div class="wraper-total-cart">
       <div class="total-cart">
         <h2 class="title__total-cart">Summary</h2>
-        <div class="products__total-cart">
-          <span>Products:</span>
-          <span class="counts__total-cart">${this.count}</span>
-        </div>
-        <div class="price-container">
-          <div class="price__total-cart">
-            <span>Total:</span>
-            <span class="price">$${this.price}</span>
+        <div class="content__total-cart">
+          <div class="products__total-cart">
+            <span>Products:</span>
+            <span class="counts__total-cart">${this.count}</span>
           </div>
+          <div class="price-container">
+            <div class="price__total-cart">
+              <span>Total:</span>
+              <span class="price">$${this.price}</span>
+            </div>
+          </div>
+          <div class="promo__total-cart">
+            <input type="search" placeholder="Enter promo code">
+          </div>
+          <div class="promo-codes__total-cart">
+          </div>
+          <button class="btn__total-cart">BUY NOW</button>
         </div>
-        <div class="promo__total-cart">
-          <input type="search" placeholder="Enter promo code">
-        </div>
-        <div class="promo-codes__total-cart">
-        </div>
-        <button class="btn__total-cart">BUY NOW</button>
       </div>
     </div>
     `;
