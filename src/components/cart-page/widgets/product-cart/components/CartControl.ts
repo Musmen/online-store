@@ -44,7 +44,7 @@ class CartControl {
       <span>Products In Cart</span>
       <div class="items-control__product-cart">
         <span>Items:</span>
-        <input class="number-products__page-control" type="text" placeholder="5" value="5">
+        <input class="number-products__page-control" type="text" placeholder="5" value="${this.showCountsProduct}">
       </div>
       <div class="pagination-control__product-cart">
         <span>Page:</span>
@@ -60,9 +60,11 @@ class CartControl {
 
   public setProducts(arr: Product[]): void {
     this.products = arr;
+    this.updatePagination();
   }
 
   private showCountsProduct = 5;
+
   private onInput = () => {
     if (this.input?.value === undefined) return;
     this.showCountsProduct = Number(this.input?.value);
@@ -123,6 +125,11 @@ class CartControl {
   }
 
   private showPagination(val: number): void {
+    if (this.chunkPagination.length <= this.spanValueView) {
+      this.spanValueView = this.chunkPagination.length;
+      val = this.spanValueView;
+    }
+
     for (let i = 0; i < this.chunkPagination.length; i++) {
       const elems = this.chunkPagination[i];
       if (i + 1 !== val) {
@@ -139,6 +146,13 @@ class CartControl {
         });
       }
     }
+  }
+
+  public updatePagination(): void {
+    console.log('pag');
+    this.calcPaginationCount();
+    this.showPagination(this.spanValueView);
+    this.setSpanView(this.spanValueView);
   }
 }
 

@@ -1,5 +1,5 @@
-import '../scss/total.style.scss';
-import PromoCode from './PromoCode';
+import './scss/total.style.scss';
+import PromoCode from './components/PromoCode';
 
 class Total {
   private root: HTMLElement | undefined;
@@ -15,8 +15,13 @@ class Total {
   private newPriceView: HTMLElement | undefined;
   private newPrice = 0;
 
+  public get Root() {
+    return this.root;
+  }
+
   public init(): void {
-    const root: HTMLElement | null = document.querySelector('.total-cart');
+    // const root: HTMLElement | null = document.querySelector('.total-cart');
+    const root: HTMLElement | null = document.querySelector('.wraper-total-cart');
     if (root === null) return;
     const promoCodes: HTMLElement | null = root?.querySelector('.promo-codes__total-cart');
     const promoInput: HTMLInputElement | null = root.querySelector('.promo__total-cart input');
@@ -63,6 +68,7 @@ class Total {
           <div class="promo__total-cart">
             <input type="search" placeholder="Enter promo code">
           </div>
+          <p style="color: orange; text-align: center">Promo Codes: rs, dv, lal</p>
           <div class="promo-codes__total-cart">
           </div>
           <button class="btn__total-cart">BUY NOW</button>
@@ -86,6 +92,12 @@ class Total {
   public setPrice(price: number): void {
     if (this.priceView === undefined) return;
     this.price = price;
+
+    this.sumDiscount = this.calcDiscount();
+    const getProcent = (this.price / 100) * this.sumDiscount;
+    this.newPrice = Number((this.price - getProcent).toFixed(2));
+    this.updateNewPrice();
+
     this.priceView.textContent = '$' + String(price);
   }
 
@@ -167,11 +179,9 @@ class Total {
     }
 
     const getProcent = (this.price / 100) * this.sumDiscount;
-    this.newPrice = this.price - getProcent;
+    this.newPrice = Number((this.price - getProcent).toFixed(2));
 
-    if (this.newPriceView !== undefined) {
-      this.newPriceView.textContent = `$${this.newPrice}`;
-    }
+    this.updateNewPrice();
   };
 
   private calcDiscount(): number {
@@ -214,6 +224,12 @@ class Total {
     this.newPriceView = elem.querySelector('.price') as HTMLElement;
     this.newPriceBlock = elem;
     this.priceContainer.querySelector('.price__total-cart')?.classList.add('old-price');
+  }
+
+  private updateNewPrice(): void {
+    if (this.newPriceView !== undefined) {
+      this.newPriceView.textContent = `$${this.newPrice}`;
+    }
   }
 }
 

@@ -1,8 +1,8 @@
-import { ProductItem } from '../../../models/product-item.model';
-import { CartComponent } from '../cart-page';
-import '../scss/product-cart.style.scss';
-import CartControl from './CartControl';
-import Product from './Product';
+import { ProductItem } from '../../../../models/product-item.model';
+import { CartComponent } from '../../cart-page';
+import './scss/product-cart.style.scss';
+import CartControl from './components/CartControl';
+import Product from './components/Product';
 
 class ProductCart {
   private root: HTMLElement | undefined;
@@ -11,8 +11,12 @@ class ProductCart {
   private product: ProductItem | undefined;
   private products: Product[] = [];
 
-  private pagination: CartControl = new CartControl();
+  private cartControl: CartControl = new CartControl();
   private controller: CartComponent;
+
+  public get Root() {
+    return this.root;
+  }
 
   public constructor(controller: CartComponent) {
     this.controller = controller;
@@ -25,14 +29,14 @@ class ProductCart {
     if (root !== null && containerRoot !== null) {
       this.containerRoot = containerRoot;
       this.root = root;
-      this.pagination.init();
+      this.cartControl.init();
     }
   }
 
   public make(): string {
     const elem = `
       <div class="product-cart">
-        ${this.pagination.make()}
+        ${this.cartControl.make()}
         <div class="container__product-cart"></div>
       </div>
     `;
@@ -50,7 +54,7 @@ class ProductCart {
       this.products.push(prod);
     }
 
-    this.pagination.setProducts(this.products);
+    this.cartControl.setProducts(this.products);
     this.controller.updateTotal(this.calcTotalCount(), this.calcTotalSum());
   }
 
@@ -68,7 +72,12 @@ class ProductCart {
     if (saveIndex !== undefined) {
       this.products.splice(saveIndex, 1);
     }
+    this.cartControl.updatePagination();
+
     this.controller.updateTotal(this.calcTotalCount(), this.calcTotalSum());
+    if (this.products.length <= 0) {
+      this.controller.emptyCart();
+    }
   };
 
   public callbackAdd = () => {

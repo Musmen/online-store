@@ -1,4 +1,4 @@
-import { ProductItem } from '../../../models/product-item.model';
+import { ProductItem } from '../../../../../models/product-item.model';
 import '../scss/product.style.scss';
 type callback = () => void;
 
@@ -77,6 +77,13 @@ class Product {
   }
 
   private item(): string {
+    if (this.data?.description === undefined) return '';
+    let description = this.data.description;
+    if (description.length >= 10) {
+      const num = Math.floor((description.length / 100) * 80);
+      description = description.slice(0, -num);
+      description += '....';
+    }
     if (this.data === undefined) return '';
     const item = `
         <div id="${this.id}" class="item__product-cart">
@@ -87,11 +94,10 @@ class Product {
             <img class="img__item" src="${this.data.images[0]}">
             <div class="detail__item">
               <span class="title__item">${this.data.name}</span>
-              <p class="description__item">${this.data.description}</p>
+              <p class="description__item">${description}</p>
               <div class="type__item">
-                <span>${this.data.nation}</span>
-                <span>${this.data.tier}</span>
-                <span>${this.totalPrice}</span>
+                <span>${this.data.nation.toUpperCase()}</span>
+                <span>${this.data.type.toUpperCase()}</span>
               </div>
             </div>
           </div>
