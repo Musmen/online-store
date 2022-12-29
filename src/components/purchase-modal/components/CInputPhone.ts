@@ -87,6 +87,7 @@ class CInputPhone extends BaseComponent {
     if (!(this.root instanceof HTMLInputElement)) return false;
     const check = this.root.value.split('+').join('');
 
+    if (this.root.value === this.errorText) return false;
     if (check.length < 9) {
       this.root.classList.add('validation-error');
       this.root.value = this.errorText;

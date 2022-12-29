@@ -60,7 +60,7 @@ class CInputText extends BaseComponent {
     if (!(this.root instanceof HTMLInputElement)) return false;
 
     const check = this.root.value.split(' ');
-
+    if (this.root.value === this.errorText) return false;
     for (let i = 0; i < check.length; i++) {
       if (check[i].length < 3 || check.length < 2) {
         this.root.classList.add('validation-error');
