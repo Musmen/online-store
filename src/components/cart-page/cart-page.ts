@@ -1,14 +1,15 @@
-import ProductCart from './components/ProductCart';
-import Total from './components/Total';
+import ProductCart from './widgets/product-cart/ProductCart';
+import Total from './widgets/total/Total';
 import './scss/cart.styles.scss';
 // TEST
 import data from '../app/storage/data/products';
-import { ISubsccribe } from '../../eventbus/interface/IMetka'; // << Test Event Bus
+import { IMetka } from '../../eventbus/interface/IMetka'; // << Test Event Bus
 import EventBus from '../../eventbus/EventBus'; // << Test Event Bus
 import { ProductItem } from '../../models/product-item.model';
 
 export class CartComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
+  private root: HTMLElement | undefined;
   private productCart: ProductCart = new ProductCart(this);
   private total: Total = new Total();
 
@@ -20,26 +21,29 @@ export class CartComponent {
 
   init(): void {
     console.log('Init Cart Component');
+    const root: HTMLElement | null = document.querySelector('.cart-page');
+    if (root === null) return;
+    this.root = root;
     this.productCart.init();
     this.total.init();
     // Test
-    EventBus.subscribe(this, 'product', this.onProduct);
-    // this.productCart.add(data[0], 1);
-    // this.productCart.add(data[1], 2);
-    // this.productCart.add(data[2], 3);
-    // this.productCart.add(data[3], 4);
-    // this.productCart.add(data[4], 5);
-    // this.productCart.add(data[5], 6);
-    // this.productCart.add(data[6], 7);
-    // this.productCart.add(data[7], 8);
-    // this.productCart.add(data[8], 9);
-    // this.productCart.add(data[9], 10);
-    // this.productCart.add(data[10], 11);
-    // this.productCart.add(data[11], 12);
-    // this.productCart.add(data[12], 13);
+    // EventBus.subscribe(this, 'product', this.onProduct);
+    this.productCart.add(data[0], 1);
+    this.productCart.add(data[1], 2);
+    this.productCart.add(data[2], 3);
+    this.productCart.add(data[3], 4);
+    this.productCart.add(data[4], 5);
+    this.productCart.add(data[5], 6);
+    this.productCart.add(data[6], 7);
+    this.productCart.add(data[7], 8);
+    this.productCart.add(data[8], 9);
+    this.productCart.add(data[9], 10);
+    this.productCart.add(data[10], 11);
+    this.productCart.add(data[11], 12);
+    this.productCart.add(data[12], 13);
     // EventBus.subscribe(this, 'lol', this.subscribe); // << Test Event BusEventBus;
     console.log(this.BD);
-    this.useBD();
+    // this.useBD();
   }
 
   unmount(): void {
@@ -74,6 +78,16 @@ export class CartComponent {
     }
   }
 
+  public emptyCart(): void {
+    this.productCart.Root?.remove();
+    this.total.unmount();
+    this.total.Root?.remove();
+
+    if (this.root !== undefined) {
+      this.root.insertAdjacentHTML('beforeend', this.makeEmptyCart());
+    }
+  }
+
   // <h2 class="title">This is Cart Component</h2>
   render(): string {
     return `
@@ -82,6 +96,13 @@ export class CartComponent {
         ${this.total.make()}
       </section>
     `;
+  }
+
+  public makeEmptyCart(): string {
+    const elem = `
+      <div class="cart-empty"></div>
+    `;
+    return elem.trim();
   }
 }
 
