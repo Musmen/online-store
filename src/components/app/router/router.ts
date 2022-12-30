@@ -25,7 +25,7 @@ class Router {
 
     if (this.#previousPage && this.#previousPage.unmount) this.#previousPage.unmount();
 
-    let [currentPath] = getLocationPath().split('?');
+    let currentPath = getLocationPath();
 
     if (currentPath.startsWith(PATHS.PRODUCT)) {
       const productId = currentPath.slice(1).split('/').pop();

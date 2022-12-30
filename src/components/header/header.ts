@@ -37,7 +37,7 @@ class HeaderComponent {
       <nav class="nav">
         <a class="link logo-link" href="#">
           <svg class="logo-icon">
-            <use xlink:href="assets/images/logo.svg#WGLogo"></use>
+            <use xlink:href="assets/images/sprite.svg#WGLogo"></use>
           </svg>
           <span class="text logo-text">Online Store</span>
         </a>
