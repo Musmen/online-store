@@ -27,15 +27,15 @@
   .search-bar__input::-webkit-search-cancel-button {
     width: 18px;
     height: 18px;
-    
+
     background-color: $button-background;
     background-image: url('../assets/images/cross.svg');
     background-size: 16px 16px;
     background-position: center;
     background-repeat: no-repeat;
-  
+
     border-radius: 50%;
-    
+
     -webkit-appearance: none;
     cursor: pointer;
     transition: $app-standard-transition;
