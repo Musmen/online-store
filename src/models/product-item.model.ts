@@ -10,3 +10,7 @@ export interface ProductItem {
   nation: string;
   type: string;
 }
+
+export interface ProductData extends ProductItem {
+  link?: string;
+}
