@@ -2,6 +2,9 @@ import storage from '../components/app/storage/storage';
 
 import queryParamsService from './query-params.service';
 
+import { hasSomeValues } from './common/services.helpers';
+import { NATIONS_VALUES, TYPES_VALUES } from '../common/common.constants';
+
 import { ProductItem } from '../models/product-item.model';
 import { Category, ProductsCount } from '../models/common.model';
 
@@ -26,13 +29,22 @@ class ProductsService {
   }
 
   getFilteredProducts(): ProductItem[] {
-    const { nation, type } = queryParamsService.getQueryParams();
-    const checkedNationsList = nation?.split(' ') || ['ussr', 'germany', 'uk', 'usa'];
-    const checkedTypesList = type?.split(' ') || ['lightTank', 'mediumTank', 'heavyTank', 'AT-SPG'];
+    const { nation, type, search } = queryParamsService.getQueryParams();
+    const checkedNationsList = nation?.split(' ') || NATIONS_VALUES;
+    const checkedTypesList = type?.split(' ') || TYPES_VALUES;
 
-    return this.getAllProducts().filter(
-      (product: ProductItem) => checkedNationsList.includes(product.nation) && checkedTypesList.includes(product.type)
-    );
+    return this.getAllProducts().filter((product: ProductItem) => {
+      const productForSearch: Partial<ProductItem> = { ...product };
+      delete productForSearch.id;
+      delete productForSearch.images;
+      const productForSearchPropertiesValues = Object.values(productForSearch);
+
+      return (
+        checkedNationsList.includes(product.nation) &&
+        checkedTypesList.includes(product.type) &&
+        (search ? hasSomeValues(productForSearchPropertiesValues, search) : true)
+      );
+    });
   }
 
   findProductById(id: string): ProductItem | undefined {

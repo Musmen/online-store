@@ -1,14 +1,13 @@
+import { NATIONS_VALUES, TYPES_VALUES } from '../../../../../common/common.constants';
+
 export const SEPARATOR = ' ';
 
 export type FilterCategoryNames = 'nation' | 'type';
 
 export type SelectedOptions = { [name: string]: string[] };
 
-const NATION_VALUES: string[] = ['ussr', 'germany', 'uk', 'usa'];
-const TYPES_VALUES: string[] = ['lightTank', 'mediumTank', 'heavyTank', 'AT-SPG'];
-
 export const FILTER_OPTIONS: { name: FilterCategoryNames; values: string[] }[] = [
-  { name: 'nation', values: NATION_VALUES },
+  { name: 'nation', values: NATIONS_VALUES },
   { name: 'type', values: TYPES_VALUES },
 ];
 

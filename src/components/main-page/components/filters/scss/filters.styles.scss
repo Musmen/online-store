@@ -67,6 +67,10 @@
     &__icon {
       width: 9px;
       height: 9px;
+
+      transform: rotate(180deg);
+
+      transition: $app-standard-transition;
     }
 
     &__body {
@@ -141,6 +145,10 @@
 
   .open .tanks-select__body {
     display: flex;
+  }
+
+  .open .tanks-select__icon {
+    transform: rotate(360deg);
   }
 
   .filter-checkbox {

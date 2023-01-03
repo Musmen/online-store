@@ -1,0 +1,50 @@
+@import '../../../../../scss/variables';
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.21);
+
+  .search-bar__input {
+    width: 323px;
+    height: 50px;
+    margin: 8px auto 12px;
+    padding: 0 15px;
+
+    border: 1px solid $input-border-color;
+    border-radius: 10px;
+
+    font-family: $app-font-family;
+    font-size: 20px;
+    color: $input-text-color;
+
+    &:focus {
+      border: 1px solid $input-border-focus-color;
+    }
+  }
+
+  .search-bar__input::-webkit-search-cancel-button {
+    width: 18px;
+    height: 18px;
+    
+    background-color: $button-background;
+    background-image: url('../assets/images/cross.svg');
+    background-size: 16px 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    border-radius: 50%;
+    
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: $app-standard-transition;
+
+    &:focus,
+    &:hover,
+    &:active {
+      box-shadow: 0 0 4px 2px $hover-text-color;
+      transform: rotate(90deg);
+    }
+  }
+}

@@ -62,7 +62,6 @@ class FiltersComponent {
     }
 
     this.#updateProducts();
-    this.#updateCounts();
   }
 
   #addListeners(): void {
@@ -77,7 +76,7 @@ class FiltersComponent {
     });
   }
 
-  #removeLiteners(): void {
+  #removeListeners(): void {
     this.#elements.selectHeaders?.forEach((selectHeader: Element) => {
       const selectHeaderElement = selectHeader as HTMLElement;
       selectHeaderElement.removeEventListener('click', this.selectHeaderOnClickHandler);
@@ -90,7 +89,7 @@ class FiltersComponent {
   }
 
   unmount(): void {
-    this.#removeLiteners();
+    this.#removeListeners();
   }
 
   #renderCount(category: Category): string {
@@ -99,7 +98,7 @@ class FiltersComponent {
     return `(<span class="current-count">${current}</span>/<span class="total-count">${total}</span>)`;
   }
 
-  #updateCounts(): void {
+  updateCounts(): void {
     this.#elements.countsInfo?.forEach((countsInfoElement: HTMLElement) => {
       const option = countsInfoElement.dataset.option;
       if (!option) return;

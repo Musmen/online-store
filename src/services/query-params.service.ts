@@ -40,6 +40,18 @@ class QueryParamsService {
 
     this.#updateHistoryState(urlParams);
   }
+
+  setQueryParam(name: string, value: string): void {
+    const urlParams: URLSearchParams = this.#getURLSearchParams();
+    urlParams.set(name, value);
+    this.#updateHistoryState(urlParams);
+  }
+
+  unsetQueryParam(name: string): void {
+    const urlParams: URLSearchParams = this.#getURLSearchParams();
+    urlParams.delete(name);
+    this.#updateHistoryState(urlParams);
+  }
 }
 
 export default new QueryParamsService();
