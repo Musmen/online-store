@@ -1,10 +1,11 @@
-import { IMetka } from './interface/IMetka';
+import EventPrice from './events/EventPrice';
 type subType = { [key: string]: unknown };
-
+type sub = { [key: string]: EventPrice };
 class EventBus {
   private static readonly subscribers: subType[] = [];
+  private static readonly subscriptions: sub = {};
 
-  public static subscribe(subClass: IMetka, eventType: string, subFunc: (val: unknown) => void): void {
+  public static subscribe<T, U>(subClass: unknown, eventType: string, subFunc: (val: T, val2?: U) => void): void {
     // const check = this.checkImplementsClassInterface(subClass);
     // console.log(check);
     const obj: subType = {};
@@ -18,23 +19,15 @@ class EventBus {
     //
   }
 
-  public static emit(eventType: string, val: unknown): void {
+  public static emit<T, U>(eventType: string, val: T, val2?: U): void {
     for (let i = 0; i < this.subscribers.length; i++) {
       const sub = this.subscribers[i];
       if (sub.event === eventType) {
         if (sub.func instanceof Function) {
-          sub.func(val);
+          sub.func(val, val2);
         }
       }
     }
-  }
-
-  private static call(): void {
-    //
-  }
-
-  private static checkImplementsClassInterface(subClass: IMetka): subClass is IMetka {
-    return 'ISubscribe' in subClass;
   }
 }
 
