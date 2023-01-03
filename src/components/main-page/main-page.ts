@@ -21,6 +21,10 @@ class MainPageComponent {
     this.renderProducts(products);
   }
 
+  unmount(): void {
+    this.products = [];
+  }
+
   render(): string {
     return `
       <section class="main-page">
@@ -30,16 +34,25 @@ class MainPageComponent {
     `;
   }
 
+  private products: ProductItemComponent[] = [];
   renderProducts(products: ProductItem[]): void {
-    this.#elements.productsList?.insertAdjacentHTML(
-      'afterbegin',
-      products
-        .map(
-          (product) => `
-            <li class="product-item">${new ProductItemComponent(product).render()}</li>`
-        )
-        .join('')
-    );
+    // this.#elements.productsList?.insertAdjacentHTML(
+    //   'afterbegin',
+    //   products
+    //     .map(
+    //       (product) => `
+    //         <li class="product-item">${new ProductItemComponent(product).render()}</li>`
+    //     )
+    //     .join('')
+    // );
+
+    for (let i = products.length; i >= 0; i--) {
+      const product = products[i];
+      const item: ProductItemComponent = new ProductItemComponent(product);
+      this.#elements.productsList?.insertAdjacentHTML('afterbegin', `<li class="product-item">${item.render()}</li>`);
+      item.init();
+      this.products.push(item);
+    }
   }
 }
 
