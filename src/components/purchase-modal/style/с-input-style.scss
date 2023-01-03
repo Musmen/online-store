@@ -1,0 +1,26 @@
+.input-modal {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 245, 0.8);
+  border-radius: 10px;
+  font-size: 18px;
+  color: #afafaf;
+  padding: 10px 0;
+  text-align: center;
+
+  &::placeholder {
+    color: #afafaf;
+  }
+
+  &:focus {
+    outline: 2px solid white;
+  }
+}
+
+.purchase-modal .validation-error {
+  border: 1px solid red;
+  color: orangered;
+
+  &::placeholder {
+    color: orange;
+  }
+}
