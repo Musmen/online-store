@@ -1,5 +1,5 @@
 .product-cart {
-  width: 70%;
+  width: 100%;
 
   border: 2px solid #ccc;
 }
@@ -63,3 +63,5 @@
 .container__product-cart {
   padding: 10px;
 }
+
+@import 'product-cart.breakpoint.scss';
