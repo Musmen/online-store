@@ -1,99 +1,96 @@
-import ProductCart from './widgets/product-cart/ProductCart';
-import Total from './widgets/total/Total';
 import './scss/cart.styles.scss';
-// TEST
-import data from '../app/storage/data/products';
-import { IMetka } from '../../eventbus/interface/IMetka'; // << Test Event Bus
 import EventBus from '../../eventbus/EventBus'; // << Test Event Bus
 import { ProductItem } from '../../models/product-item.model';
+import TotalController from './widgets/total/controller/TotalController';
+import ProductStoreModel from './models/ProductStoreModel';
+
+import ProductCartController from './widgets/product-cart/controller/ProductCartController';
+import CartStorageService from './service/CartStorageService';
+import EventCartEmpty from '../../eventbus/events/EventCartEmpty';
 
 export class CartComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
   private root: HTMLElement | undefined;
-  private productCart: ProductCart = new ProductCart(this);
-  private total: Total = new Total();
+  private productCartController: ProductCartController = new ProductCartController();
+  private totalController: TotalController = new TotalController();
 
+  private productList = ProductStoreModel;
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
+    EventBus.subscribe(this, 'product', this.onProduct);
+  }
+
+  private onProduct = (product: ProductItem, link: string | undefined) => {
+    if (product === null) return;
+    if (link !== undefined) {
+      this.productList.add(product, link);
+    }
+  };
+
+  private initProductList(): void {
+    for (let i = 0; i < this.productList.Products.length; i++) {
+      const product = this.productList.Products[i];
+      this.productCartController.addProduct(product, this.productList.Links[i]);
+    }
+  }
+
+  // TEST
+  private isEmptyStorage(): void {
+    const test = CartStorageService.getFrom('products');
+    if (test.length <= 0) return;
+    this.productList.reset();
+    for (let i = 0; i < test.length; i++) {
+      this.productList.add(test[i]);
+    }
+    CartStorageService.deleteFrom('products');
   }
 
   init(): void {
-    console.log('Init Cart Component');
     const root: HTMLElement | null = document.querySelector('.cart-page');
     if (root === null) return;
     this.root = root;
-    this.productCart.init();
-    this.total.init();
-    // Test
-    // EventBus.subscribe(this, 'product', this.onProduct);
-    this.productCart.add(data[0], 1);
-    this.productCart.add(data[1], 2);
-    this.productCart.add(data[2], 3);
-    this.productCart.add(data[3], 4);
-    this.productCart.add(data[4], 5);
-    this.productCart.add(data[5], 6);
-    this.productCart.add(data[6], 7);
-    this.productCart.add(data[7], 8);
-    this.productCart.add(data[8], 9);
-    this.productCart.add(data[9], 10);
-    this.productCart.add(data[10], 11);
-    this.productCart.add(data[11], 12);
-    this.productCart.add(data[12], 13);
-    // EventBus.subscribe(this, 'lol', this.subscribe); // << Test Event BusEventBus;
-    console.log(this.BD);
-    // this.useBD();
+
+    if (this.productList.Products.length <= 0) {
+      this.emptyCart();
+    }
+
+    this.totalController.init();
+
+    this.productCartController.init();
+    this.initProductList();
+    EventBus.subscribe(this, 'price-and-counts', this.onUpdateTotal);
+    EventCartEmpty.current.subscribe(this.onCartEmpty);
   }
 
   unmount(): void {
-    console.log('Unmount Cart Component');
-    this.total.unmount();
+    this.productCartController.unmount();
+    this.totalController.unmount();
   }
 
-  public updateTotal(count: number, price: number): void {
-    this.total.setProductCount(count);
-    this.total.setPrice(price);
-    EventBus.emit('price', price);
-    EventBus.emit('counts', count);
-  }
-
-  //<<ISubsccribe
-  // public subscribe(val: unknown): void {
-  //   console.log('subscribe: Сработал');
-  //   console.log(val);
-  // }
-  //<<END
-
-  private BD: ProductItem[] = [];
-  private onProduct = (product: unknown) => {
-    const prod = product as ProductItem;
-    this.BD.push(prod);
+  private onUpdateTotal = (price: number, count: number | undefined) => {
+    if (count === undefined) return;
+    this.totalController.setPriceAndCount(count, price);
   };
 
-  private useBD(): void {
-    for (let i = 0; i < this.BD.length; i++) {
-      const product = this.BD[i];
-      this.productCart.add(product, i);
-    }
-  }
-
   public emptyCart(): void {
-    this.productCart.Root?.remove();
-    this.total.unmount();
-    this.total.Root?.remove();
-
+    this.root?.classList.add('cart-empty');
     if (this.root !== undefined) {
-      this.root.insertAdjacentHTML('beforeend', this.makeEmptyCart());
+      document.querySelector('.product-cart')?.remove();
+      document.querySelector('.wraper-total-cart')?.remove();
     }
   }
 
-  // <h2 class="title">This is Cart Component</h2>
+  private onCartEmpty = () => {
+    this.emptyCart();
+  };
+
   render(): string {
     return `
       <section class="cart-page">
-        ${this.productCart.make()}
-        ${this.total.make()}
+        ${this.productCartController.render()}
+        ${this.totalController.render()}
       </section>
     `;
   }
