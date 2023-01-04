@@ -1,7 +1,5 @@
 import { NATIONS_VALUES, TYPES_VALUES } from '../../../../../common/common.constants';
 
-export const SEPARATOR = ' ';
-
 export type FilterCategoryNames = 'nation' | 'type';
 
 export type SelectedOptions = { [name: string]: string[] };

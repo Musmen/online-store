@@ -4,3 +4,16 @@ export const ROMAN_DIGITS = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII
 
 export const NATIONS_VALUES: string[] = ['ussr', 'germany', 'uk', 'usa'];
 export const TYPES_VALUES: string[] = ['lightTank', 'mediumTank', 'heavyTank', 'AT-SPG'];
+
+export const SEPARATOR = ' ';
+
+export enum SORTING_ORDERS {
+  ASC = 'asc',
+  DES = 'des',
+}
+
+export enum SORTING_BY {
+  PRICE = 'price',
+  AMOUNT = 'amount',
+  TIER = 'tier',
+}

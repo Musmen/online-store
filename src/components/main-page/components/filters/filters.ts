@@ -7,9 +7,9 @@ import {
   FilterCategoryNames,
   FILTER_OPTIONS,
   FILTER_OPTIONS_TEMPLATES,
-  SEPARATOR,
   SelectedOptions,
 } from './common/filter.constants';
+import { SEPARATOR } from '../../../../common/common.constants';
 
 import { Category, ProductsCount } from '../../../../models/common.model';
 import { ProductItem } from '../../../../models/product-item.model';
@@ -132,8 +132,8 @@ class FiltersComponent {
   render(): string {
     const { nation, type } = queryParamsService.getQueryParams();
     const selectedOptions: SelectedOptions = {
-      nation: nation?.split(' ') || [],
-      type: type?.split(' ') || [],
+      nation: nation?.split(SEPARATOR) || [],
+      type: type?.split(SEPARATOR) || [],
     };
 
     return FILTER_OPTIONS.map(

@@ -1,12 +1,14 @@
 import './scss/main-page.styles.scss';
 
-import filters from './components/filters/filters';
-import ProductItemComponent from '../product-item/product-item';
-
 import productsService from '../../services/products.service';
 
-import { ProductItem } from '../../models/product-item.model';
+import filters from './components/filters/filters';
 import searchBar from './components/search-bar/search-bar';
+import sortingBlock from './components/sorting-block/sorting-block';
+
+import ProductItemComponent from '../product-item/product-item';
+
+import { ProductItem } from '../../models/product-item.model';
 
 class MainPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
@@ -24,11 +26,13 @@ class MainPageComponent {
 
     filters.init(this.updateProducts);
     searchBar.init(this.updateProducts);
+    sortingBlock.init(this.updateProducts);
   }
 
   unmount(): void {
     filters.unmount();
     searchBar.unmount();
+    sortingBlock.unmount();
   }
 
   #renderProducts(products: ProductItem[]): string {
@@ -62,6 +66,10 @@ class MainPageComponent {
       <section class="filters-container">
         <h3 class="visually-hidden">Filters</h3>
         ${filters.render()}
+      </section>
+      <section class="sorting-block-container">
+        <h3>Sort by: </h3>
+        ${sortingBlock.render()}
       </section>
       <section class="main-page">
         <h2 class="visually-hidden">Main Page. Shop Products List</h2>

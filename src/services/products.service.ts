@@ -3,7 +3,7 @@ import storage from '../components/app/storage/storage';
 import queryParamsService from './query-params.service';
 
 import { hasSomeValues } from './common/services.helpers';
-import { NATIONS_VALUES, TYPES_VALUES } from '../common/common.constants';
+import { NATIONS_VALUES, SEPARATOR, SORTING_BY, SORTING_ORDERS, TYPES_VALUES } from '../common/common.constants';
 
 import { ProductItem } from '../models/product-item.model';
 import { Category, ProductsCount } from '../models/common.model';
@@ -29,11 +29,13 @@ class ProductsService {
   }
 
   getFilteredProducts(): ProductItem[] {
-    const { nation, type, search } = queryParamsService.getQueryParams();
-    const checkedNationsList = nation?.split(' ') || NATIONS_VALUES;
-    const checkedTypesList = type?.split(' ') || TYPES_VALUES;
+    const { nation, type, search, sorting } = queryParamsService.getQueryParams();
+    const checkedNationsList = nation?.split(SEPARATOR) || NATIONS_VALUES;
+    const checkedTypesList = type?.split(SEPARATOR) || TYPES_VALUES;
 
-    return this.getAllProducts().filter((product: ProductItem) => {
+    const [sortingBy, sortingOrder] = (sorting || '').split(SEPARATOR) as [SORTING_BY, SORTING_ORDERS];
+
+    const filteredProduct: ProductItem[] = this.getAllProducts().filter((product: ProductItem) => {
       const productForSearch: Partial<ProductItem> = { ...product };
       delete productForSearch.id;
       delete productForSearch.images;
@@ -45,6 +47,14 @@ class ProductsService {
         (search ? hasSomeValues(productForSearchPropertiesValues, search) : true)
       );
     });
+
+    if (!sorting) return filteredProduct;
+
+    return filteredProduct.sort(
+      (firstProduct: ProductItem, secondProduct: ProductItem) =>
+        (Number(firstProduct[sortingBy]) - Number(secondProduct[sortingBy])) *
+        (sortingOrder === SORTING_ORDERS.ASC ? 1 : -1)
+    );
   }
 
   findProductById(id: string): ProductItem | undefined {
