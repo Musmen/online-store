@@ -6,4 +6,5 @@ export enum QUERY_PARAMS_NAMES {
   SORTING = 'sorting',
   PRICE = 'price',
   AMOUNT = 'amount',
+  SIZE = 'size',
 }

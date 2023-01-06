@@ -5,6 +5,7 @@ import productsService from '../../services/products.service';
 import filters from './components/filters/filters';
 import searchBar from './components/search-bar/search-bar';
 import sortingBlock from './components/sorting-block/sorting-block';
+import cardSizeToggler from './components/card-size-toggler/card-size-toggler';
 import dualSlidersController from './components/dual-sliders-block/dual-sliders-block';
 
 import ProductItemComponent from '../product-item/product-item';
@@ -30,6 +31,7 @@ class MainPageComponent {
     filters.init(this.updateMainPage);
     searchBar.init(this.updateMainPage);
     sortingBlock.init(this.updateMainPage);
+    cardSizeToggler.init(this.#elements.productsList);
 
     const dualSlidersContainer: HTMLElement | null = document.querySelector('.dual-sliders-container');
     dualSlidersController.init(this.updateMainPage, dualSlidersContainer);
@@ -39,6 +41,7 @@ class MainPageComponent {
     filters.unmount();
     searchBar.unmount();
     sortingBlock.unmount();
+    cardSizeToggler.unmount();
     dualSlidersController.unmount();
   }
 
@@ -88,6 +91,9 @@ class MainPageComponent {
         ${sortingBlock.render()}
       </section>
       <div class="dual-sliders-container">
+      </div>
+      <div class="card-size-toggler-container">
+        ${cardSizeToggler.render()}
       </div>
       <section class="main-page">
         <h2 class="visually-hidden">Main Page. Shop Products List</h2>
