@@ -10,6 +10,8 @@ import dualSlidersController from './components/dual-sliders-block/dual-sliders-
 
 import ProductItemComponent from '../product-item/product-item';
 
+import { EMPTY_MESSAGE } from './common/main-page.constants';
+
 import { ProductItem } from '../../models/product-item.model';
 
 class MainPageComponent {
@@ -18,15 +20,16 @@ class MainPageComponent {
   constructor() {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
-    this.updateProducts = this.updateProducts.bind(this);
-
     this.updateMainPage = this.updateMainPage.bind(this);
   }
 
   init(): void {
     this.#elements = {
       productsList: document.querySelector('.products-list'),
+      totalAmountInfo: document.querySelector('.total-amount__value'),
     };
+
+    this.#updateTotalAmountInfo();
 
     filters.init(this.updateMainPage);
     searchBar.init(this.updateMainPage);
@@ -46,20 +49,27 @@ class MainPageComponent {
   }
 
   #renderProducts(products: ProductItem[]): string {
-    return products
-      .map(
-        (product) => `
+    return (
+      products
+        .map(
+          (product) => `
           <li class="product-item">${new ProductItemComponent(product).render()}</li>`
-      )
-      .join('');
+        )
+        .join('') || `<li class="empty-message">${EMPTY_MESSAGE}</li>`
+    );
   }
 
-  updateProducts(): void {
+  #updateProducts(): void {
     if (!this.#elements.productsList) return;
 
     productsService.updateSelectedProducts();
     const products: ProductItem[] = productsService.getSelectedProducts();
     this.#elements.productsList.innerHTML = this.#renderProducts(products);
+  }
+
+  #updateTotalAmountInfo(): void {
+    if (!this.#elements.totalAmountInfo) return;
+    this.#elements.totalAmountInfo.innerText = String(productsService.getSelectedProductsAmount());
   }
 
   updateMainPage(
@@ -68,7 +78,8 @@ class MainPageComponent {
       shouldUpdateAmountDualSlider: true,
     }
   ) {
-    this.updateProducts();
+    this.#updateProducts();
+    this.#updateTotalAmountInfo();
     filters.updateCounts();
     dualSlidersController.updateDualSliders({ shouldUpdatePriceDualSlider, shouldUpdateAmountDualSlider });
   }
@@ -94,6 +105,12 @@ class MainPageComponent {
       </div>
       <div class="card-size-toggler-container">
         ${cardSizeToggler.render()}
+      </div>
+      <div class="main-page-controllers">
+        <p class="total-amount">
+          <span class="total-amount__title">Found: </span>
+          <span class="total-amount__value"></span>
+        </p>
       </div>
       <section class="main-page">
         <h2 class="visually-hidden">Main Page. Shop Products List</h2>

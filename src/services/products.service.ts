@@ -44,6 +44,10 @@ class ProductsService {
     return storage.getSelectedProducts();
   }
 
+  getSelectedProductsAmount(): number {
+    return this.getSelectedProducts().length;
+  }
+
   setSelectedProducts(selectedProducts: ProductItem[] = []): void {
     storage.setSelectedProducts(selectedProducts);
   }

@@ -1,0 +1,13 @@
+@import '../../../scss/variables';
+
+.main-page-controllers {
+  .total-amount {
+    font-family: $app-font-family;
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+    color: $title-text-color;
+    text-transform: uppercase;
+  }
+}
