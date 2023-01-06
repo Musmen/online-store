@@ -13,3 +13,13 @@ export interface ProductsCount {
   total: number;
   current: number;
 }
+
+export interface MinMaxRange {
+  min: number;
+  max: number;
+}
+
+export type GetMinAndMaxPropertyValuesInProductsType = (
+  products: ProductItem[],
+  property: keyof ProductItem
+) => MinMaxRange;

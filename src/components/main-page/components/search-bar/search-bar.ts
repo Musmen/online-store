@@ -6,7 +6,7 @@ class SearchBarComponent {
   #inputElement: HTMLInputElement | null = null;
   #timerId: NodeJS.Timeout | null = null;
 
-  #updateProducts: () => void = () => null;
+  #updateMainPage: () => void = () => null;
 
   constructor() {
     this.unmount = this.unmount.bind(this);
@@ -14,8 +14,8 @@ class SearchBarComponent {
     this.debouncedOnInputHandler = this.debouncedOnInputHandler.bind(this);
   }
 
-  init(updateProducts: () => void): void {
-    this.#updateProducts = updateProducts;
+  init(updateMainPage: () => void): void {
+    this.#updateMainPage = updateMainPage;
 
     this.#inputElement = document.querySelector('.search-bar__input');
 
@@ -30,7 +30,7 @@ class SearchBarComponent {
       queryParamsService.setQueryParam('search', searchValue);
     } else queryParamsService.unsetQueryParam('search');
 
-    this.#updateProducts();
+    this.#updateMainPage();
   }
 
   debouncedOnInputHandler(event: Event): void {

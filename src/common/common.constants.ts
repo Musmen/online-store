@@ -1,3 +1,5 @@
+import { ProductItem } from '../models/product-item.model';
+
 export const DEFAULT_ERROR_MESSAGE = 'API request error...';
 
 export const ROMAN_DIGITS = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
@@ -17,3 +19,12 @@ export enum SORTING_BY {
   AMOUNT = 'amount',
   TIER = 'tier',
 }
+
+export const PRICE_POSTFIX = '$';
+
+export const PRODUCTS_PROPERTIES_NAMES: {
+  [keys: string]: keyof ProductItem;
+} = {
+  PRICE: 'price',
+  AMOUNT: 'amount',
+};

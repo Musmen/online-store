@@ -5,6 +5,7 @@ import productsService from '../../services/products.service';
 import filters from './components/filters/filters';
 import searchBar from './components/search-bar/search-bar';
 import sortingBlock from './components/sorting-block/sorting-block';
+import dualSlidersController from './components/dual-sliders-block/dual-sliders-block';
 
 import ProductItemComponent from '../product-item/product-item';
 
@@ -17,6 +18,8 @@ class MainPageComponent {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
     this.updateProducts = this.updateProducts.bind(this);
+
+    this.updateMainPage = this.updateMainPage.bind(this);
   }
 
   init(): void {
@@ -24,15 +27,19 @@ class MainPageComponent {
       productsList: document.querySelector('.products-list'),
     };
 
-    filters.init(this.updateProducts);
-    searchBar.init(this.updateProducts);
-    sortingBlock.init(this.updateProducts);
+    filters.init(this.updateMainPage);
+    searchBar.init(this.updateMainPage);
+    sortingBlock.init(this.updateMainPage);
+
+    const dualSlidersContainer: HTMLElement | null = document.querySelector('.dual-sliders-container');
+    dualSlidersController.init(this.updateMainPage, dualSlidersContainer);
   }
 
   unmount(): void {
     filters.unmount();
     searchBar.unmount();
     sortingBlock.unmount();
+    dualSlidersController.unmount();
   }
 
   #renderProducts(products: ProductItem[]): string {
@@ -47,16 +54,25 @@ class MainPageComponent {
   updateProducts(): void {
     if (!this.#elements.productsList) return;
 
-    const products: ProductItem[] = productsService.getFilteredProducts();
+    productsService.updateSelectedProducts();
+    const products: ProductItem[] = productsService.getSelectedProducts();
+    this.#elements.productsList.innerHTML = this.#renderProducts(products);
+  }
 
-    this.#elements.productsList.innerHTML = '';
-    this.#elements.productsList.insertAdjacentHTML('afterbegin', this.#renderProducts(products));
-
+  updateMainPage(
+    { shouldUpdatePriceDualSlider, shouldUpdateAmountDualSlider } = {
+      shouldUpdatePriceDualSlider: true,
+      shouldUpdateAmountDualSlider: true,
+    }
+  ) {
+    this.updateProducts();
     filters.updateCounts();
+    dualSlidersController.updateDualSliders({ shouldUpdatePriceDualSlider, shouldUpdateAmountDualSlider });
   }
 
   render(): string {
-    const products: ProductItem[] = productsService.getFilteredProducts();
+    productsService.updateSelectedProducts();
+    const products: ProductItem[] = productsService.getSelectedProducts();
 
     return `
       <section class="search-bar-container">
@@ -71,6 +87,8 @@ class MainPageComponent {
         <h3>Sort by: </h3>
         ${sortingBlock.render()}
       </section>
+      <div class="dual-sliders-container">
+      </div>
       <section class="main-page">
         <h2 class="visually-hidden">Main Page. Shop Products List</h2>
         <ul class="list products-list">

@@ -2,40 +2,70 @@ import storage from '../components/app/storage/storage';
 
 import queryParamsService from './query-params.service';
 
-import { hasSomeValues } from './common/services.helpers';
-import { NATIONS_VALUES, SEPARATOR, SORTING_BY, SORTING_ORDERS, TYPES_VALUES } from '../common/common.constants';
+import { getMinMaxTupleOfPropertyValuesInProducts, hasSomeValues } from './common/services.helpers';
+
+import {
+  NATIONS_VALUES,
+  PRODUCTS_PROPERTIES_NAMES,
+  SEPARATOR,
+  SORTING_BY,
+  SORTING_ORDERS,
+  TYPES_VALUES,
+} from '../common/common.constants';
 
 import { ProductItem } from '../models/product-item.model';
 import { Category, ProductsCount } from '../models/common.model';
+import { MinMaxTupleType } from './models/services.models';
 
 class ProductsService {
-  #currentProduct: ProductItem | null = null;
+  getAllProducts(): ProductItem[] {
+    return storage.getAllProducts();
+  }
+
+  #findProductById(id: string): ProductItem | undefined {
+    const products: ProductItem[] = this.getAllProducts();
+    return products.find((product: ProductItem) => id === String(product.id));
+  }
 
   setCurrentProduct(product: ProductItem | null): void {
-    this.#currentProduct = product;
+    storage.setCurrentProduct(product);
   }
 
   getCurrentProduct(): ProductItem | null {
-    return this.#currentProduct;
+    return storage.getCurrentProduct();
   }
 
   updateCurrentProduct(productId = ''): void {
-    const currentProduct = this.findProductById(productId) || null;
+    const currentProduct = this.#findProductById(productId) || null;
     this.setCurrentProduct(currentProduct);
   }
 
-  getAllProducts(): ProductItem[] {
-    return storage.getProducts();
+  getSelectedProducts(): ProductItem[] {
+    return storage.getSelectedProducts();
   }
 
-  getFilteredProducts(): ProductItem[] {
-    const { nation, type, search, sorting } = queryParamsService.getQueryParams();
+  setSelectedProducts(selectedProducts: ProductItem[] = []): void {
+    storage.setSelectedProducts(selectedProducts);
+  }
+
+  #getFilteredProducts(products: ProductItem[]): ProductItem[] {
+    const { nation, type, search, price, amount } = queryParamsService.getQueryParams();
     const checkedNationsList = nation?.split(SEPARATOR) || NATIONS_VALUES;
     const checkedTypesList = type?.split(SEPARATOR) || TYPES_VALUES;
 
-    const [sortingBy, sortingOrder] = (sorting || '').split(SEPARATOR) as [SORTING_BY, SORTING_ORDERS];
+    const priceMinMaxTuple: MinMaxTupleType = getMinMaxTupleOfPropertyValuesInProducts(
+      products,
+      PRODUCTS_PROPERTIES_NAMES.PRICE
+    );
+    const amountMinMaxTuple: MinMaxTupleType = getMinMaxTupleOfPropertyValuesInProducts(
+      products,
+      PRODUCTS_PROPERTIES_NAMES.AMOUNT
+    );
 
-    const filteredProduct: ProductItem[] = this.getAllProducts().filter((product: ProductItem) => {
+    const [minPrice, maxPrice] = price?.split(SEPARATOR) || priceMinMaxTuple;
+    const [minAmount, maxAmount] = amount?.split(SEPARATOR) || amountMinMaxTuple;
+
+    return products.filter((product: ProductItem) => {
       const productForSearch: Partial<ProductItem> = { ...product };
       delete productForSearch.id;
       delete productForSearch.images;
@@ -44,22 +74,32 @@ class ProductsService {
       return (
         checkedNationsList.includes(product.nation) &&
         checkedTypesList.includes(product.type) &&
+        Number(product.price) >= Number(minPrice) &&
+        Number(product.price) <= Number(maxPrice) &&
+        Number(product.amount) >= Number(minAmount) &&
+        Number(product.amount) <= Number(maxAmount) &&
         (search ? hasSomeValues(productForSearchPropertiesValues, search) : true)
       );
     });
+  }
 
-    if (!sorting) return filteredProduct;
+  #getSortedProducts(products: ProductItem[]): ProductItem[] {
+    const { sorting } = queryParamsService.getQueryParams();
+    if (!sorting) return products;
 
-    return filteredProduct.sort(
+    const [sortingBy, sortingOrder] = sorting.split(SEPARATOR) as [SORTING_BY, SORTING_ORDERS];
+    return [...products].sort(
       (firstProduct: ProductItem, secondProduct: ProductItem) =>
         (Number(firstProduct[sortingBy]) - Number(secondProduct[sortingBy])) *
         (sortingOrder === SORTING_ORDERS.ASC ? 1 : -1)
     );
   }
 
-  findProductById(id: string): ProductItem | undefined {
-    const products: ProductItem[] = this.getAllProducts();
-    return products.find((product: ProductItem) => id === String(product.id));
+  updateSelectedProducts(): void {
+    const allProducts: ProductItem[] = this.getAllProducts();
+    const filteredProducts: ProductItem[] = this.#getFilteredProducts(allProducts);
+    const sortedAndFilteredProducts: ProductItem[] = this.#getSortedProducts(filteredProducts);
+    this.setSelectedProducts(sortedAndFilteredProducts);
   }
 
   #countCategoryItemsInProducts(category: Category, products: ProductItem[]): number {
@@ -69,10 +109,10 @@ class ProductsService {
 
   getCategoryItemsCount(category: Category): ProductsCount {
     const allProducts: ProductItem[] = this.getAllProducts();
-    const filteredProducts: ProductItem[] = this.getFilteredProducts();
+    const selectedProducts: ProductItem[] = this.getSelectedProducts();
 
     const totalCount = this.#countCategoryItemsInProducts(category, allProducts);
-    const currentCount = this.#countCategoryItemsInProducts(category, filteredProducts);
+    const currentCount = this.#countCategoryItemsInProducts(category, selectedProducts);
 
     return { total: totalCount, current: currentCount };
   }

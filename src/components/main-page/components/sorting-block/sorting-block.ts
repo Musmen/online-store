@@ -5,21 +5,22 @@ import queryParamsService from '../../../../services/query-params.service';
 import { getActiveClassNameBySortingState } from './common/sorting-block.helpers';
 
 import { SEPARATOR, SORTING_BY, SORTING_ORDERS } from '../../../../common/common.constants';
-import { DEFAULT_SORTING_BY, SORTING_QUERY_PARAM_NAME } from './common/sorting-block.constants';
+import { DEFAULT_SORTING_BY } from './common/sorting-block.constants';
+import { QUERY_PARAMS_NAMES } from '../../../../services/common/services.constants';
 
 class SortingBlockComponent {
   #sortingBlockContainer: HTMLElement | null = null;
   #sortingButtons: NodeListOf<HTMLElement> | null = null;
 
-  #updateProducts: () => void = () => null;
+  #updateMainPage: () => void = () => null;
 
   constructor() {
     this.unmount = this.unmount.bind(this);
     this.sortingButtonClickHandler = this.sortingButtonClickHandler.bind(this);
   }
 
-  init(updateProducts: () => void): void {
-    this.#updateProducts = updateProducts;
+  init(updateMainPage: () => void): void {
+    this.#updateMainPage = updateMainPage;
 
     this.#sortingBlockContainer = document.querySelector('.sorting-block-container');
     this.#sortingButtons = this.#sortingBlockContainer?.querySelectorAll('.sorting-block-button') || null;
@@ -44,19 +45,19 @@ class SortingBlockComponent {
           ? SORTING_ORDERS.ASC
           : SORTING_ORDERS.DES;
         const sortingOptionsString = `${sortingBy} ${sortingOrderString}`;
-        queryParamsService.setQueryParam(SORTING_QUERY_PARAM_NAME, sortingOptionsString);
+        queryParamsService.setQueryParam(QUERY_PARAMS_NAMES.SORTING, sortingOptionsString);
 
         clickedSortingButton.classList.toggle('sorting-block-button_rotated');
         return;
       }
 
       const sortingOptionsString = `${sortingBy}${SEPARATOR}${SORTING_ORDERS.ASC}`;
-      queryParamsService.setQueryParam(SORTING_QUERY_PARAM_NAME, sortingOptionsString);
+      queryParamsService.setQueryParam(QUERY_PARAMS_NAMES.SORTING, sortingOptionsString);
 
       clickedSortingButton.classList.add('sorting-block-button_active');
     });
 
-    this.#updateProducts();
+    this.#updateMainPage();
   }
 
   #addListeners(): void {

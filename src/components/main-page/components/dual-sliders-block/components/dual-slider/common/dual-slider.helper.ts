@@ -1,4 +1,5 @@
-import { DualSliderColors, MinMaxRange } from '../models/dual-slider.model';
+import { MinMaxRange } from '../../../../../../../models/common.model';
+import { DualSliderColors } from '../models/dual-slider.model';
 
 type GetSliderBackgroundType = (limits: MinMaxRange, values: MinMaxRange, colors: DualSliderColors) => string;
 

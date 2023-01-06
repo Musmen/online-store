@@ -19,7 +19,7 @@ class FiltersComponent {
     [key: string]: NodeListOf<HTMLElement> | null;
   };
 
-  #updateProducts: () => void = () => null;
+  #updateMainPage: () => void = () => null;
 
   constructor() {
     this.#elements = {
@@ -33,8 +33,8 @@ class FiltersComponent {
     this.checkboxOnChangeHandler = this.checkboxOnChangeHandler.bind(this);
   }
 
-  init(updateProducts: () => void): void {
-    this.#updateProducts = updateProducts;
+  init(updateMainPage: () => void): void {
+    this.#updateMainPage = updateMainPage;
 
     this.#elements = {
       countsInfo: document.querySelectorAll('.count-info'),
@@ -61,7 +61,7 @@ class FiltersComponent {
       queryParamsService.deleteQueryParam(name, value);
     }
 
-    this.#updateProducts();
+    this.#updateMainPage();
   }
 
   #addListeners(): void {
@@ -103,7 +103,7 @@ class FiltersComponent {
       const option = countsInfoElement.dataset.option;
       if (!option) return;
 
-      const [name, value] = option.split(' ') as [keyof ProductItem, string];
+      const [name, value] = option.split(SEPARATOR) as [keyof ProductItem, string];
       countsInfoElement.innerHTML = this.#renderCount({ name, value });
     });
   }

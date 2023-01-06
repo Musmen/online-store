@@ -59,6 +59,7 @@
     background-size: 10px 10px;
 
     transition: $app-standard-transition;
+    transform: rotate(-180deg);
   }
 
   .sorting-block-button:hover {
@@ -73,6 +74,6 @@
   }
 
   .sorting-block-button_rotated::after {
-    transform: rotate(-180deg);
+    transform: rotate(0);
   }
 }
