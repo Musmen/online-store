@@ -31,6 +31,6 @@ export const FILTER_OPTIONS_TEMPLATES: {
     heavyTank: `<span class="tank-type tank-type_heavytank"></span>
                 <span class="tanks-select__value">Heavy</span>`,
     'AT-SPG': `<span class="tank-type tank-type_at-spg"></span>
-               <span class="tanks-select__value">Antitank SPG</span>`,
+               <span class="tanks-select__value">AT-SPG</span>`,
   },
 };

@@ -5,8 +5,12 @@ class QueryParamsService {
     return new URLSearchParams(window.location.search);
   }
 
-  #updateHistoryState(urlParams: URLSearchParams) {
+  #updateHistoryState(urlParams: URLSearchParams): void {
     window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+  }
+
+  clearAllQueryParams() {
+    window.history.replaceState({}, '', `${window.location.pathname}`);
   }
 
   getQueryParams(): QueryParams {

@@ -28,6 +28,12 @@ class SortingBlockComponent {
     this.#addListeners();
   }
 
+  resetAllSortingsState(): void {
+    this.#sortingButtons?.forEach((sortingButton) =>
+      sortingButton.classList.remove('sorting-block-button_active', 'sorting-block-button_rotated')
+    );
+  }
+
   sortingButtonClickHandler(event: Event): void {
     const clickedSortingButton = event.target as HTMLElement;
     if (!clickedSortingButton.classList.contains('sorting-block-button')) return;

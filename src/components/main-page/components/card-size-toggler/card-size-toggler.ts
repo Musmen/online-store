@@ -27,6 +27,11 @@ class CardSizeTogglerComponent {
     this.#addListeners();
   }
 
+  resetTogglerState(): void {
+    this.#togglerElement && (this.#togglerElement.checked = false);
+    this.#productsListContainer?.classList.remove('products-list_big-card');
+  }
+
   togglerOnClickHandler(): void {
     this.#toggleCardsSize();
 

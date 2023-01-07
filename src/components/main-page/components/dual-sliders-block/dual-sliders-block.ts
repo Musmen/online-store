@@ -93,12 +93,12 @@ class DualSlidersBlockComponent {
     return `
       <section class="price-dual-slider">
         <h3 class="visually-hidden">Price Filtering Dual Slider</h3>
-        <p class="dual-slider-title">Price range: </p>
+        <span class="dual-slider-title">Price Filter</span>
         ${this.priceDualSlider.render()}
       </section>
       <section class="amount-dual-slider">
         <h3 class="visually-hidden">Amount Filtering Dual Slider</h3>
-        <p class="dual-slider-title">Amount range: </p>
+        <span class="dual-slider-title">Amount Filter</span>
         ${this.amountDualSlider.render()}
       </section>`;
   }

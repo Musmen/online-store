@@ -45,6 +45,25 @@ class FiltersComponent {
     this.#addListeners();
   }
 
+  resetAllFiltersState(): void {
+    this.#resetAllCheckboxes();
+    this.#closeAllFilters();
+  }
+
+  #closeAllFilters(): void {
+    this.#elements.selectHeaders?.forEach((selectHeader: Element) => {
+      const selectHeaderElement = selectHeader as HTMLElement;
+      selectHeaderElement.parentElement?.classList.remove('open');
+    });
+  }
+
+  #resetAllCheckboxes(): void {
+    this.#elements.checkboxes?.forEach((checkbox: Element) => {
+      const checkboxElement = checkbox as HTMLInputElement;
+      checkboxElement.checked = false;
+    });
+  }
+
   selectHeaderOnClickHandler(event: Event): void {
     const selectHeaderElement = event.currentTarget as HTMLElement;
     selectHeaderElement.parentElement?.classList.toggle('open');
@@ -115,13 +134,15 @@ class FiltersComponent {
     return `
       <li class="tanks-select__item">
         <label class="tanks-select__label">
-          <input
-            class="checkbox filter-checkbox" 
-            type="checkbox"
-            name="${checkboxName}"
-            ${isCheckboxChecked ? 'checked' : ''}
-          >
-          ${FILTER_OPTIONS_TEMPLATES[name][value]}
+          <div class="tanks-select__wrapper">
+            <input
+              class="checkbox filter-checkbox" 
+              type="checkbox"
+              name="${checkboxName}"
+              ${isCheckboxChecked ? 'checked' : ''}
+            >
+            ${FILTER_OPTIONS_TEMPLATES[name][value]}
+          </div>
           <span class="count-info" data-option="${name}${SEPARATOR}${value}">
             ${this.#renderCount({ name, value })}
           </span>

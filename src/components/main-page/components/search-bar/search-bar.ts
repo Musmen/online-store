@@ -22,6 +22,10 @@ class SearchBarComponent {
     this.#addListeners();
   }
 
+  resetSearchState(): void {
+    this.#inputElement && (this.#inputElement.value = '');
+  }
+
   searchInputHandler(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const searchValue: string = inputElement.value;
