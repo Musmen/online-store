@@ -1,8 +1,13 @@
 import './scss/product-page.styles.scss';
 
 import initSwipers from './components/swiper/swiper';
+
 import productsService from '../../services/products.service';
+
 import { convertToRomane } from '../../common/common.helper';
+
+import { PRICE_POSTFIX } from '../../common/common.constants';
+
 import { ProductItem } from '../../models/product-item.model';
 import { Breadcrumbs } from './models/breadcrumbs.model';
 
@@ -83,7 +88,7 @@ class ProductPageComponent {
                 <span class="product-name">${short_name || name}</span>
               </h2>
               <div class="product-wrapper">
-                  <p class="price">${price} $</p>
+                  <p class="price">${price} ${PRICE_POSTFIX}</p>
                   <p class="amount">amount: ${amount}</p>
               </div>
               <div class="product__controls">

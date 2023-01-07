@@ -1,4 +1,5 @@
 import { convertToRomane } from '../../common/common.helper';
+import { PRICE_POSTFIX } from '../../common/common.constants';
 import { ProductItem } from '../../models/product-item.model';
 
 export default class ProductItemComponent {
@@ -32,7 +33,7 @@ export default class ProductItemComponent {
               <span class="item-name">${short_name || name}</span>
             </h2>
             <div class="card-wrapper">
-              <p class="price">${price} $</p>
+              <p class="price">${price} ${PRICE_POSTFIX}</p>
               <p class="amount">AMOUNT: ${amount}</p>
             </div>
           </div>

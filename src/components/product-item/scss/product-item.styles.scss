@@ -105,6 +105,36 @@
   }
 }
 
+.products-list_big-card {
+  .card {
+    height: calc(100vw / 2 - 10px);
+    max-height: 400px;
+
+    .card-info {
+      .card-img {
+        width: calc(100vw / 2 - 10px);
+        max-width: 600px;
+        max-height: 400px;
+      }
+
+      .card-specifications {
+        .item-text {
+          font-size: 20px;
+        }
+
+        .price,
+        .amount {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .add-cart-btn {
+      font-size: 22px;
+    }
+  }
+}
+
 @media all and (max-width: $app-medium-media-query) {
   .card {
     height: calc(100vw / 3 - 10px);
@@ -118,8 +148,8 @@
       }
 
       .card-specifications {
-        left: 14px;
-        bottom: 14px;
+        left: 10px;
+        bottom: 10px;
 
         .item-text {
           align-items: baseline;
@@ -157,7 +187,7 @@
     }
 
     .add-cart-btn {
-      top: 5px;
+      top: 10px;
       left: 10px;
 
       width: 60px;
@@ -165,6 +195,25 @@
 
       font-size: 14px;
       opacity: 1;
+    }
+  }
+
+  .products-list_big-card {
+    .card {
+      .add-cart-btn {
+        top: 20px;
+        left: 20px;
+
+        width: 150px;
+        height: 45px;
+
+        opacity: 1;
+      }
+
+      .card-specifications {
+        left: 20px;
+        bottom: 20px;
+      }
     }
   }
 }
@@ -226,6 +275,69 @@
 
       &_active {
         background-color: $button-background;
+      }
+    }
+  }
+
+  .products-list_big-card {
+    .card {
+      height: calc(100vw - 2px);
+      max-height: 300px;
+
+      background-color: $card-hover-background;
+
+      .card-info {
+        .card-img {
+          width: calc(100vw - 2px);
+          max-height: 300px;
+        }
+      }
+
+      .add-cart-btn {
+        top: auto;
+        left: auto;
+        right: 14px;
+        bottom: 14px;
+
+        width: 150px;
+        height: 45px;
+
+        background-image: none;
+
+        border-radius: 3px;
+        border: 1px solid $button-background;
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-mobile-small-width) {
+  .products-list_big-card {
+    .card {
+      .card-info {
+        .card-specifications {
+          left: 10px;
+          bottom: 10px;
+
+          .item-text {
+            font-size: 17px;
+          }
+
+          .price,
+          .amount {
+            font-size: 17px;
+          }
+        }
+      }
+
+      .add-cart-btn {
+        right: 10px;
+        bottom: 10px;
+
+        width: 120px;
+        height: 40px;
+
+        font-size: 18px;
       }
     }
   }

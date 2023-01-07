@@ -3,18 +3,36 @@ import products from './data/products.js';
 import { ProductItem } from '../../../models/product-item.model';
 
 class Storage {
-  #products: ProductItem[] = [];
+  #allProducts: ProductItem[] = [];
+  #selectedProducts: ProductItem[] = [];
+  #currentProduct: ProductItem | null = null;
 
   init(): void {
-    this.setProducts(products);
+    this.setAllProducts(products);
   }
 
-  setProducts(products: ProductItem[]): void {
-    this.#products = products;
+  setAllProducts(products: ProductItem[]): void {
+    this.#allProducts = products;
   }
 
-  getProducts(): ProductItem[] {
-    return this.#products;
+  getAllProducts(): ProductItem[] {
+    return this.#allProducts;
+  }
+
+  setCurrentProduct(currentProduct: ProductItem | null): void {
+    this.#currentProduct = currentProduct;
+  }
+
+  getCurrentProduct(): ProductItem | null {
+    return this.#currentProduct;
+  }
+
+  setSelectedProducts(selectedProducts: ProductItem[]): void {
+    this.#selectedProducts = selectedProducts;
+  }
+
+  getSelectedProducts(): ProductItem[] {
+    return this.#selectedProducts;
   }
 }
 

@@ -33,13 +33,12 @@ class HeaderComponent {
   render(): string {
     return `
     <header class="main-header">
-      <h1 class="visually-hidden">Tanks Online Store</h1>
       <nav class="nav">
         <a class="link logo-link" href="#">
           <svg class="logo-icon">
-            <use xlink:href="assets/images/logo.svg#WGLogo"></use>
+            <use xlink:href="assets/images/sprite.svg#WGLogo"></use>
           </svg>
-          <span class="text logo-text">Online Store</span>
+          <h1 class="text logo-text">Tanks Online Store</h1>
         </a>
         <p class="total-cost-wrapper">
           <span class="text">Total cost: </span>

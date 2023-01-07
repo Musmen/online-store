@@ -1,0 +1,12 @@
+<svg viewBox="0 0 9 5" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .arrow {
+      width: 1em; 
+      height: 1em;
+      vertical-align: middle;
+      overflow: hidden;
+      fill: #fff;
+    }
+  </style>
+  <path class="arrow" d="M9 0L4.5 3.6 0 0v1l4.5 4L9 1z"/>
+</svg>

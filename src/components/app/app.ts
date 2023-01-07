@@ -3,8 +3,8 @@ import appController from './controller/app.controller';
 import router from './router/router';
 
 class App {
-  async init(): Promise<void> {
-    await storage.init();
+  init(): void {
+    storage.init();
     appController.init();
     router.init();
   }

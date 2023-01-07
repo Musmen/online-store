@@ -1,0 +1,123 @@
+@import '../../../../../scss/variables';
+
+.sorting-block-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: $app-font-family;
+  font-size: 17px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: $title-text-color;
+  text-transform: uppercase;
+
+  user-select: none;
+
+  .sorting-block-button {
+    position: relative;
+
+    width: 116px;
+    height: 30px;
+    margin: 0;
+    margin-left: 10px;
+
+    font-family: $app-font-family;
+    font-size: 17px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: $title-text-color;
+    text-transform: uppercase;
+
+    border-radius: 3px;
+    border: 1px solid $button-background;
+
+    background: none;
+
+    opacity: 0.5;
+    transition: $app-standard-transition;
+  }
+
+  .sorting-block-button::after {
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 5px);
+
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+
+    content: '';
+
+    background-image: url('../assets/images/arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px 10px;
+
+    transition: $app-standard-transition;
+    transform: rotate(-180deg);
+  }
+
+  .sorting-block-button:hover {
+    color: $hover-text-color;
+    opacity: 1;
+  }
+
+  .sorting-block-button_active {
+    color: $hover-text-color;
+    background-color: $button-background;
+    opacity: 0.8;
+  }
+
+  .sorting-block-button_rotated::after {
+    transform: rotate(0);
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .sorting-block-container {
+    font-size: 15px;
+
+    .sorting-block-button {
+      width: 110px;
+
+      font-size: 15px;
+    }
+
+    .sorting-block-title {
+      font-size: 15px;
+    }
+  }
+}
+
+@media all and (max-width: 450px) {
+  .sorting-block-title {
+    display: none;
+  }
+
+  .sorting-block-container {
+    justify-content: space-evenly;
+
+    .sorting-block-button:first-of-type {
+      margin-left: 0;
+    }
+  }
+}
+
+@media all and (max-width: $app-mobile-small-width) {
+  .sorting-block-container {
+    .sorting-block-button {
+      width: 90px;
+      height: 30px;
+      padding-left: 5px;
+
+      text-align: left;
+    }
+
+    .sorting-block-button::after {
+      right: 5px;
+    }
+  }
+}
