@@ -1,11 +1,15 @@
 .purchase-modal {
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   background-color: rgba(1, 44, 78, 0.2);
-  height: 100%;
+  backdrop-filter: blur(20px);
+  overflow-y: hidden;
+  width: 100vw; 
+  height: 100vh;
+  z-index: 100;
 }
 
 .modal__purchase-modal {
