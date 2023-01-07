@@ -78,11 +78,11 @@ class PromoCode {
   private changeStateButton(): void {
     switch (this.stateButton) {
       case StateButton.ADD:
-        this.stateButton = StateButton.DROPE;
+        this.stateButton = StateButton.DROP;
         this.isDiscountApply = true;
         this.emit(this.isDiscountApply, this);
         break;
-      case StateButton.DROPE:
+      case StateButton.DROP:
         this.stateButton = StateButton.ADD;
         this.isDiscountApply = false;
         this.emit(this.isDiscountApply, this);

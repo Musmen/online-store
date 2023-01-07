@@ -1,5 +1,5 @@
 enum StateButton {
   ADD = 'ADD',
-  DROPE = 'DROP',
+  DROP = 'DROP',
 }
 export default StateButton;
