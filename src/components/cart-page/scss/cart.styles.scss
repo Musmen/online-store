@@ -2,6 +2,29 @@
   display: grid;
   grid-template-columns: 70% 30%;
   gap: 20px;
+
+  height: 100%;
+}
+
+@media all and (max-width: 1240px) {
+  .cart-page {
+    gap: 10px;
+  }
+}
+
+@media all and (max-width: 1140px) {
+  .cart-page {
+    gap: 0;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .cart-page {
+    // grid-template-columns: auto;
+    // grid-template-rows: 40% auto;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .cart-empty {
@@ -11,7 +34,7 @@
   width: 400px;
   height: 400px;
   transform: translate(-50%, -50%);
-  background-image: url("../assets/cart-empty.png");
+  background-image: url('../assets/cart-empty.png');
   mix-blend-mode: color-dodge;
   background-repeat: no-repeat;
   background-size: contain;

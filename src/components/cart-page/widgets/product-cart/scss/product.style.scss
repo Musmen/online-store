@@ -11,6 +11,11 @@
   height: 100%;
   margin-right: 10px;
   color: #ccc;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .contetnt__product-cart {
@@ -108,4 +113,4 @@
   }
 }
 
-// @import 'product.breakpoint.scss';
+//@import 'product.breakpoint.scss';
