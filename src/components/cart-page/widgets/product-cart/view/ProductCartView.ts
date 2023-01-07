@@ -6,13 +6,15 @@ import ProductCartController from '../controller/ProductCartController';
 
 class ProductCartView extends BaseView {
   private controller: ProductCartController;
-  private control: ControlView = new ControlView();
+  private control: ControlView;
 
   private containerItem: HTMLElement | null = null;
 
   public constructor(controller: ProductCartController) {
     super();
     this.controller = controller;
+    this.control = new ControlView(controller);
+    this.insert = this.insert.bind(this);
   }
 
   public init(): void {
