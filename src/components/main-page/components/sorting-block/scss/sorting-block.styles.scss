@@ -13,14 +13,12 @@
   color: $title-text-color;
   text-transform: uppercase;
 
-  background-color: rgba(0, 0, 0, 0.21);
-
   user-select: none;
 
   .sorting-block-button {
     position: relative;
 
-    width: 120px;
+    width: 116px;
     height: 30px;
     margin: 0;
     margin-left: 10px;
@@ -75,5 +73,51 @@
 
   .sorting-block-button_rotated::after {
     transform: rotate(0);
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .sorting-block-container {
+    font-size: 15px;
+
+    .sorting-block-button {
+      width: 110px;
+
+      font-size: 15px;
+    }
+
+    .sorting-block-title {
+      font-size: 15px;
+    }
+  }
+}
+
+@media all and (max-width: 450px) {
+  .sorting-block-title {
+    display: none;
+  }
+
+  .sorting-block-container {
+    justify-content: space-evenly;
+
+    .sorting-block-button:first-of-type {
+      margin-left: 0;
+    }
+  }
+}
+
+@media all and (max-width: $app-mobile-small-width) {
+  .sorting-block-container {
+    .sorting-block-button {
+      width: 90px;
+      height: 30px;
+      padding-left: 5px;
+
+      text-align: left;
+    }
+
+    .sorting-block-button::after {
+      right: 5px;
+    }
   }
 }

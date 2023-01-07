@@ -1,13 +1,9 @@
 @import '../../../scss/variables.scss';
 
 .main-footer {
-  margin-top: 30px;
+  margin-top: 10px;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.12);
-
-  @media all and (max-width: $app-max-media-query) {
-    margin-top: 15px;
-  }
 
   @media all and (max-width: $app-medium-media-query) {
     margin-top: 0;

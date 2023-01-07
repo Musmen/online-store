@@ -6,7 +6,7 @@
   justify-content: center;
   width: 100%;
   min-height: 47px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
 
   background: $header-background;
 
@@ -95,8 +95,6 @@
 
 @media all and (max-width: $app-max-media-query) {
   .main-header {
-    margin-bottom: 10px;
-
     .nav {
       width: 90vw;
 
@@ -110,8 +108,6 @@
 
 @media all and (max-width: $app-medium-media-query) {
   .main-header {
-    margin-bottom: 0;
-
     .nav {
       .logo-link {
         width: initial;

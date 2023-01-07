@@ -1,14 +1,32 @@
 @import '../../../../../scss/variables';
 
 .dual-sliders-container {
-  background-color: rgba(0, 0, 0, 0.21);
+  user-select: none;
+}
+
+.price-dual-slider,
+.amount-dual-slider {
+  position: relative;
+}
+
+.amount-dual-slider {
+  .range-container {
+    margin-bottom: 0;
+  }
 }
 
 .dual-slider-title {
-  width: 80%;
-  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
   font-size: 16px;
   color: $title-text-color;
-  text-decoration: underline;
+  text-align: center;
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .dual-slider-title {
+    font-size: 14px;
+  }
 }

@@ -4,12 +4,10 @@
   display: flex;
   justify-content: center;
 
-  background-color: rgba(0, 0, 0, 0.21);
-
   .search-bar__input {
-    width: 323px;
-    height: 50px;
-    margin: 8px auto 12px;
+    width: 100%;
+    height: 40px;
+    margin: 10px auto;
     padding: 0 15px;
 
     border: 1px solid $input-border-color;
