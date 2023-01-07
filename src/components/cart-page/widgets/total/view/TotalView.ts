@@ -126,7 +126,7 @@ class TotalView {
       if (this.input !== null) {
         this.input.value = '';
       }
-      this.controller.applyDiscount(promoCode.ID);
+      this.controller.applyDiscount();
     } else {
       // drop
       this.controller.dropDiscount(promoCode.ID);
