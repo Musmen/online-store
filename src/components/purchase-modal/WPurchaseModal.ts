@@ -18,6 +18,7 @@ class WPurchaseModal {
   };
 
   public init(): void {
+    this.disableScroll();
     this.inputs.name.init();
     this.inputs.phone.init();
     this.inputs.deliveryAddress.init();
@@ -43,6 +44,7 @@ class WPurchaseModal {
     this.inputs.creditCard.unmount();
 
     this.root?.removeEventListener('click', this.onModal);
+    this.root?.remove();
   }
 
   public render(): string {
@@ -72,13 +74,23 @@ class WPurchaseModal {
     return elem.trim();
   }
 
+  private disableScroll(): void {
+    document.body.style.overflow = 'hidden';
+  }
+
+  private enableScroll(): void {
+    document.body.style.overflow = 'visible';
+  }
+
   private onModal = (event: Event) => {
     if (this.root === undefined) return;
     if (!(event.target instanceof Element)) return;
 
     if (event.target.className === 'purchase-modal' || event.target.className === 'close__purchase-modal') {
       this.root.style.display = 'none';
+      console.log('unmounts');
       this.unmount();
+      this.enableScroll();
     }
   };
 
@@ -96,6 +108,7 @@ class WPurchaseModal {
       this.span.textContent = 'SUCCESS: Please wait 3 seconds';
       setTimeout(() => {
         this.unmount();
+        this.enableScroll();
         window.location.hash = '#';
       }, 3000);
     } else {
