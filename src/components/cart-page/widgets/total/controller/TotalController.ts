@@ -1,12 +1,12 @@
 import TotalView from '../view/TotalView';
 
-import ProductStoreModel from '../../../models/ProductStoreModel';
+import CartStoreService from '../../../models/CartStoreService';
 import PromoCodeModel from '../model/PromoCodeModel';
 
 class TotalController {
   private view: TotalView = new TotalView(this);
   private promoCodeModel: PromoCodeModel = new PromoCodeModel();
-  private productList = ProductStoreModel; // << Main Model
+  private productList = CartStoreService; // << Main Model
 
   public init(): void {
     this.view.init();
