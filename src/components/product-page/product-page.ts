@@ -5,10 +5,16 @@ import productsService from '../../services/products.service';
 import { convertToRomane } from '../../common/common.helper';
 import { ProductItem } from '../../models/product-item.model';
 import { Breadcrumbs } from './models/breadcrumbs.model';
+import CartService from '../cart-page/service/CartService';
+import CartStoreService from '../cart-page/models/CartStoreService';
+import storage from '../app/storage/storage';
+import WPurchaseModal from '../purchase-modal/WPurchaseModal';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
-
+  private cartService = new CartService();
+  private cartStoreService = CartStoreService;
+  private storage = storage;
   constructor() {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
@@ -20,8 +26,47 @@ class ProductPageComponent {
       purchaseButton: document.querySelector('.purchase-btn'),
     };
 
+    this.handlers(); // Doonn
     initSwipers();
   }
+  // Doonn
+  unmount(): void {
+    this.#elements.cartButton?.removeEventListener('click', this.onBtn);
+    this.#elements.purchaseButton?.removeEventListener('click', this.onPurchase);
+  }
+  // Doonn
+  private handlers(): void {
+    this.#elements.cartButton?.addEventListener('click', this.onBtn);
+    this.#elements.purchaseButton?.addEventListener('click', this.onPurchase);
+  }
+  // Doonn
+  private onBtn = (event: Event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+
+    const target = event.target;
+    const root = target.closest('.product');
+    if (root === null) return;
+    const id = root.getAttribute('data-id');
+    const link = window.location.hash;
+    const result = this.storage.getProducts().find((item) => Number(id) === item.id);
+    if (result === undefined) return;
+
+    if (this.cartStoreService.isCheckProductByID(Number(id))) {
+      this.cartStoreService.removeAllProductsByID(Number(id));
+      target.classList.toggle('cart-btn_active');
+    } else {
+      this.cartStoreService.add(result, link);
+      target.classList.toggle('cart-btn_active');
+    }
+  };
+  // Doonn
+  private onPurchase = () => {
+    const root: HTMLElement | undefined | null = this.#elements.cartButton?.closest('.router-page-container');
+    if (root === null || root === undefined) return;
+    const w = new WPurchaseModal();
+    root.insertAdjacentHTML('beforeend', w.render());
+    w.init();
+  };
 
   #renderSwiperSlides(images: string[], imageClassName: string, name: string): string {
     return images
