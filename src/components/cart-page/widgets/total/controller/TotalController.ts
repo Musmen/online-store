@@ -40,7 +40,7 @@ class TotalController {
     }
   }
 
-  public applyDiscount(id: string): void {
+  public applyDiscount(): void {
     this.promoCodeModel.Price = this.productList.TotalPrice;
     this.promoCodeModel.calc();
     this.productList.NewTotalPrice = this.promoCodeModel.Price;
