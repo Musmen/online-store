@@ -3,13 +3,16 @@ import './scss/main-page.styles.scss';
 import storage from '../app/storage/storage';
 import ProductItemComponent from '../product-item/product-item';
 import { ProductItem } from '../../models/product-item.model';
+import CartService from '../cart-page/service/CartService';
 
 class MainPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
 
+  private cartService: CartService;
   constructor() {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
+    this.cartService = new CartService();
   }
 
   init(): void {
@@ -19,10 +22,13 @@ class MainPageComponent {
 
     const products: ProductItem[] = storage.getProducts();
     this.renderProducts(products);
+
+    this.cartService.check(); // Doonn
+    this.cartService.hundlerButton(); // Doonn
   }
 
   unmount(): void {
-    this.products = [];
+    this.cartService.unmountButtons(); // Doonn
   }
 
   render(): string {
@@ -34,25 +40,16 @@ class MainPageComponent {
     `;
   }
 
-  private products: ProductItemComponent[] = [];
   renderProducts(products: ProductItem[]): void {
-    // this.#elements.productsList?.insertAdjacentHTML(
-    //   'afterbegin',
-    //   products
-    //     .map(
-    //       (product) => `
-    //         <li class="product-item">${new ProductItemComponent(product).render()}</li>`
-    //     )
-    //     .join('')
-    // );
-
-    for (let i = products.length; i >= 0; i--) {
-      const product = products[i];
-      const item: ProductItemComponent = new ProductItemComponent(product);
-      this.#elements.productsList?.insertAdjacentHTML('afterbegin', `<li class="product-item">${item.render()}</li>`);
-      item.init();
-      this.products.push(item);
-    }
+    this.#elements.productsList?.insertAdjacentHTML(
+      'afterbegin',
+      products
+        .map(
+          (product) => `
+            <li class="product-item">${new ProductItemComponent(product).render()}</li>`
+        )
+        .join('')
+    );
   }
 }
 
