@@ -1,3 +1,4 @@
+import WPurchaseModal from '../../../../purchase-modal/WPurchaseModal'; // TEST
 import PromoCode from '../components/PromoCode';
 import TotalController from '../controller/TotalController';
 import { template } from '../template/template';
@@ -10,6 +11,7 @@ class TotalView {
   private input: HTMLInputElement | null = null;
   private containerPromoCode: HTMLElement | null = null;
   private containerPrice: HTMLElement | null = null;
+  private btnPurchase: HTMLButtonElement | null = null;
   public set Price(price: number) {
     if (this.price === null) return;
     this.price.textContent = '$' + String(price);
@@ -32,6 +34,7 @@ class TotalView {
     this.price = this.root.querySelector('.price__total-cart .price');
     this.input = this.root.querySelector('.promo__total-cart input');
     this.containerPromoCode = this.root.querySelector('.promo-codes__total-cart');
+    this.btnPurchase = this.root.querySelector('.btn__total-cart');
     this.enable();
   }
 
@@ -41,7 +44,7 @@ class TotalView {
 
   private enable(): void {
     this.input?.addEventListener('input', this.onInput);
-
+    this.btnPurchase?.addEventListener('click', this.onPurchase);
     if (this.promoCodeViewArr.length > 0) {
       this.renderAllPromoCode();
     }
@@ -49,6 +52,7 @@ class TotalView {
 
   private disable(): void {
     this.input?.removeEventListener('input', this.onInput);
+    this.btnPurchase?.removeEventListener('click', this.onPurchase);
     this.removeNewPrice();
   }
 
@@ -59,6 +63,15 @@ class TotalView {
   private onInput = () => {
     if (this.input === null) return;
     this.controller.searchPromoCode(this.input.value);
+  };
+
+  private onPurchase = () => {
+    if (this.btnPurchase === null) return;
+    console.log('asd');
+    // TEST
+    const test = new WPurchaseModal();
+    document.querySelector('.router-page-container')?.insertAdjacentHTML('beforeend', test.render());
+    test.init();
   };
 
   private promoCodeViewArr: PromoCode[] = [];
