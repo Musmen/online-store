@@ -11,6 +11,6 @@ export interface ProductItem {
   type: string;
 }
 
-export interface ProductData extends ProductItem {
-  link?: string;
+export interface ProductItemData extends ProductItem {
+  link: string;
 }
