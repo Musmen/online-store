@@ -1,10 +1,9 @@
-import BaseEvent from './events/BaseEvent';
 import { TType } from './type/Type';
 type tt = { [key: string]: { id: string; callback: (data?: TType) => void } };
 class NewEventBus {
   private subscribes: tt[] = [];
 
-  public subscribe<T extends TType>(eventId: string, func: (data?: TType) => void): void {
+  public subscribe<T extends TType>(eventId: string, func: (data?: T) => void): void {
     const lal: tt = {
       eventId: {
         id: eventId,
