@@ -61,7 +61,7 @@ class CartStoreService {
     const productData: ProductItemData = product as ProductItemData;
     productData.link = link;
     this.products.push(productData);
-    EventBus.emit('price', this.price);
+    EventBus.emit('price', this.TotalPrice);
     EventBus.emit('counts', this.TotalAmount);
     EventBus.emit('price-and-counts', this.TotalPrice, this.TotalAmount);
 
