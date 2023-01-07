@@ -1,11 +1,11 @@
-import { ProductItem } from '../../../../../../models/product-item.model';
+import { ProductItemData } from '../../../../../../models/product-item.model';
 import BaseView from '../../../../components/BaseView';
 import '../../scss/product.style.scss';
 
 type callback = (product: ProductView) => void;
 class ProductView extends BaseView {
   private id = '';
-  private data: ProductItem | null = null;
+  private data: ProductItemData | null = null;
   private price = 0;
   private totalPrice = 0;
   private count = 1;
@@ -42,6 +42,15 @@ class ProductView extends BaseView {
     return this.id;
   }
 
+  public set Index(index: number) {
+    this.index = index;
+    if (this.root === null) return;
+    const ind: HTMLElement | null = this.root.querySelector('.product-index span');
+    if (ind !== null) {
+      ind.textContent = String(index);
+    }
+  }
+
   public addCount(): void {
     this.count += 1;
     this.totalPrice += this.price;
@@ -50,12 +59,13 @@ class ProductView extends BaseView {
     this.countView();
   }
 
-  public constructor(data: ProductItem, index = 1, link = '#') {
+  public constructor(data: ProductItemData, index = 1) {
     super();
     this.data = data;
     this.index = index;
     this.id = String(data.id);
-    this.link = link;
+    this.link = data.link;
+    console.log(this.link);
     if (typeof data.price === 'number') {
       this.price = data.price;
       this.totalPrice = data.price;
@@ -105,7 +115,7 @@ class ProductView extends BaseView {
     if (this.data === undefined) return '';
     const item = `
         <div id="${this.id}" class="item__product-cart">
-          <a class="link__product-cart"href="${this.link}">
+          <a class="link__product-cart" href="${this.link}">
             <div class="product-index">
               <span>${this.index}</span>
             </div>
