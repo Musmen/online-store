@@ -1,11 +1,19 @@
 import BaseView from '../../../../components/BaseView';
+import ProductCartController from '../../controller/ProductCartController';
 import ProductView from './ProductView';
 
 class ControlView extends BaseView {
   private input: HTMLInputElement | null = null;
   private prev: HTMLElement | null = null;
   private span: HTMLElement | null = null;
+  private textSpan = 1;
   private next: HTMLElement | null = null;
+  private controller: ProductCartController;
+
+  constructor(c: ProductCartController) {
+    super();
+    this.controller = c;
+  }
 
   public init(): void {
     this.root = document.querySelector('#page-control');
@@ -17,6 +25,8 @@ class ControlView extends BaseView {
     this.input?.addEventListener('input', this.onInput);
     this.prev?.addEventListener('click', this.onPrev);
     this.next?.addEventListener('click', this.onNext);
+
+    this.amountProducts = Number(this.input?.value);
   }
 
   public unmount(): void {
@@ -36,7 +46,7 @@ class ControlView extends BaseView {
       <div class="pagination-control__product-cart">
         <span>Page:</span>
         <button class="prev__page-control"><</button>
-        <span class="current-num__page-control">1</span>
+        <span class="current-num__page-control">${this.textSpan}</span>
         <button class="next__page-control">></button>
       </div>
     </div>`;
@@ -47,6 +57,7 @@ class ControlView extends BaseView {
 
   public setProducts(arr: ProductView[]): void {
     this.tempProductsArr = arr;
+    this.updatePagination();
   }
 
   private amountProducts = 5;
@@ -67,7 +78,7 @@ class ControlView extends BaseView {
 
     this.calcPaginationCount();
     this.showPagination(this.amountChunk);
-    this.updatePagination();
+    this.setSpanView(this.amountChunk);
   };
 
   private amountChunk = 1;
@@ -79,8 +90,9 @@ class ControlView extends BaseView {
       this.amountChunk--;
     }
 
-    this.setSpanView(this.amountChunk);
+    this.calcPaginationCount();
     this.showPagination(this.amountChunk);
+    this.setSpanView(this.amountChunk);
   };
 
   private onNext = () => {
@@ -89,21 +101,24 @@ class ControlView extends BaseView {
     } else {
       this.amountChunk++;
     }
-    this.setSpanView(this.amountChunk);
-    this.showPagination(this.amountChunk);
+    this.updatePagination();
   };
 
   private maxCountPagination = 1;
 
   private chunkPagination: ProductView[][] = [];
-  private calcPaginationCount(): void {
-    this.maxCountPagination = Math.ceil(this.tempProductsArr.length / this.amountProducts);
-    this.chunkPagination = this.slicePaginations(this.tempProductsArr, this.amountProducts);
+  private calcPaginationCount(prod: ProductView[] = this.tempProductsArr): void {
+    this.maxCountPagination = Math.ceil(prod.length / this.amountProducts);
+    if (this.maxCountPagination <= 0) this.maxCountPagination = 1;
+    this.chunkPagination = this.slicePaginations(prod, this.amountProducts);
   }
 
   private setSpanView(num: number): void {
     if (this.span === null) return;
-    this.span.textContent = String(num);
+    if (num <= 0) num = 1;
+    this.textSpan = num;
+    this.amountChunk = num;
+    this.span.textContent = String(this.textSpan);
   }
 
   private slicePaginations(arr: ProductView[], size: number): ProductView[][] {
@@ -123,24 +138,16 @@ class ControlView extends BaseView {
 
     for (let i = 0; i < this.chunkPagination.length; i++) {
       const elems = this.chunkPagination[i];
-      if (i + 1 !== val) {
-        elems.forEach((elem) => {
-          if (elem.Root !== null) {
-            elem.Root.style.display = 'none';
-          }
-        });
-      } else {
-        elems.forEach((elem) => {
-          if (elem.Root !== null) {
-            elem.Root.style.display = 'flex';
-          }
-        });
-      }
+      elems.forEach((elem) => {
+        if (elem.Root !== null) {
+          elem.Root.style.display = i + 1 !== val ? 'none' : 'flex';
+        }
+      });
     }
   }
 
-  public updatePagination(): void {
-    this.calcPaginationCount();
+  public updatePagination(products: ProductView[] = this.tempProductsArr): void {
+    this.calcPaginationCount(products);
     this.showPagination(this.amountChunk);
     this.setSpanView(this.amountChunk);
   }
