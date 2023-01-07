@@ -1,12 +1,12 @@
-import { ProductItem } from '../../../../../models/product-item.model';
-import ProductStoreModel from '../../../models/ProductStoreModel';
+import { ProductItemData } from '../../../../../models/product-item.model';
+import CartStoreService from '../../../models/CartStoreService';
 import ProductView from '../view/components/ProductView';
 import ProductCartView from '../view/ProductCartView';
 
 class ProductCartController {
   private productView: ProductCartView = new ProductCartView(this);
   private productArr: ProductView[] = [];
-  private dataProductModel = ProductStoreModel;
+  private dataProductModel = CartStoreService;
 
   public get ProductArr() {
     return this.productArr;
@@ -25,14 +25,14 @@ class ProductCartController {
     return this.productView.render();
   }
 
-  public addProduct(product: ProductItem, link = '#'): void {
+  public addProduct(product: ProductItemData): void {
     const findDublicate = this.findDublicate(product);
     if (findDublicate) {
       findDublicate.addCount();
     } else {
-      const item = new ProductView(product, this.productArr.length + 1, link);
-      this.productView.insert(item);
+      const item = new ProductView(product, this.productArr.length + 1);
       this.productArr.push(item);
+      this.productView.insert(item);
     }
   }
 
@@ -41,20 +41,25 @@ class ProductCartController {
       const item = this.productArr[i];
       if (product.ID === item.ID) {
         this.productArr.splice(i, 1);
-        return;
+        break;
       }
+    }
+
+    for (let i = 0; i < this.productArr.length; i++) {
+      const item = this.productArr[i];
+      item.Index = i + 1;
     }
   }
 
-  public addToProductDataModel(product: ProductItem): void {
-    this.dataProductModel.add(product);
+  public addToProductDataModel(product: ProductItemData): void {
+    this.dataProductModel.add(product, product.link);
   }
 
-  public removeToProductDataModel(product: ProductItem): void {
+  public removeToProductDataModel(product: ProductItemData): void {
     this.dataProductModel.remove(product);
   }
 
-  private findDublicate(product: ProductItem): ProductView | null {
+  private findDublicate(product: ProductItemData): ProductView | null {
     for (let i = 0; i < this.productArr.length; i++) {
       const item = this.productArr[i];
       if (Number(item.ID) === Number(product.id)) {
