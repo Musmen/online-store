@@ -22,5 +22,5 @@ export const getMinMaxTupleOfPropertyValuesInProducts: getMinMaxTupleOfPropertyV
 ) => {
   const propertyLimits: MinMaxRange = getMinAndMaxPropertyValuesInProducts(products, property);
 
-  return [propertyLimits.min, propertyLimits.max];
+  return [propertyLimits.min || 0, propertyLimits.max || 0];
 };
