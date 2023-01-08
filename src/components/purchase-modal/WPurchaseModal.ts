@@ -106,7 +106,7 @@ class WPurchaseModal {
     }
 
     if (this.isValidate(vals)) {
-      this.span.textContent = 'SUCCESS: Please wait 3 seconds';
+      this.span.textContent = 'Validation was successful: Please wait 3 seconds';
       setTimeout(() => {
         this.unmount();
         this.enableScroll();
