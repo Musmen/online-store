@@ -63,7 +63,8 @@ class ControlView extends BaseView {
   private amountProducts = 5;
 
   private onInput = () => {
-    if (this.input?.value === undefined || this.input?.value === '') return;
+    if (this.input?.value === undefined) return;
+    this.input.value = this.input?.value.replace(/[^\d]/g, '');
     if (Number(this.input?.value) === 0) {
       this.input.value = '1';
     }
