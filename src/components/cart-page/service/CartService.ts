@@ -1,5 +1,6 @@
 import { ProductItem } from '../../../models/product-item.model';
 import storage from '../../app/storage/storage';
+import WPurchaseModal from '../../purchase-modal/WPurchaseModal';
 import CartStoreService from '../models/CartStoreService';
 
 class CartService {
@@ -7,6 +8,7 @@ class CartService {
   private storage = storage;
 
   public check(): void {
+    CartStoreService.init();
     const cards = document.querySelectorAll('.card');
 
     cards.forEach((elem) => {
@@ -75,6 +77,34 @@ class CartService {
   private removeProductsByID(product: ProductItem): void {
     this.cartStoreService.removeAllProductsByID(Number(product.id));
   }
+
+  public launchingModalWindow(id: number, link: string): void {
+    const find = CartStoreService.Products.find((prod) => id === prod.id);
+    if (find) {
+      this.callModalWindow();
+    } else {
+      const products = storage.getProducts();
+      const getProd = products.find((prod) => prod.id === id);
+      console.log(products);
+
+      if (getProd !== undefined) {
+        CartStoreService.add(getProd, link);
+        this.callModalWindow();
+      }
+    }
+  }
+
+  private callModalWindow(): void {
+    window.location.href = '#/cart';
+    window.addEventListener('hashchange', this.onModal);
+  }
+
+  private onModal = () => {
+    const w = new WPurchaseModal();
+    document.querySelector('.router-page-container')?.insertAdjacentHTML('beforeend', w.render());
+    w.init();
+    window.removeEventListener('hashchange', this.onModal);
+  };
 }
 
 export default CartService;
