@@ -11,8 +11,14 @@ import { PRICE_POSTFIX } from '../../common/common.constants';
 import { ProductItem } from '../../models/product-item.model';
 import { Breadcrumbs } from './models/breadcrumbs.model';
 
+import CartService from '../cart-page/service/CartService'; // Doonn
+import CartStoreService from '../cart-page/models/CartStoreService'; // Doonn
+import storage from '../app/storage/storage'; // Doonn
+
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
+  private cartService = new CartService();
+  private cartStoreService = CartStoreService;
 
   constructor() {
     this.init = this.init.bind(this);
@@ -24,6 +30,9 @@ class ProductPageComponent {
       cartButton: document.querySelector('.cart-btn'),
       purchaseButton: document.querySelector('.purchase-btn'),
     };
+
+    this.cartService.check(); // Doonn
+    this.handlers(); // Doonn
 
     initSwipers();
   }
@@ -119,6 +128,47 @@ class ProductPageComponent {
         </article>
       </div>`;
   }
+
+  // Doonn
+  unmount(): void {
+    this.#elements.cartButton?.removeEventListener('click', this.onBtn);
+    this.#elements.purchaseButton?.removeEventListener('click', this.onPurchase);
+  }
+  // Doonn
+  private handlers(): void {
+    this.#elements.cartButton?.addEventListener('click', this.onBtn);
+    this.#elements.purchaseButton?.addEventListener('click', this.onPurchase);
+  }
+  // Doonn
+  private onBtn = (event: Event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+
+    const target = event.target;
+    const root = target.closest('.product');
+    if (root === null) return;
+    const id = root.getAttribute('data-id');
+    const link = window.location.hash;
+    const result = storage.getAllProducts().find((item) => Number(id) === item.id);
+    if (result === undefined) return;
+
+    if (this.cartStoreService.isCheckProductByID(Number(id))) {
+      this.cartStoreService.removeAllProductsByID(Number(id));
+      target.classList.toggle('cart-btn_active');
+    } else {
+      this.cartStoreService.add(result, link);
+      target.classList.toggle('cart-btn_active');
+    }
+  };
+  // Doonn
+  private onPurchase = (event: Event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+    const target = event.target;
+    const root = target.closest('.product');
+    if (root === null) return;
+    const id = root.getAttribute('data-id');
+    const link = window.location.hash;
+    this.cartService.launchingModalWindow(Number(id), link);
+  };
 }
 
 export default new ProductPageComponent();
