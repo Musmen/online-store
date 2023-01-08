@@ -26,11 +26,11 @@ class ControlView extends BaseView {
     this.prev?.addEventListener('click', this.onPrev);
     this.next?.addEventListener('click', this.onNext);
 
-    // this.amountProducts = Number(this.input?.value);
+    this.amountProducts = Number(this.input?.value);
     // QueryParamsService.addQueryParam('add', String(this.amountProducts));
     // QueryParamsService.setQueryParam('TEST#cart', String(this.amountProducts));
     // QueryParamsService.setQueryParam('page=', String(this.amountChunk));
-    // this.updatePagination();
+    this.updatePagination();
   }
 
   public unmount(): void {
@@ -42,11 +42,20 @@ class ControlView extends BaseView {
   public render(): string {
     const cart = QueryParamsService.getQueryParams();
     const test = Object.values(cart);
-    const amount = Number(test[0]);
-    const pagPage = Number(test[1]);
+    let amount = Number(test[0]);
+    let pagPage = Number(test[1]);
 
-    this.amountProducts = amount;
-    this.amountChunk = pagPage;
+    if (isNaN(amount)) {
+      amount = this.amountProducts;
+    } else {
+      this.amountProducts = amount;
+    }
+
+    if (isNaN(pagPage)) {
+      pagPage = this.amountChunk;
+    } else {
+      this.amountChunk = pagPage;
+    }
 
     const elem = `
     <div id="page-control" class="page-control__product-cart">
