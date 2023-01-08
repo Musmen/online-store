@@ -25,6 +25,22 @@ class CartService {
     });
   }
 
+  public checkProductPage(): void {
+    CartStoreService.init();
+    const productPage = document.querySelector('.product-centralizer');
+    if (productPage === null) return;
+    const product = productPage.querySelector('.product');
+    const id = product?.getAttribute('data-id');
+    const btn: HTMLElement = productPage.querySelector('.cart-btn') as HTMLElement;
+    const check = this.cartStoreService.isCheckProductByID(Number(id));
+
+    if (check) {
+      btn?.classList.remove('cart-btn_active');
+    } else {
+      btn?.classList.add('cart-btn_active');
+    }
+  }
+
   public hundlerButton(): void {
     const cards = document.querySelectorAll('.card');
 
