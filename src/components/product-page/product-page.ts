@@ -31,7 +31,7 @@ class ProductPageComponent {
       purchaseButton: document.querySelector('.purchase-btn'),
     };
 
-    this.cartService.check(); // Doonn
+    this.cartService.checkProductPage(); // Doonn
     this.handlers(); // Doonn
 
     initSwipers();
@@ -72,7 +72,8 @@ class ProductPageComponent {
     const flagClassName = `flag flag_${nation}`;
     const typeClassName = `tank-type tank-type_${type?.toLowerCase()}`;
 
-    const isInCart = Math.random() > 0.5 ? true : false;
+    // const isInCart = Math.random() > 0.5 ? true : false;
+    const isInCart = true;
 
     const breadcrumbsList: Breadcrumbs[] = [
       { path: '#', pageName: 'shop' },
