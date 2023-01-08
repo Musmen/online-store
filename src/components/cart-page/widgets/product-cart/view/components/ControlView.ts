@@ -30,7 +30,7 @@ class ControlView extends BaseView {
     // QueryParamsService.addQueryParam('add', String(this.amountProducts));
     // QueryParamsService.setQueryParam('TEST#cart', String(this.amountProducts));
     // QueryParamsService.setQueryParam('page=', String(this.amountChunk));
-    this.updatePagination();
+    // this.updatePagination();
   }
 
   public unmount(): void {
@@ -40,22 +40,22 @@ class ControlView extends BaseView {
   }
 
   public render(): string {
-    const cart = QueryParamsService.getQueryParams();
-    const test = Object.values(cart);
-    let amount = Number(test[0]);
-    let pagPage = Number(test[1]);
+    // const cart = QueryParamsService.getQueryParams();
+    // const test = Object.values(cart);
+    // let amount = Number(test[0]);
+    // let pagPage = Number(test[1]);
 
-    if (isNaN(amount)) {
-      amount = this.amountProducts;
-    } else {
-      this.amountProducts = amount;
-    }
+    // if (isNaN(amount)) {
+    //   amount = this.amountProducts;
+    // } else {
+    //   this.amountProducts = amount;
+    // }
 
-    if (isNaN(pagPage)) {
-      pagPage = this.amountChunk;
-    } else {
-      this.amountChunk = pagPage;
-    }
+    // if (isNaN(pagPage)) {
+    //   pagPage = this.amountChunk;
+    // } else {
+    //   this.amountChunk = pagPage;
+    // }
 
     const elem = `
     <div id="page-control" class="page-control__product-cart">
@@ -63,12 +63,12 @@ class ControlView extends BaseView {
       <div class="items-control__product-cart">
         <span>Items:</span>
         <input class="number-products__page-control" type="text" placeholder="5"
-                value="${amount}">
+                value="${this.amountProducts}">
       </div>
       <div class="pagination-control__product-cart">
         <span>Page:</span>
         <button class="prev__page-control"><</button>
-        <span class="current-num__page-control">${pagPage}</span>
+        <span class="current-num__page-control">${this.amountChunk}</span>
         <button class="next__page-control">></button>
       </div>
     </div>`;
@@ -79,6 +79,20 @@ class ControlView extends BaseView {
 
   public setProducts(arr: ProductView[]): void {
     this.tempProductsArr = arr;
+
+    const cart = QueryParamsService.getQueryParams();
+    console.log(cart);
+    const test = Object.values(cart);
+
+    if (!isNaN(Number(test[0])) || !isNaN(Number(test[1]))) {
+      this.amountProducts = Number(test[0]);
+      this.amountChunk = Number(test[1]);
+    }
+
+    if (this.input !== null) {
+      this.input.value = String(this.amountProducts);
+    }
+
     this.updatePagination();
   }
 
@@ -157,7 +171,7 @@ class ControlView extends BaseView {
 
   private showPagination(val: number): void {
     if (this.chunkPagination.length <= this.amountChunk) {
-      // this.amountChunk = this.chunkPagination.length;
+      this.amountChunk = this.chunkPagination.length;
       val = this.amountChunk;
     }
 
