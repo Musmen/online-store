@@ -38,18 +38,16 @@ class PromoCodeModel {
       if (searchDuplicate) return searchDuplicate;
       const promo: PromoCode = new PromoCode(find.code, find.name, 20);
       this.promoCodeArr.push(promo);
-      this.tempDiscount.push(promo.Discount);
       this.tempPromo = promo;
       return promo;
     }
   }
 
   private applyDisc(): void {
+    if (this.tempDiscount.length >= this.promoCodeArr.length) return;
     for (let i = 0; i < this.promoCodeArr.length; i++) {
       const promo = this.promoCodeArr[i];
-      if (this.tempPromo?.IsDiscountApply) {
-        if (this.tempDiscount.length > this.promoCodeArr.length) continue;
-
+      if (promo.IsDiscountApply) {
         this.tempDiscount.push(promo.Discount);
       }
     }
@@ -72,7 +70,7 @@ class PromoCodeModel {
   }
 
   public calc(): void {
-    // this.applyDisc();
+    this.applyDisc();
     if (this.tempDiscount.length <= 0) return;
     const result = this.tempDiscount.reduce((a, b) => a + b);
     const getProcent = (this.tempPrice / 100) * result;

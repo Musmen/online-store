@@ -76,19 +76,19 @@ class TestDeliveryAddress {
   private enumCurrentPosition(): void {
     switch (this.enumAddress) {
       case EAddress.COUNTRY:
-        this.currentData = this.data[0]; // country
+        this.currentData = this.data[0];
         break;
       case EAddress.CITY:
-        this.currentData = this.data[1]; // city
+        this.currentData = this.data[1];
         break;
       case EAddress.STREET:
-        this.currentData = this.data[2]; // street
+        this.currentData = this.data[2];
         break;
       case EAddress.HOUSE:
-        this.currentData = this.data[3]; // house
+        this.currentData = this.data[3];
         break;
       case EAddress.ROOM:
-        this.currentData = this.data[4]; // room
+        this.currentData = this.data[4];
         break;
     }
   }

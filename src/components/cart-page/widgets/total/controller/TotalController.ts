@@ -6,7 +6,7 @@ import PromoCodeModel from '../model/PromoCodeModel';
 class TotalController {
   private view: TotalView = new TotalView(this);
   private promoCodeModel: PromoCodeModel = new PromoCodeModel();
-  private productList = CartStoreService; // << Main Model
+  private productList = CartStoreService;
 
   public init(): void {
     this.view.init();

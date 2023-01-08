@@ -7,8 +7,8 @@ class PromoCode {
   private nameView: HTMLElement | undefined;
   private btnView: HTMLButtonElement | undefined;
 
-  private name: string; // example >> Rolling Scopes School - 10%
-  private discount = 10; // procentag
+  private name: string;
+  private discount = 10;
   private isDiscountApply = false;
   public get IsDiscountApply() {
     return this.isDiscountApply;

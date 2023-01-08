@@ -89,7 +89,6 @@ class WPurchaseModal {
 
     if (event.target.className === 'purchase-modal' || event.target.className === 'close__purchase-modal') {
       this.root.style.display = 'none';
-      console.log('unmounts');
       this.unmount();
       this.enableScroll();
     }

@@ -15,7 +15,6 @@ import { COPY_URL_BUTTON_TEXT, EMPTY_MESSAGE, SWITCHING_BUTTON_STATE_TIME } from
 
 import { ProductItem } from '../../models/product-item.model';
 
-// import storage from '../app/storage/storage'; // Doonn
 import CartService from '../cart-page/service/CartService'; // Doonn
 
 class MainPageComponent {

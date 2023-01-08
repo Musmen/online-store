@@ -72,7 +72,6 @@ class ProductPageComponent {
     const flagClassName = `flag flag_${nation}`;
     const typeClassName = `tank-type tank-type_${type?.toLowerCase()}`;
 
-    // const isInCart = Math.random() > 0.5 ? true : false;
     const isInCart = true;
 
     const breadcrumbsList: Breadcrumbs[] = [
@@ -129,7 +128,6 @@ class ProductPageComponent {
         </article>
       </div>`;
   }
-
   // Doonn
   unmount(): void {
     this.#elements.cartButton?.removeEventListener('click', this.onBtn);

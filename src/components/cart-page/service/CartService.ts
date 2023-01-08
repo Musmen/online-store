@@ -101,7 +101,6 @@ class CartService {
     } else {
       const products = storage.getAllProducts();
       const getProd = products.find((prod) => prod.id === id);
-      console.log(products);
 
       if (getProd !== undefined) {
         CartStoreService.add(getProd, link);

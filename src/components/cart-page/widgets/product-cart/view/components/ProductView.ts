@@ -183,9 +183,6 @@ class ProductView extends BaseView {
       }
     }
     this.countView();
-    // if (this.emitAdd !== null) {
-    // this.emitAdd(this);
-    // }
   }
 
   private substractPrice(): void {
@@ -212,7 +209,7 @@ class ProductView extends BaseView {
     this.currCountItems.textContent = String(this.count);
   }
 
-  public emitRemoveProduct: callback | null = null; // вызов функции на верхнем уровне
+  public emitRemoveProduct: callback | null = null;
   public emitAdd: callback | null = null;
   public emitRemove: callback | null = null;
 }

@@ -27,10 +27,6 @@ class ControlView extends BaseView {
     this.next?.addEventListener('click', this.onNext);
 
     this.amountProducts = Number(this.input?.value);
-    // QueryParamsService.addQueryParam('add', String(this.amountProducts));
-    // QueryParamsService.setQueryParam('TEST#cart', String(this.amountProducts));
-    // QueryParamsService.setQueryParam('page=', String(this.amountChunk));
-    // this.updatePagination();
   }
 
   public unmount(): void {
@@ -40,23 +36,6 @@ class ControlView extends BaseView {
   }
 
   public render(): string {
-    // const cart = QueryParamsService.getQueryParams();
-    // const test = Object.values(cart);
-    // let amount = Number(test[0]);
-    // let pagPage = Number(test[1]);
-
-    // if (isNaN(amount)) {
-    //   amount = this.amountProducts;
-    // } else {
-    //   this.amountProducts = amount;
-    // }
-
-    // if (isNaN(pagPage)) {
-    //   pagPage = this.amountChunk;
-    // } else {
-    //   this.amountChunk = pagPage;
-    // }
-
     const elem = `
     <div id="page-control" class="page-control__product-cart">
       <span>Products In Cart</span>
@@ -81,7 +60,6 @@ class ControlView extends BaseView {
     this.tempProductsArr = arr;
 
     const cart = QueryParamsService.getQueryParams();
-    console.log(cart);
     const test = Object.values(cart);
 
     if (!isNaN(Number(test[0])) && !isNaN(Number(test[1]))) {
@@ -113,9 +91,6 @@ class ControlView extends BaseView {
       this.input.value = String(this.amountProducts);
     }
 
-    // this.calcPaginationCount();
-    // this.showPagination(this.amountChunk);
-    // this.setSpanView(this.amountChunk);
     this.updatePagination();
   };
 
@@ -128,9 +103,6 @@ class ControlView extends BaseView {
       this.amountChunk--;
     }
 
-    // this.calcPaginationCount();
-    // this.showPagination(this.amountChunk);
-    // this.setSpanView(this.amountChunk);
     this.updatePagination();
   };
 

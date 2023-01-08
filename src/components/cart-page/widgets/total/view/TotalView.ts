@@ -67,8 +67,7 @@ class TotalView {
 
   private onPurchase = () => {
     if (this.btnPurchase === null) return;
-    console.log('asd');
-    // TEST
+
     const test = new WPurchaseModal();
     document.querySelector('.router-page-container')?.insertAdjacentHTML('beforeend', test.render());
     test.init();
@@ -121,15 +120,12 @@ class TotalView {
 
   private onPromo = (val: boolean, promoCode: PromoCode) => {
     if (val) {
-      // add
       this.insertNewPrice();
       this.controller.applyDiscount();
       if (this.input !== null) {
         this.input.value = '';
       }
     } else {
-      // drop
-      console.log('drop');
       this.controller.dropDiscount(promoCode.ID);
       promoCode.unmount();
       promoCode.Root?.remove();
