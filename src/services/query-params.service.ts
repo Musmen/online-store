@@ -6,7 +6,7 @@ class QueryParamsService {
   }
 
   #updateHistoryState(urlParams: URLSearchParams): void {
-    window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+    window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}${window.location.hash}`);
   }
 
   clearAllQueryParams() {
