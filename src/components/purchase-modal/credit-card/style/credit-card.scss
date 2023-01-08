@@ -1,0 +1,66 @@
+.credit-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  background-color: rgba(83, 83, 83, 0.5);
+  border: 1px solid rgba(255, 255, 245, 0.8);
+  border-radius: 10px;
+
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.input__credit-card {
+  margin: 0;
+  padding: 5px 0;
+
+  font-size: 18px;
+  text-align: center;
+  color: rgba(255, 255, 245, 0.8);
+  border: 1px solid rgba(255, 255, 245, 0.8);
+  border-radius: 2px;
+
+  &::placeholder {
+    color: white;
+    font-size: 18px;
+  }
+
+  &:focus {
+    outline: 2px solid #fffff5cc;
+  }
+}
+
+.validity-period__credit-card {
+  width: 120px;
+}
+
+.cvv-code__credit-card {
+  width: 120px;
+}
+
+.blank-card {
+  background-image: url('../assets/blank-credit-card.png');
+}
+
+.master-card {
+  background-image: url('../assets/mastercard.png');
+}
+
+.visa {
+  background-image: url('../assets/visa.png');
+}
+
+.unionpay {
+  background-image: url('../assets/unionpay.png');
+}
+
+@import './breakpoints.scss';
