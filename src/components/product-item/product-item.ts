@@ -19,7 +19,7 @@ export default class ProductItemComponent {
     const typeClassName = `tank-type tank-type_${type?.toLowerCase()}`;
 
     const linkToProductPage = `#/product/${id}`;
-    const isInCart = Math.random() > 0.5 ? true : false;
+    const isInCart = false;
 
     return `
       <article class="card" data-id="${id}">

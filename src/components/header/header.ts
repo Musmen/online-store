@@ -1,3 +1,4 @@
+import EventBus from '../../eventbus/EventBus';
 import './scss/header.styles.scss';
 
 class HeaderComponent {
@@ -16,7 +17,19 @@ class HeaderComponent {
       cartCount: headerElement.querySelector('.cart-quantity'),
       totalCost: headerElement.querySelector('.total-cost'),
     };
+
+    EventBus.subscribe(this, 'price', this.onPrice);
+    EventBus.subscribe(this, 'counts', this.onCounts);
   }
+
+  private onPrice = (price: unknown) => {
+    if (typeof price !== 'number') return;
+    this.updateTotalCost(price);
+  };
+  private onCounts = (counts: unknown) => {
+    if (typeof counts !== 'number') return;
+    this.updateCartCount(counts);
+  };
 
   updateCartCount(cartCount: number | string): void {
     if (!this.#elements.cartCount) return;

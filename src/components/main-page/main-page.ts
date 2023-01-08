@@ -15,16 +15,20 @@ import { COPY_URL_BUTTON_TEXT, EMPTY_MESSAGE, SWITCHING_BUTTON_STATE_TIME } from
 
 import { ProductItem } from '../../models/product-item.model';
 
+import CartService from '../cart-page/service/CartService'; // Doonn
+
 class MainPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
   #timerId: NodeJS.Timeout | null = null;
 
+  private cartService: CartService; // Doonn
   constructor() {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
     this.updateMainPage = this.updateMainPage.bind(this);
     this.clearFiltersButtonOnClickHandler = this.clearFiltersButtonOnClickHandler.bind(this);
     this.copyUrlToClipboardButtonOnClickHandler = this.copyUrlToClipboardButtonOnClickHandler.bind(this);
+    this.cartService = new CartService(); // Doonn
   }
 
   init(): void {
@@ -46,6 +50,9 @@ class MainPageComponent {
     dualSlidersController.init(this.updateMainPage, dualSlidersContainer);
 
     this.#addListeners();
+
+    this.cartService.check(); // Doonn
+    this.cartService.hundlerButton(); // Doonn
   }
 
   #addListeners(): void {
@@ -67,6 +74,8 @@ class MainPageComponent {
     sortingBlock.unmount();
     cardSizeToggler.unmount();
     dualSlidersController.unmount();
+
+    this.cartService.unmountButtons(); // Doonn
   }
 
   clearFiltersButtonOnClickHandler(event: Event): void {
@@ -134,6 +143,9 @@ class MainPageComponent {
     this.#updateTotalAmountInfo();
     filters.updateCounts();
     dualSlidersController.updateDualSliders({ shouldUpdatePriceDualSlider, shouldUpdateAmountDualSlider });
+
+    this.cartService.check(); // Doonn
+    this.cartService.hundlerButton(); // Doonn
   }
 
   render(): string {
