@@ -8,7 +8,6 @@ import { Breadcrumbs } from './models/breadcrumbs.model';
 import CartService from '../cart-page/service/CartService';
 import CartStoreService from '../cart-page/models/CartStoreService';
 import storage from '../app/storage/storage';
-import WPurchaseModal from '../purchase-modal/WPurchaseModal';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement | null } = {};
@@ -26,6 +25,7 @@ class ProductPageComponent {
       purchaseButton: document.querySelector('.purchase-btn'),
     };
 
+    this.cartService.check(); // Doonn
     this.handlers(); // Doonn
     initSwipers();
   }
@@ -60,12 +60,14 @@ class ProductPageComponent {
     }
   };
   // Doonn
-  private onPurchase = () => {
-    const root: HTMLElement | undefined | null = this.#elements.cartButton?.closest('.router-page-container');
-    if (root === null || root === undefined) return;
-    const w = new WPurchaseModal();
-    root.insertAdjacentHTML('beforeend', w.render());
-    w.init();
+  private onPurchase = (event: Event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+    const target = event.target;
+    const root = target.closest('.product');
+    if (root === null) return;
+    const id = root.getAttribute('data-id');
+    const link = window.location.hash;
+    this.cartService.launchingModalWindow(Number(id), link);
   };
 
   #renderSwiperSlides(images: string[], imageClassName: string, name: string): string {
