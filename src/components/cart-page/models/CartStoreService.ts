@@ -87,8 +87,15 @@ class CartStoreService {
     EventBus.emit('counts', this.TotalAmount);
     EventBus.emit('price-and-counts', this.TotalPrice, this.TotalAmount);
 
-    const idMap = this.products.map((item) => String(item.id));
-    LocalStorageService.setLocalStorageData(idMap, 'products-id');
+    const map = this.products.map((item) => {
+      const ket = {
+        id: String(item.id),
+        link: item.link,
+      };
+      return ket;
+    });
+
+    LocalStorageService.setLocalStorageData(map, 'products-id');
     if (this.products.length <= 0) {
       EventCartEmpty.current.emit();
     }
