@@ -18,5 +18,5 @@ export const getMinAndMaxPropertyValuesInProducts: GetMinAndMaxPropertyValuesInP
 ) => {
   const productsPropertyValues: number[] = products.map((product: ProductItem) => Number(product[property]));
 
-  return { min: Math.min(...productsPropertyValues), max: Math.max(...productsPropertyValues) };
+  return { min: Math.min(...productsPropertyValues) || 0, max: Math.max(...productsPropertyValues) || 0 };
 };
