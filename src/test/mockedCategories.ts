@@ -69,7 +69,7 @@ export const testMixedCategoriesList: Category[] = [
   },
   {
     name: 'description',
-    value: 'np description',
+    value: 'no description',
   },
   {
     name: 'price',

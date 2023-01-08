@@ -14,7 +14,7 @@
     "prettier": "prettier --write ./src/**/*.{js,ts} ./src/**/*.{scss,css}",
     "stylelint": "stylelint \"src/**/*.{scss,css}\"",
     "stylelint:fix": "stylelint \"src/**/*.{scss,css}\" --fix",
-    "precommit": "npm run lint:fix && npm run prettier && npm run stylelint:fix"
+    "precommit": "npm run lint:fix && npm run prettier && npm test && npm run stylelint:fix"
   },
   "repository": {
     "type": "git",

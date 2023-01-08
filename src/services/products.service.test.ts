@@ -11,7 +11,7 @@ import {
 } from '../test/mockedProducts';
 import { testMixedCategoriesList, testNationCategoriesList, testTypeCategoriesList } from '../test/mockedCategories';
 
-describe('Testing productsService from "src/services/products.services.ts"', () => {
+describe('Testing productsService from "src/services/products.service.ts"', () => {
   test('Correctly creates ProductsService instance with all methods', () => {
     expect(testProductService).toBeDefined();
     expect(testProductService.findProductById).toBeDefined();
@@ -42,7 +42,7 @@ describe('Testing productsService from "src/services/products.services.ts"', () 
       });
     });
 
-    test('Return falsy/undefined if product not found by id', () => {
+    test('Returns falsy/undefined if product not found by id', () => {
       expect(testProductService.findProductById('not id...')).toBeFalsy();
       expect(testProductService.findProductById('not id...')).toBeUndefined();
     });
@@ -194,7 +194,6 @@ describe('Testing productsService from "src/services/products.services.ts"', () 
       ];
 
       testMixedCategoriesList.forEach((testCategory: Category, index: number) => {
-        console.log(testCategory);
         expect(testProductService.getCategoryItemsCount(testCategory)).toEqual(testExpectedResultsList[index]);
       });
     });
