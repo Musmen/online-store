@@ -1,4 +1,6 @@
-export default [
+import { ProductItem } from '../../../../models/product-item.model';
+
+const products: ProductItem[] = [
   {
     description:
       'Developed in the summer of 1944 by the Construction Bureau of the Kirov Plant (Leningrad). In the fall of the same year, the prototype underwent trials. It never entered mass production nor saw service.\nThis Premium vehicle has a 10% bonus XP earn and a 50% bonus Silver earn.',
@@ -189,7 +191,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/a910326e8e9248a046ef2a5b2e6c3ed4.jpg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/90a46989dd8f3254bd6fe356946b9e7e.jpg',
     ],
-    tag: 'A19_T2_lt',
     tier: 2,
     id: 51489,
     type: 'lightTank',
@@ -208,7 +209,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/7002f593268131fa6d09954335082113.jpg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/c37ca994cb7e594feba2e2e364ccb69e.jpg',
     ],
-    tag: 'A43_M22_Locust',
     tier: 3,
     id: 52769,
     type: 'lightTank',
@@ -227,7 +227,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/80c1dd7cf50c1c4f8b5006dff292a89a.jpg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/0a1b103c3324e31a672468a5de5ab62a.jpg',
     ],
-    tag: 'GB68_Matilda_Black_Prince',
     tier: 5,
     id: 53585,
     type: 'mediumTank',
@@ -246,7 +245,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/9ff2d6c208e27bcc12b06fc09bbc808b.jpg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/8c94cb3db475272aa020c1b7e2bf98e5.jpg',
     ],
-    tag: 'GB51_Excelsior',
     tier: 5,
     id: 54353,
     type: 'heavyTank',
@@ -265,7 +263,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/354946f19afd4b4a25b62d2b9ccbe061.jpeg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/183a9ecc45312ede66abf5be670b340f.jpeg',
     ],
-    tag: 'A101_M56',
     tier: 7,
     id: 56353,
     type: 'AT-SPG',
@@ -284,7 +281,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/73f474879cf6baea6419147fceef929e.jpeg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/7e61566260644bd2bf962336c8ada555.jpeg',
     ],
-    tag: 'GB52_A45',
     tier: 7,
     id: 55121,
     type: 'heavyTank',
@@ -303,7 +299,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/f3b4f79cf585a388b35d0da6f9a501f1.jpg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/bd94ca97d3cfe81d7b75e73ec5f1aaa8.jpg',
     ],
-    tag: 'GB71_AT_15A',
     tier: 7,
     id: 54097,
     type: 'AT-SPG',
@@ -322,7 +317,6 @@ export default [
       'https://catoolwebdav-net-cdn.gcdn.co/catool/3b12811d74b8bee2a035d255368d514d.jpg',
       'https://catoolwebdav-net-cdn.gcdn.co/catool/8541679813a968c5e27592a965bd5c77.jpg',
     ],
-    tag: 'A121_M26_Cologne',
     tier: 7,
     id: 59937,
     type: 'mediumTank',
@@ -365,3 +359,5 @@ export default [
     name: 'Chrysler K',
   },
 ];
+
+export default products;

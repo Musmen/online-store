@@ -1,10 +1,7 @@
 import { convertToRomane, getMinAndMaxPropertyValuesInProducts } from './common.helper';
 
-import {
-  minMaxPropertiesForProductsOnlyWithNumericProperties,
-  mockedProductsOnlyWithNumericProperties,
-  mockedProductsWithInvalidData,
-} from '../test/mockedTestData';
+import { mockedProductsOnlyWithNumericProperties, mockedProductsWithInvalidData } from '../test/mockedProducts';
+import { minMaxPropertiesForProductsOnlyWithNumericProperties } from '../test/mockedCommonData';
 
 import { MinMaxRange } from '../models/common.model';
 import { ProductItem } from '../models/product-item.model';

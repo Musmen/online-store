@@ -1,10 +1,7 @@
 import { getMinMaxTupleOfPropertyValuesInProducts, hasSomeValues } from './services.helpers';
 
-import {
-  minMaxPropertiesTuplesForProductsOnlyWithNumericProperties,
-  mockedProductsOnlyWithNumericProperties,
-  mockedProductsWithInvalidData,
-} from '../../test/mockedTestData';
+import { mockedProductsOnlyWithNumericProperties, mockedProductsWithInvalidData } from '../../test/mockedProducts';
+import { minMaxPropertiesTuplesForProductsOnlyWithNumericProperties } from '../../test/mockedCommonData';
 
 import { ProductItem } from '../../models/product-item.model';
 import { MinMaxTupleType } from '../models/services.models';
@@ -26,7 +23,7 @@ describe('Testing hasSomeValues function from "src/services/common/services.help
     });
   });
 
-  test('Correctly returns false for empty search values list', () => {
+  test('Returns false for empty search values list', () => {
     testIncludedValues.forEach((testSearchValue: string) => {
       expect(hasSomeValues([], testSearchValue)).toBe(false);
     });
@@ -53,7 +50,7 @@ describe('Testing getMinMaxTupleOfPropertyValuesInProducts function from "src/se
     });
   });
 
-  test('Correctly returns zero min and max tuples on invalid products data', () => {
+  test('Returns zero min and max tuples on invalid products data', () => {
     const ZERO_MIN_AND_MAX_RESULT: MinMaxTupleType = [0, 0];
 
     PRODUCT_PROPERTIES_WITH_NUMERIC_VALUES.forEach((productPropertyWithNumericValues) => {
