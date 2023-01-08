@@ -84,7 +84,7 @@ class ControlView extends BaseView {
     console.log(cart);
     const test = Object.values(cart);
 
-    if (!isNaN(Number(test[0])) || !isNaN(Number(test[1]))) {
+    if (!isNaN(Number(test[0])) && !isNaN(Number(test[1]))) {
       this.amountProducts = Number(test[0]);
       this.amountChunk = Number(test[1]);
     }
@@ -170,7 +170,7 @@ class ControlView extends BaseView {
   }
 
   private showPagination(val: number): void {
-    if (this.chunkPagination.length <= this.amountChunk) {
+    if (this.amountChunk >= this.chunkPagination.length) {
       this.amountChunk = this.chunkPagination.length;
       val = this.amountChunk;
     }
@@ -186,11 +186,12 @@ class ControlView extends BaseView {
   }
 
   public updatePagination(products: ProductView[] = this.tempProductsArr): void {
+    QueryParamsService.setQueryParam('pag-items', String(this.amountProducts));
+    QueryParamsService.setQueryParam('pag-page', String(this.amountChunk));
+
     this.calcPaginationCount(products);
     this.showPagination(this.amountChunk);
     this.setSpanView(this.amountChunk);
-    QueryParamsService.setQueryParam('pag-items', String(this.amountProducts));
-    QueryParamsService.setQueryParam('pag-page', String(this.amountChunk));
   }
 }
 
