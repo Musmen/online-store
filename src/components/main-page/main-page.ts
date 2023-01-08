@@ -52,9 +52,6 @@ class MainPageComponent {
 
     this.#addListeners();
 
-    const products: ProductItem[] = storage.getAllProducts(); // Doonn
-    this.#renderProducts(products); // Doonn
-
     this.cartService.check(); // Doonn
     this.cartService.hundlerButton(); // Doonn
   }
@@ -147,6 +144,9 @@ class MainPageComponent {
     this.#updateTotalAmountInfo();
     filters.updateCounts();
     dualSlidersController.updateDualSliders({ shouldUpdatePriceDualSlider, shouldUpdateAmountDualSlider });
+
+    this.cartService.check(); // Doonn
+    this.cartService.hundlerButton(); // Doonn
   }
 
   render(): string {
