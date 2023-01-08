@@ -1,3 +1,4 @@
+import CartStoreService from '../cart-page/models/CartStoreService';
 import BaseComponent from './components/base/BaseComponent';
 import CInputDeliveryAddress from './components/CInputDeliveryAddress';
 import CInputEmail from './components/CInputEmail';
@@ -109,10 +110,11 @@ class WPurchaseModal {
       setTimeout(() => {
         this.unmount();
         this.enableScroll();
+        CartStoreService.cleanLocalStorage();
         window.location.hash = '#';
       }, 3000);
     } else {
-      this.span.textContent = 'Invalide';
+      this.span.textContent = 'Please, fill in the fields correctly';
     }
   };
 
