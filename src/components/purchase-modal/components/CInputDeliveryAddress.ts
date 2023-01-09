@@ -97,6 +97,8 @@ class CInputDeliveryAddress extends BaseComponent {
       }
     }
 
+    console.log(arrB);
+
     let sumB = 0;
     for (let i = 0; i < arrB.length; i++) {
       const elem = arrB[i];
@@ -108,9 +110,10 @@ class CInputDeliveryAddress extends BaseComponent {
 
     if (sumB > 0) {
       this.addClassStyleValidationError();
+      return false;
+    } else {
+      return true;
     }
-
-    return true;
   }
 }
 
