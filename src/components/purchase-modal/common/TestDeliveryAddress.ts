@@ -86,17 +86,9 @@ class TestDeliveryAddress {
   }
 
   private checkChunkIsEmpty(): boolean {
-    console.log(this.currentData);
     if (this.currentData[1] === undefined) return true;
     if (this.currentData[1].trim().length <= 0) return false;
     return true;
-    // let str = this.temp;
-    // if (str[str.length - 1] === ' ') str = str.slice(0, -1);
-    // // console.log(str);
-    // if (str[str.length - 1] === ' ' && str[str.length - 2] !== ':') {
-    //   return true;
-    // }
-    // return true;
   }
 
   // controll enum
