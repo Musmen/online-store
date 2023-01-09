@@ -42,7 +42,10 @@ class TestDeliveryAddress {
   }
 
   public removeLastChar(): void {
+    if (this.temp === this.data[0][0]) return;
     if (this.temp === this.currentData[0]) return;
+
+    if (this.temp.trim()[this.temp.length] === ':') return;
     this.temp = this.temp.slice(0, -1);
     const arr = this.temp.split(' ');
 
@@ -62,14 +65,29 @@ class TestDeliveryAddress {
       return;
     } else {
       this.temp = result;
+      if (this.temp === 'country:') {
+        this.enumAddress = EAddress.COUNTRY;
+      }
     }
   }
 
   private nextAddress(): void {
+    if (this.checkChunkIsEmpty() === false) return;
     this.enumDown();
     this.enumCurrentPosition();
     if (this.temp.includes('room:')) return;
     this.temp += this.currentData[0];
+  }
+
+  private checkChunkIsEmpty(): boolean {
+    if (
+      this.temp[this.temp.length - 1] === ' ' &&
+      typeof this.temp[this.temp.length - 2] === 'string' &&
+      this.temp[this.temp.length - 2] !== ':'
+    ) {
+      return true;
+    }
+    return false;
   }
 
   // controll enum
