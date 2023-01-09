@@ -1,4 +1,3 @@
-import { Keyboard } from 'swiper';
 import Common from '../common/Common';
 import '../style/с-input-style.scss';
 import BaseComponent from './base/BaseComponent';
