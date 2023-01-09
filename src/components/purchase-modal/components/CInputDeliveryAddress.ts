@@ -38,7 +38,9 @@ class CInputDeliveryAddress extends BaseComponent {
     return root.trim();
   }
 
+  private countSpace = 0;
   private onInput = (event: Event) => {
+    event.preventDefault();
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
 
@@ -46,13 +48,20 @@ class CInputDeliveryAddress extends BaseComponent {
       this.test.removeLastChar();
       this.tempValue = this.test.Result;
       this.root.value = this.tempValue;
+      this.countSpace = 0;
     } else if (event.data === ' ') {
-      this.test.add(event.data);
-      this.tempValue = this.test.Result;
-      this.root.value = this.tempValue;
+      this.countSpace += 1;
+      if (this.countSpace > 1) {
+        this.root.value = this.root.value.slice(0, -1);
+      } else {
+        this.test.add(event.data);
+        this.tempValue = this.test.Result;
+        this.root.value = this.tempValue;
+      }
     } else {
       this.test.add(event.data);
       this.root.value = this.test.Result;
+      this.countSpace = 0;
     }
   };
 
@@ -108,9 +117,10 @@ class CInputDeliveryAddress extends BaseComponent {
 
     if (sumB > 0) {
       this.addClassStyleValidationError();
+      return false;
+    } else {
+      return true;
     }
-
-    return true;
   }
 }
 

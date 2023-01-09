@@ -63,6 +63,8 @@ class ControlView extends BaseView {
     const test = Object.values(cart);
 
     if (!isNaN(Number(test[0])) && !isNaN(Number(test[1]))) {
+      if (Number(test[0]) === 0) test[0] = '1';
+      if (Number(test[1]) === 0) test[1] = '1';
       this.amountProducts = Number(test[0]);
       this.amountChunk = Number(test[1]);
     }

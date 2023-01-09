@@ -11,7 +11,7 @@ import './style/breakpoints.scss';
 class WPurchaseModal {
   private root: HTMLElement | undefined;
   private span: HTMLElement | undefined;
-
+  private form: HTMLElement | null = null;
   private inputs = {
     name: new CInputText('Name Surname'),
     phone: new CInputPhone('Phone'),
@@ -31,8 +31,10 @@ class WPurchaseModal {
     const root: HTMLElement | null = document.querySelector('.purchase-modal');
     const span: HTMLElement | null = document.querySelector('#form-message');
     if (root !== null && span !== null) {
+      this.form = root?.querySelector('form');
       root.addEventListener('click', this.onModal);
       root.querySelector('.submit__purchase-modal')?.addEventListener('click', this.onSubmit);
+      this.form?.addEventListener('submit', this.onSubmit);
       span.classList.add('message--disable');
       this.span = span;
       this.root = root;
@@ -47,6 +49,8 @@ class WPurchaseModal {
     this.inputs.creditCard.unmount();
 
     this.root?.removeEventListener('click', this.onModal);
+    this.root?.querySelector('.submit__purchase-modal')?.removeEventListener('click', this.onSubmit);
+    this.form?.removeEventListener('submit', this.onSubmit);
     this.root?.remove();
   }
 
