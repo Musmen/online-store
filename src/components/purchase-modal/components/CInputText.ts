@@ -1,3 +1,4 @@
+import { Keyboard } from 'swiper';
 import Common from '../common/Common';
 import '../style/с-input-style.scss';
 import BaseComponent from './base/BaseComponent';
@@ -34,6 +35,9 @@ class CInputText extends BaseComponent {
   }
 
   private onInput = (event: Event) => {
+    if (event instanceof KeyboardEvent) {
+      console.log(event.key);
+    }
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
 

@@ -47,6 +47,7 @@ class CInputCvvCode extends BaseComponent {
   private temp = '';
 
   private onInput = (event: Event) => {
+    event.preventDefault();
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
 
