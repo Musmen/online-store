@@ -1,18 +1,21 @@
-@media all and (max-width: 440px) {
+@media all and (max-width: 700px) {
   .credit-card {
-    transform: scale(0.95);
+    .input__credit-card {
+      font-size: 15px;
 
-    & > div {
-      flex-direction: column;
-
-      & * {
-        width: 100%;
-        margin-bottom: 20px;
+      &::placeholder {
+        font-size: 15px;
       }
+    }
+  }
+}
 
-      & *:last-child {
-        margin-bottom: 0;
-      }
+@media all and (max-width: 400px) {
+  .modal__purchase-modal {
+    .credit-card {
+      width: 296px;
+
+      background-position: 0 -38px;
     }
   }
 }

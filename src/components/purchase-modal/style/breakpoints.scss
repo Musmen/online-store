@@ -1,12 +1,45 @@
 @media all and (max-width: 940px) {
   .modal__purchase-modal {
-    width: 600px;
+    width: 90vw;
+    padding: 10px;
   }
 }
 
-@media all and (max-width: 640px) {
+@media all and (max-width: 768px) {
   .modal__purchase-modal {
-    width: 500px;
+    width: 95vw;
+  }
+}
+
+@media all and (max-width: 700px) {
+  .input-modal {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .personal-details__purchase-modal > span {
+    font-size: 18px;
+  }
+
+  .submit__purchase-modal {
+    height: 35px;
+
+    font-size: 16px;
+  }
+
+  .message__purchase-modal {
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .purchase-modal-wrapper {
+    flex-direction: column;
+  }
+
+  .purchase-modal-inner-wrapper {
+    margin-bottom: 10px;
   }
 
   .close__purchase-modal {
@@ -14,14 +47,9 @@
   }
 }
 
-@media all and (max-width: 540px) {
+@media all and (max-width: 500px) {
   .modal__purchase-modal {
-    width: 400px;
-  }
-}
-
-@media all and (max-width: 440px) {
-  .modal__purchase-modal {
-    width: 300px;
+    width: 100vw;
+    padding: 10px;
   }
 }
