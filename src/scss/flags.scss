@@ -1,0 +1,24 @@
+.flag {
+  flex: 0 0 auto;
+
+  display: inline-block;
+  width: 21px;
+  height: 14px;
+  margin-right: 8px;
+
+  &_germany {
+    background: url('/src/assets/flags/germany.png');
+  }
+
+  &_uk {
+    background: url('/src/assets/flags/uk.png');
+  }
+
+  &_usa {
+    background: url('/src/assets/flags/usa.png');
+  }
+
+  &_ussr {
+    background: url('/src/assets/flags/ussr.png');
+  }
+}

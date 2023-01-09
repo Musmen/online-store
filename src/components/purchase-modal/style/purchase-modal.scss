@@ -1,0 +1,170 @@
+@import '../../../scss/variables';
+
+.purchase-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  background-color: rgba(1, 44, 78, 0.2);
+  backdrop-filter: blur(20px);
+
+  z-index: 100;
+}
+
+.modal__purchase-modal {
+  position: relative;
+  width: 70vw;
+  margin: 20px auto;
+  padding: 15px;
+
+  border: 2px solid rgba(255, 255, 245, 0.8);
+  border-radius: 10px;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.personal-details__purchase-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .personal-details__title {
+    margin-bottom: 10px;
+  }
+
+  .input-modal {
+    margin-bottom: 10px;
+  }
+
+  & *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.personal-details__purchase-modal > span {
+  font-size: 22px;
+  color: #fffff5cc;
+}
+
+.purchase-modal-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.purchase-modal-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 10px;
+
+  .input-modal {
+    width: 100%;
+  }
+}
+
+.credit-card-details__purchase-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+
+.credit-card-details__purchase-modal > span {
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: #fffff5cc;
+}
+
+.submit__purchase-modal {
+  width: 150px;
+  height: 44px;
+
+  margin: 0 auto;
+
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: $button-text-color;
+
+  border-radius: 10px;
+  border: 1px solid $button-background;
+
+  background-color: $button-background;
+
+  transition: $app-standard-transition;
+
+  &:hover {
+    color: $button-background;
+    background-color: $button-text-color;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.message__purchase-modal {
+  min-height: 26px;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 18px;
+  color: $error-text-color;
+}
+
+.message--disable {
+  font-size: 0;
+  opacity: 0;
+}
+
+.close__purchase-modal {
+  display: none;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 35px;
+  height: 35px;
+  margin: 0;
+
+  & button {
+    background-image: url('../assets/icon-close.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+    pointer-events: none;
+  }
+
+  &:hover {
+    & button {
+      animation: rotate linear 2s infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,43 @@
+// FONTS
+$app-font-family: 'Roboto Condensed', sans-serif;
+
+// COLORS
+$header-background: #000;
+$main-background: #1c1b15;
+$card-background: rgba(0, 0, 0, 0.21);
+$card-hover-background: rgba(0, 0, 0, 0.6);
+$title-text-color: #ccc;
+$link-text-color: #919191;
+$hover-text-color: #fff;
+$price-now-color: #d1b482;
+$main-text-color: #d1b482;
+$button-background: #e95104;
+$button-text-color: #fff;
+$button-hover-background: #e9951f;
+$button-active-background: #ff9d00;
+$item-page-text-color: #fff;
+$item-page-border-color: rgba(255, 255, 255, 0.3);
+$active-border-color: #e95104;
+$input-text-color: #fff;
+$input-border-color: rgba(255, 255, 245, 0.8);
+$input-border-focus-color: rgba(255, 93, 0, 0.6);
+$main-dual-slider-color: #ccc;
+$main-toggler-color: #ccc;
+$error-text-color: red;
+
+// ANIMATION
+$app-standard-transition: all 200ms;
+$card-transition: all 300ms;
+
+//  SIZE
+$app-max-media-query: 1260px;
+$app-max-width: 1200px;
+$app-medium-media-query: 940px;
+$app-medium-width: 900px;
+$app-tablet-media-query: 630px;
+$app-tablet-width: 600px;
+$app-mobile-small-width: 400px;
+$app-min-width: 300px;
+
+// FILTERS
+$icon-brightness: brightness(6);

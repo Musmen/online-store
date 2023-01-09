@@ -1,0 +1,381 @@
+@import '../../../scss/variables';
+
+.card {
+  position: relative;
+  display: block;
+  height: calc(100vw / 4 - 10px);
+  max-height: 260px;
+
+  background-color: $card-background;
+
+  transition: all 300ms;
+
+  .card-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .card-img {
+      width: calc(100vw / 4 - 10px);
+      max-width: 300px;
+      max-height: 260px;
+
+      transition: $card-transition;
+      object-fit: contain;
+    }
+
+    .card-specifications {
+      position: absolute;
+      left: 27px;
+      bottom: 30px;
+
+      transition: $card-transition;
+
+      .item-text {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        margin-bottom: 10px;
+
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $title-text-color;
+
+        .level {
+          margin-right: 8px;
+        }
+      }
+
+      .card-wrapper {
+        display: flex;
+      }
+
+      .price,
+      .amount {
+        display: inline-block;
+
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+      }
+
+      .amount {
+        color: $title-text-color;
+      }
+
+      .price {
+        margin-right: 15px;
+
+        color: $price-now-color;
+      }
+    }
+  }
+
+  .add-cart-btn {
+    position: absolute;
+    left: 26px;
+    bottom: 30px;
+
+    width: 150px;
+    height: 45px;
+
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $button-text-color;
+
+    border-radius: 3px;
+    border: 1px solid $button-background;
+
+    background: none;
+
+    transition: $app-standard-transition;
+    opacity: 0;
+
+    &_active {
+      background-color: $button-background;
+    }
+  }
+}
+
+.products-list_big-card {
+  .card {
+    height: calc(100vw / 2 - 10px);
+    max-height: 400px;
+
+    .card-info {
+      .card-img {
+        width: calc(100vw / 2 - 10px);
+        max-width: 600px;
+        max-height: 400px;
+      }
+
+      .card-specifications {
+        .item-text {
+          font-size: 20px;
+        }
+
+        .price,
+        .amount {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .add-cart-btn {
+      font-size: 22px;
+    }
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .card {
+    height: calc(100vw / 3 - 10px);
+    max-height: 200px;
+
+    .card-info {
+      .card-img {
+        width: calc(100vw / 3 - 10px);
+        max-width: 300px;
+        max-height: 200px;
+      }
+
+      .card-specifications {
+        left: 10px;
+        bottom: 10px;
+
+        .item-text {
+          align-items: baseline;
+          margin-bottom: 4px;
+
+          font-size: 15px;
+
+          .flag,
+          .tank-type,
+          .level {
+            margin-right: 3px;
+          }
+
+          .item-name {
+            overflow-wrap: anywhere;
+          }
+
+          .flag,
+          .tank-type {
+            margin-bottom: 1px;
+
+            transform: scale(0.8);
+          }
+        }
+
+        .price,
+        .amount {
+          font-size: 14px;
+        }
+
+        .price {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .add-cart-btn {
+      top: 10px;
+      left: 10px;
+
+      width: 60px;
+      height: 30px;
+
+      font-size: 14px;
+      opacity: 1;
+    }
+  }
+
+  .products-list_big-card {
+    .card {
+      .add-cart-btn {
+        top: 20px;
+        left: 20px;
+
+        width: 150px;
+        height: 45px;
+
+        opacity: 1;
+      }
+
+      .card-specifications {
+        left: 20px;
+        bottom: 20px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .card {
+    height: calc(100vw / 2 - 2px);
+    max-height: 158px;
+
+    background-color: $card-hover-background;
+
+    .card-info {
+      .card-img {
+        width: calc(100vw / 2 - 2px);
+        max-height: 158px;
+      }
+
+      .card-specifications {
+        left: 14px;
+        bottom: 14px;
+
+        .item-text {
+          font-size: 14px;
+
+          .flag,
+          .tank-type,
+          .level {
+            align-self: center;
+          }
+        }
+
+        .price,
+        .amount {
+          font-size: 13px;
+        }
+      }
+    }
+
+    &:hover .card-specifications {
+      bottom: 14px;
+    }
+
+    .add-cart-btn {
+      top: 0;
+      left: 0;
+
+      background-color: $card-background;
+      background-image: url('../../../assets/images/cart.png');
+      background-repeat: no-repeat;
+      background-position: center;
+
+      font-size: 0;
+
+      width: 36px;
+      height: 36px;
+
+      border-radius: 0;
+      border-color: $card-background;
+
+      &_active {
+        background-color: $button-background;
+      }
+    }
+  }
+
+  .products-list_big-card {
+    .card {
+      height: calc(100vw - 2px);
+      max-height: 300px;
+
+      background-color: $card-hover-background;
+
+      .card-info {
+        .card-img {
+          width: calc(100vw - 2px);
+          max-height: 300px;
+        }
+      }
+
+      .add-cart-btn {
+        top: auto;
+        left: auto;
+        right: 14px;
+        bottom: 14px;
+
+        width: 150px;
+        height: 45px;
+
+        background-image: none;
+
+        border-radius: 3px;
+        border: 1px solid $button-background;
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-mobile-small-width) {
+  .products-list_big-card {
+    .card {
+      .card-info {
+        .card-specifications {
+          left: 10px;
+          bottom: 10px;
+
+          .item-text {
+            font-size: 17px;
+          }
+
+          .price,
+          .amount {
+            font-size: 17px;
+          }
+        }
+      }
+
+      .add-cart-btn {
+        right: 10px;
+        bottom: 10px;
+
+        width: 120px;
+        height: 40px;
+
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@media (hover: hover) {
+  .card {
+    .add-cart-btn:hover {
+      background-color: $button-background;
+    }
+
+    .add-cart-btn_active:hover {
+      color: $button-background;
+      background-color: $button-text-color;
+    }
+
+    &:hover {
+      background-color: $card-hover-background;
+      transition: $card-transition;
+
+      .card-img {
+        opacity: 0.65;
+        transition: $card-transition;
+      }
+
+      .card-specifications {
+        bottom: 85px;
+        transition: $card-transition;
+
+        .item-text {
+          color: $hover-text-color;
+        }
+      }
+
+      .add-cart-btn {
+        opacity: 1;
+        transition: all 600ms;
+      }
+    }
+  }
+}
