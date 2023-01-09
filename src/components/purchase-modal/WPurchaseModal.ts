@@ -56,20 +56,22 @@ class WPurchaseModal {
         <div class="modal__purchase-modal">
           <form>
             <div class="personal-details__purchase-modal">
-              <span>Personal Detail</span>
+              <span class="personal-details__title">Personal & Card Details</span>
               <div class="close__purchase-modal"><button></button></div>
               ${this.inputs.name.make()}
-              ${this.inputs.phone.make()}
               ${this.inputs.deliveryAddress.make()}
-              ${this.inputs.email.make()}
-            </div>
-
-            <div class="credit-card-details__purchase-modal">
-              <span>Credit Card Details</span>
-              ${this.inputs.creditCard.make()}
+              <div class="purchase-modal-wrapper">
+                <div class="purchase-modal-inner-wrapper">
+                  ${this.inputs.phone.make()}
+                  ${this.inputs.email.make()}
+                </div>
+                <div class="credit-card-details__purchase-modal">
+                  ${this.inputs.creditCard.make()}
+                </div>
+              </div>
             </div>
             <span id="form-message" class="message__purchase-modal"></span>
-            <button class="submit__purchase-modal" type="submit">CONFIRM</button>
+            <button class="submit__purchase-modal" type="submit">PURCHASE</button>
           <form>
         </div>
       </div>
@@ -107,7 +109,7 @@ class WPurchaseModal {
     }
 
     if (this.isValidate(vals)) {
-      this.span.textContent = 'Validation was successful: Please wait 3 seconds';
+      this.span.textContent = 'Successful purchase! Please, wait 3 seconds...';
       setTimeout(() => {
         this.unmount();
         this.enableScroll();

@@ -1,27 +1,34 @@
+@import '../../../scss/variables';
+
 .purchase-modal {
   position: fixed;
   top: 0;
-  left: 0;
   bottom: 0;
-  right: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  min-height: 100vh;
+
   background-color: rgba(1, 44, 78, 0.2);
   backdrop-filter: blur(20px);
-  overflow-y: hidden;
-  width: 100vw;
-  height: 100vh;
+
   z-index: 100;
 }
 
 .modal__purchase-modal {
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
-  width: 700px;
-  height: 600px;
+  width: 70vw;
+  margin: 20px auto;
+  padding: 15px;
+
   border: 2px solid rgba(255, 255, 245, 0.8);
   border-radius: 10px;
+
+  background-color: rgba(0, 0, 0, 0.4);
 
   & form {
     display: flex;
@@ -36,7 +43,11 @@
   align-items: center;
   margin-bottom: 10px;
 
-  & * {
+  .personal-details__title {
+    margin-bottom: 10px;
+  }
+
+  .input-modal {
     margin-bottom: 10px;
   }
 
@@ -46,14 +57,33 @@
 }
 
 .personal-details__purchase-modal > span {
-  font-size: 25px;
+  font-size: 22px;
   color: #fffff5cc;
+}
+
+.purchase-modal-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.purchase-modal-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 10px;
+
+  .input-modal {
+    width: 100%;
+  }
 }
 
 .credit-card-details__purchase-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin-bottom: 10px;
 }
 
 .credit-card-details__purchase-modal > span {
@@ -63,19 +93,26 @@
 }
 
 .submit__purchase-modal {
+  width: 150px;
+  height: 44px;
+
   margin: 0 auto;
-  padding: 5px 50px;
-  border: 2px solid #fffff5cc;
+
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: $button-text-color;
+
   border-radius: 10px;
+  border: 1px solid $button-background;
 
-  font-size: 24px;
-  color: #fffff5cc;
+  background-color: $button-background;
 
-  transition: transform 0.1s;
+  transition: $app-standard-transition;
 
   &:hover {
-    border: 2px solid rgba(255, 93, 0, 0.8);
-    color: #ff5d00;
+    color: $button-background;
+    background-color: $button-text-color;
   }
 
   &:active {
@@ -84,23 +121,25 @@
 }
 
 .message__purchase-modal {
-  margin: auto;
+  min-height: 26px;
+  height: 100%;
+  margin: 0 auto;
   font-size: 18px;
-  color: red;
+  color: $error-text-color;
 }
 
 .message--disable {
-  visibility: hidden;
+  font-size: 0;
   opacity: 0;
 }
 
 .close__purchase-modal {
   display: none;
   position: absolute;
-  top: 0;
-  right: 10px;
-  width: 45px;
-  height: 45px;
+  top: 1px;
+  right: 1px;
+  width: 35px;
+  height: 35px;
   margin: 0;
 
   & button {
