@@ -125,6 +125,7 @@ class TotalView {
       if (this.input !== null) {
         this.input.value = '';
       }
+      console.log('sdfsfs');
     } else {
       this.controller.dropDiscount(promoCode.ID);
       promoCode.unmount();
@@ -133,9 +134,9 @@ class TotalView {
         const promo = this.promoCodeViewArr[i];
         if (promo.ID === promoCode.ID) {
           this.promoCodeViewArr.splice(i, 1);
+          this.removeNewPrice();
         }
       }
-      this.removeNewPrice();
       if (this.input !== null) {
         this.input.value = '';
       }
@@ -172,11 +173,21 @@ class TotalView {
   }
 
   private removeNewPrice(): void {
-    if (this.promoCodeViewArr.length <= 0) {
+    if (this.promoCodeViewArr.length <= 0 || !this.checkPromoIsApply()) {
       this.newPriceBlock?.remove();
       this.newPriceBlock = null;
       this.containerPrice?.querySelector('.price__total-cart')?.classList.remove('old-price');
     }
+  }
+
+  private checkPromoIsApply(): boolean {
+    for (let i = 0; i < this.promoCodeViewArr.length; i++) {
+      const promo = this.promoCodeViewArr[i];
+      if (promo.IsDiscountApply) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 
