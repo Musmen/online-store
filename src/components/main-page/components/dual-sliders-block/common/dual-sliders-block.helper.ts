@@ -27,6 +27,9 @@ export const getLimitsPricesInSelectedProducts: () => MinMaxRange = () => {
   if (!price) return getLimitsPricesInAllProducts();
 
   const [minPrice, maxPrice] = price.split(SEPARATOR);
+
+  if (!Number(minPrice) || !Number(maxPrice)) return getLimitsPricesInAllProducts();
+
   return { min: Number(minPrice), max: Number(maxPrice) };
 };
 
@@ -36,8 +39,11 @@ export const getLimitsAmountsInSelectedProducts: () => MinMaxRange = () => {
     return getMinAndMaxPropertyValuesInProducts(selectedProducts, PRODUCTS_PROPERTIES_NAMES.AMOUNT);
 
   const { amount } = queryParamsService.getQueryParams();
-  if (!amount) return getLimitsPricesInAllProducts();
+  if (!amount) return getLimitsAmountsInAllProducts();
 
   const [minAmount, maxAmount] = amount.split(SEPARATOR);
+
+  if (!Number(minAmount) || !Number(maxAmount)) return getLimitsAmountsInAllProducts();
+
   return { min: Number(minAmount), max: Number(maxAmount) };
 };

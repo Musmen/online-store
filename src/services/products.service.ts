@@ -22,7 +22,7 @@ class ProductsService {
     return storage.getAllProducts();
   }
 
-  #findProductById(id: string): ProductItem | undefined {
+  findProductById(id: string): ProductItem | undefined {
     const products: ProductItem[] = this.getAllProducts();
     return products.find((product: ProductItem) => id === String(product.id));
   }
@@ -36,7 +36,7 @@ class ProductsService {
   }
 
   updateCurrentProduct(productId = ''): void {
-    const currentProduct = this.#findProductById(productId) || null;
+    const currentProduct = this.findProductById(productId) || null;
     this.setCurrentProduct(currentProduct);
   }
 
@@ -52,7 +52,7 @@ class ProductsService {
     storage.setSelectedProducts(selectedProducts);
   }
 
-  #getFilteredProducts(products: ProductItem[]): ProductItem[] {
+  getFilteredProducts(products: ProductItem[]): ProductItem[] {
     const { nation, type, search, price, amount } = queryParamsService.getQueryParams();
     const checkedNationsList = nation?.split(SEPARATOR) || NATIONS_VALUES;
     const checkedTypesList = type?.split(SEPARATOR) || TYPES_VALUES;
@@ -87,7 +87,7 @@ class ProductsService {
     });
   }
 
-  #getSortedProducts(products: ProductItem[]): ProductItem[] {
+  getSortedProducts(products: ProductItem[]): ProductItem[] {
     const { sorting } = queryParamsService.getQueryParams();
     if (!sorting) return products;
 
@@ -101,12 +101,12 @@ class ProductsService {
 
   updateSelectedProducts(): void {
     const allProducts: ProductItem[] = this.getAllProducts();
-    const filteredProducts: ProductItem[] = this.#getFilteredProducts(allProducts);
-    const sortedAndFilteredProducts: ProductItem[] = this.#getSortedProducts(filteredProducts);
+    const filteredProducts: ProductItem[] = this.getFilteredProducts(allProducts);
+    const sortedAndFilteredProducts: ProductItem[] = this.getSortedProducts(filteredProducts);
     this.setSelectedProducts(sortedAndFilteredProducts);
   }
 
-  #countCategoryItemsInProducts(category: Category, products: ProductItem[]): number {
+  countCategoryItemsInProducts(category: Category, products: ProductItem[]): number {
     const { name, value } = category;
     return products.filter((product: ProductItem) => product[name] === value).length;
   }
@@ -115,8 +115,8 @@ class ProductsService {
     const allProducts: ProductItem[] = this.getAllProducts();
     const selectedProducts: ProductItem[] = this.getSelectedProducts();
 
-    const totalCount = this.#countCategoryItemsInProducts(category, allProducts);
-    const currentCount = this.#countCategoryItemsInProducts(category, selectedProducts);
+    const totalCount = this.countCategoryItemsInProducts(category, allProducts);
+    const currentCount = this.countCategoryItemsInProducts(category, selectedProducts);
 
     return { total: totalCount, current: currentCount };
   }

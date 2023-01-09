@@ -24,11 +24,9 @@
 }
 
 .pagination-control__product-cart {
-  & * {
-    margin-right: 10px;
-  }
+  margin-right: 10px;
 
-  & *:last-child {
+  &:last-child {
     margin-right: 0;
   }
 
@@ -41,11 +39,9 @@
 }
 
 .items-control__product-cart {
-  & * {
-    margin-right: 10px;
-  }
+  margin-right: 10px;
 
-  & *:last-child {
+  &:last-child {
     margin-right: 0;
   }
 
@@ -63,5 +59,3 @@
 .container__product-cart {
   padding: 10px;
 }
-
-@import 'product-cart.breakpoint.scss';

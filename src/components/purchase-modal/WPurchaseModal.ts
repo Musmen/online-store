@@ -6,6 +6,8 @@ import CInputPhone from './components/CInputPhone';
 import CInputText from './components/CInputText';
 import WCreditCard from './credit-card/WCreditCard';
 import './style/purchase-modal.scss';
+import './style/breakpoints.scss';
+
 class WPurchaseModal {
   private root: HTMLElement | undefined;
   private span: HTMLElement | undefined;

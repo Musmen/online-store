@@ -26,6 +26,8 @@ class ProductPageComponent {
   }
 
   init(): void {
+    window.scrollTo(0, 0);
+
     this.#elements = {
       cartButton: document.querySelector('.cart-btn'),
       purchaseButton: document.querySelector('.purchase-btn'),
@@ -72,12 +74,10 @@ class ProductPageComponent {
     const flagClassName = `flag flag_${nation}`;
     const typeClassName = `tank-type tank-type_${type?.toLowerCase()}`;
 
-    const isInCart = true;
-
     const breadcrumbsList: Breadcrumbs[] = [
       { path: '#', pageName: 'shop' },
-      { path: `#/?nation=${nation}`, pageName: nation },
-      { path: `#/?type=${type}`, pageName: type },
+      { path: `?nation=${nation}#`, pageName: nation },
+      { path: `?type=${type}#`, pageName: type },
       { path: '', pageName: short_name || name },
     ];
 
@@ -101,7 +101,7 @@ class ProductPageComponent {
                   <p class="amount">amount: ${amount}</p>
               </div>
               <div class="product__controls">
-                <button class="cart-btn ${isInCart ? 'cart-btn_active' : ''}">Add To Cart</button>
+                <button class="cart-btn cart-btn_active">Add To Cart</button>
                 <button class="purchase-btn">Purchase</button>
               </div>
             </div>

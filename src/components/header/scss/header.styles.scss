@@ -68,6 +68,10 @@
       color: $title-text-color;
 
       text-transform: uppercase;
+
+      .total-cost {
+        color: $main-text-color;
+      }
     }
 
     .logo-link {
