@@ -25,6 +25,7 @@ class TestDeliveryAddress {
     ['room:', ''],
   ];
   private currentData: string[] = [];
+  private dataValue = '';
   private enumAddress: EAddress = EAddress.COUNTRY;
 
   constructor() {
@@ -37,7 +38,8 @@ class TestDeliveryAddress {
 
   public add(val: string | null): void {
     if (val === null) return;
-    this.temp += val;
+    this.temp += val.trimStart();
+    this.dataValue += val.trimStart();
     if (val === ' ') this.nextAddress();
   }
 
@@ -45,7 +47,7 @@ class TestDeliveryAddress {
     if (this.temp === this.data[0][0]) return;
     if (this.temp === this.currentData[0]) return;
 
-    if (this.temp.trim()[this.temp.length] === ':') return;
+    if (this.temp.trim()[this.temp.length - 1] === ':') return;
     this.temp = this.temp.slice(0, -1);
     const arr = this.temp.split(' ');
 
@@ -62,32 +64,39 @@ class TestDeliveryAddress {
 
     if (result.length <= 0) {
       this.temp = this.currentData[0];
+      this.enumAddress = EAddress.COUNTRY;
+      this.enumCurrentPosition();
       return;
     } else {
       this.temp = result;
       if (this.temp === 'country:') {
         this.enumAddress = EAddress.COUNTRY;
+        this.enumCurrentPosition();
       }
     }
   }
 
   private nextAddress(): void {
+    this.currentData[1] = this.dataValue;
     if (this.checkChunkIsEmpty() === false) return;
     this.enumDown();
     this.enumCurrentPosition();
     if (this.temp.includes('room:')) return;
-    this.temp += this.currentData[0];
+    this.temp += ' ' + this.currentData[0];
   }
 
   private checkChunkIsEmpty(): boolean {
-    if (
-      this.temp[this.temp.length - 1] === ' ' &&
-      typeof this.temp[this.temp.length - 2] === 'string' &&
-      this.temp[this.temp.length - 2] !== ':'
-    ) {
-      return true;
-    }
-    return false;
+    console.log(this.currentData);
+    if (this.currentData[1] === undefined) return true;
+    if (this.currentData[1].trim().length <= 0) return false;
+    return true;
+    // let str = this.temp;
+    // if (str[str.length - 1] === ' ') str = str.slice(0, -1);
+    // // console.log(str);
+    // if (str[str.length - 1] === ' ' && str[str.length - 2] !== ':') {
+    //   return true;
+    // }
+    // return true;
   }
 
   // controll enum
@@ -95,18 +104,28 @@ class TestDeliveryAddress {
     switch (this.enumAddress) {
       case EAddress.COUNTRY:
         this.currentData = this.data[0];
+        this.currentData[1] = this.dataValue; // new
+        this.dataValue = ''; // new
         break;
-      case EAddress.CITY:
+      case EAddress.CITY: // new
         this.currentData = this.data[1];
+        this.currentData[1] = this.dataValue; // new
+        this.dataValue = ''; // new
         break;
       case EAddress.STREET:
         this.currentData = this.data[2];
+        this.currentData[1] = this.dataValue; // new
+        this.dataValue = ''; // new
         break;
       case EAddress.HOUSE:
         this.currentData = this.data[3];
+        this.currentData[1] = this.dataValue; // new
+        this.dataValue = ''; // new
         break;
       case EAddress.ROOM:
         this.currentData = this.data[4];
+        this.currentData[1] = this.dataValue; // new
+        this.dataValue = ''; // new
         break;
     }
   }
