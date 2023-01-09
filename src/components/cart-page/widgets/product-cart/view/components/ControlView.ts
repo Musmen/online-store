@@ -38,9 +38,9 @@ class ControlView extends BaseView {
   public render(): string {
     const elem = `
     <div id="page-control" class="page-control__product-cart">
-      <span>Products In Cart</span>
+      <span>CART PRODUCTS</span>
       <div class="items-control__product-cart">
-        <span>Items:</span>
+        <span>Items/Page:</span>
         <input class="number-products__page-control" type="text" placeholder="5"
                 value="${this.amountProducts}">
       </div>
