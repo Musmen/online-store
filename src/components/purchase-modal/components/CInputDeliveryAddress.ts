@@ -106,8 +106,6 @@ class CInputDeliveryAddress extends BaseComponent {
       }
     }
 
-    console.log(arrB);
-
     let sumB = 0;
     for (let i = 0; i < arrB.length; i++) {
       const elem = arrB[i];
