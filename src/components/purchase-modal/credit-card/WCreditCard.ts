@@ -7,7 +7,7 @@ import BaseComponent from '../components/base/BaseComponent';
 class WCreditCard {
   private root: HTMLElement | undefined;
   private inputs = {
-    cardNumber: new CInputCardNumber('Card Number', this),
+    cardNumber: new CInputCardNumber('Credit Card Number', this),
     cardVP: new CInputCardValidityPeriod('Validity Period'),
     cardCvvCode: new CInputCvvCode('CVV'),
   };
