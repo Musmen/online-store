@@ -35,9 +35,6 @@ class CInputText extends BaseComponent {
   }
 
   private onInput = (event: Event) => {
-    if (event instanceof KeyboardEvent) {
-      console.log(event.key);
-    }
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
 
