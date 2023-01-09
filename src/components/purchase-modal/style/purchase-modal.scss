@@ -7,7 +7,7 @@
   background-color: rgba(1, 44, 78, 0.2);
   backdrop-filter: blur(20px);
   overflow-y: hidden;
-  width: 100vw; 
+  width: 100vw;
   height: 100vh;
   z-index: 100;
 }
@@ -97,14 +97,14 @@
 .close__purchase-modal {
   display: none;
   position: absolute;
-  top: 0px;
+  top: 0;
   right: 10px;
   width: 45px;
   height: 45px;
   margin: 0;
-  
+
   & button {
-    background-image: url("../assets/icon-close.png");
+    background-image: url('../assets/icon-close.png');
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;
@@ -124,9 +124,8 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
-
-@import './breakpoints.scss';

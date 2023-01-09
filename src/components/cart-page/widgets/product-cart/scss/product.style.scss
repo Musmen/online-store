@@ -61,10 +61,6 @@
   align-items: center;
   width: 100%;
   font-size: 20px;
-
-  & * {
-    margin: 0;
-  }
 }
 
 .item__product-cart .control__item {
@@ -79,14 +75,7 @@
 
 .amount__item {
   display: flex;
-
-  & * {
-    margin-right: 5px;
-  }
-
-  & *:last-child {
-    margin-right: 0;
-  }
+  margin-right: 5px;
 }
 
 .add-remove__item {

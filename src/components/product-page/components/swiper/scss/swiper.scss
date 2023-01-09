@@ -27,6 +27,15 @@
 
     border-radius: 2px;
 
+    mask-image: url('../assets/images/mask.png');
+    mask-repeat: no-repeat;
+    mask-position: top center;
+    -webkit-mask-image: url('../assets/images/mask.png');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+
     object-fit: contain;
   }
 }
