@@ -1,40 +1,39 @@
+@import '../../../scss/variables';
+
 .cart-page {
+  max-width: 1200px;
+  margin: 0 auto;
+
   display: grid;
-  grid-template-columns: 70% 30%;
-  // gap: 20px;
-
+  grid-template-columns: 74% 25%;
+  justify-items: center;
+  gap: 10px;
   height: 100%;
-}
 
-@media all and (max-width: 1240px) {
-  .cart-page {
-    gap: 10px;
-  }
-}
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 400;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+  color: $title-text-color;
 
-@media all and (max-width: 1140px) {
-  .cart-page {
-    gap: 0;
-  }
-}
-
-@media all and (max-width: 1024px) {
-  .cart-page {
-    display: flex;
-    flex-direction: column;
-  }
+  user-select: none;
 }
 
 .cart-empty {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  height: 400px;
-  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 100%;
+  margin: auto;
   background-image: url('../assets/cart-empty.png');
   mix-blend-mode: color-dodge;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 90%;
+  background-position: center;
   filter: invert(0.5);
+}
+
+@media all and (max-width: 1200px) {
+  .cart-page {
+    grid-template-columns: 100%;
+    gap: 0;
+  }
 }

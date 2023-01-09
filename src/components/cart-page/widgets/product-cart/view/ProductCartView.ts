@@ -1,7 +1,6 @@
 import BaseView from '../../../components/BaseView';
 import ControlView from './components/ControlView';
 import '../scss/product-cart.style.scss';
-import '../scss/product-cart.breakpoint.scss';
 import ProductView from './components/ProductView';
 import ProductCartController from '../controller/ProductCartController';
 

@@ -3,6 +3,10 @@
     width: 90vw;
     padding: 10px;
   }
+
+  .close__purchase-modal {
+    display: block;
+  }
 }
 
 @media all and (max-width: 768px) {
@@ -40,10 +44,6 @@
 
   .purchase-modal-inner-wrapper {
     margin-bottom: 10px;
-  }
-
-  .close__purchase-modal {
-    display: block;
   }
 }
 

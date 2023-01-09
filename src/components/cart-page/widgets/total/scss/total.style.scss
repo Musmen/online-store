@@ -1,3 +1,5 @@
+@import '../../../../../scss/variables';
+
 .wraper-total-cart {
   height: 100%;
   display: flex;
@@ -6,22 +8,27 @@
 
 .total-cart {
   position: fixed;
+  top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 300px;
+  padding: 10px;
+  padding-bottom: 0;
 
   border: 2px solid #ccc;
+  border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
 .title__total-cart {
   width: 100%;
+  padding-bottom: 5px;
   font-size: 24px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $price-now-color;
   text-align: center;
-  color: #ccc;
+  color: $price-now-color;
 }
 
 .content__total-cart {
@@ -38,6 +45,8 @@
   font-size: 24px;
 
   & span {
+    margin-right: 5px;
+
     color: #ccc;
   }
 }
@@ -59,6 +68,11 @@
   & span {
     color: #ccc;
   }
+
+  .price {
+    margin-left: 5px;
+    color: $price-now-color;
+  }
 }
 
 .promo__total-cart {
@@ -67,34 +81,42 @@
   margin-bottom: 10px;
 
   & input {
-    width: 100px;
-    padding: 5px;
+    width: 140px;
+    height: 30px;
+    padding: 0 10px;
     font-size: 18px;
     text-align: center;
     color: #ccc;
     border: 1px solid #ccc;
+
+    border-radius: 10px;
   }
 
   & input:focus {
-    outline: 2px solid #ccc;
+    border-color: $active-border-color;
   }
 }
 
 .btn__total-cart {
   width: 100%;
+  margin-top: 10px;
   padding: 10px 30px;
-  border: 1px solid #ccc;
   font-size: 18px;
-  color: #ccc;
-  transition: 0.2s;
+
+  color: $title-text-color;
+  background-color: $button-background;
+
+  border-radius: 10px;
+
+  transition: $app-standard-transition;
 
   &:hover {
-    color: orange;
-    border: 1px solid orange;
+    color: $button-background;
+    background-color: $title-text-color;
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 }
 
@@ -118,10 +140,25 @@
   }
 
   & button {
+    width: 60px;
     padding: 2px;
-    border: 1px solid #ccc;
     font-size: 18px;
-    color: #ccc;
+
+    color: $title-text-color;
+    background-color: $button-background;
+
+    border-radius: 10px;
+
+    transition: $app-standard-transition;
+
+    &:hover {
+      color: $button-background;
+      background-color: $title-text-color;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }
 
@@ -132,13 +169,9 @@
   color: white;
 }
 
-@media all and (max-width: 1024px) {
-  .wraper-total-cart {
-    height: 100%;
-    align-items: center;
-  }
-
+@media all and (max-width: 1200px) {
   .total-cart {
-    position: static;
+    position: initial;
+    margin-bottom: 10px;
   }
 }
