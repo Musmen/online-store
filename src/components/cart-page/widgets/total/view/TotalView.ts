@@ -125,7 +125,6 @@ class TotalView {
       if (this.input !== null) {
         this.input.value = '';
       }
-      console.log('sdfsfs');
     } else {
       this.controller.dropDiscount(promoCode.ID);
       promoCode.unmount();
