@@ -45,6 +45,7 @@ class PromoCodeModel {
 
   private applyDisc(): void {
     if (this.tempDiscount.length >= this.promoCodeArr.length) return;
+    this.tempDiscount = [];
     for (let i = 0; i < this.promoCodeArr.length; i++) {
       const promo = this.promoCodeArr[i];
       if (promo.IsDiscountApply) {
@@ -71,6 +72,7 @@ class PromoCodeModel {
 
   public calc(): void {
     this.applyDisc();
+
     if (this.tempDiscount.length <= 0) return;
     const result = this.tempDiscount.reduce((a, b) => a + b);
     const getProcent = (this.tempPrice / 100) * result;
