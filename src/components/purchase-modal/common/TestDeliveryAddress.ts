@@ -47,7 +47,20 @@ class TestDeliveryAddress {
     if (this.temp === this.data[0][0]) return;
     if (this.temp === this.currentData[0]) return;
 
-    if (this.temp.trim()[this.temp.length - 1] === ':') return;
+    if (this.temp.trim()[this.temp.length - 1] === ':') {
+      const arr = this.temp.split(' ');
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === this.currentData[0]) {
+          arr.splice(i, 1);
+          this.enumUp();
+          this.enumCurrentPosition();
+          break;
+        }
+      }
+      this.temp = arr.join(' ');
+      return;
+    }
+
     this.temp = this.temp.slice(0, -1);
     const arr = this.temp.split(' ');
 
