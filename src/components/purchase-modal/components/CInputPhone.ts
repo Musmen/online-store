@@ -43,6 +43,7 @@ class CInputPhone extends BaseComponent {
   }
 
   private onInputValue = (event: Event) => {
+    event.preventDefault();
     if (!(this.root instanceof HTMLInputElement)) return;
     if (!(event instanceof InputEvent)) return;
 

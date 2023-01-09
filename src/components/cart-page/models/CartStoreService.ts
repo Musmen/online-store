@@ -45,7 +45,7 @@ class CartStoreService {
       const elem = getArrID[i];
       const find = storage.getAllProducts().find((item) => Number(elem.id) === item.id);
       if (find !== undefined) {
-        this.add(find, elem.link);
+        this.add(find, `#/product/${find.id}`);
       }
     }
   }
@@ -68,7 +68,6 @@ class CartStoreService {
     const map = this.products.map((item) => {
       const ket = {
         id: String(item.id),
-        link: item.link,
       };
       return ket;
     });
@@ -90,7 +89,6 @@ class CartStoreService {
     const map = this.products.map((item) => {
       const ket = {
         id: String(item.id),
-        link: item.link,
       };
       return ket;
     });
@@ -111,7 +109,6 @@ class CartStoreService {
     const map = this.products.map((item) => {
       const ket = {
         id: String(item.id),
-        link: item.link,
       };
       return ket;
     });
