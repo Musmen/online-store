@@ -1,3 +1,5 @@
+@import './breakpoints.scss';
+
 .credit-card {
   display: flex;
   flex-direction: column;
@@ -62,5 +64,3 @@
 .unionpay {
   background-image: url('../assets/unionpay.png');
 }
-
-@import './breakpoints.scss';

@@ -7,6 +7,7 @@
   align-items: center;
   height: 100%;
   margin-top: 10px;
+  padding-bottom: 10px;
 }
 
 .product {
@@ -224,6 +225,11 @@
   }
 }
 @media all and (max-width: $app-medium-media-query) {
+  .product-centralizer {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+
   .product {
     width: $app-tablet-width;
     padding: 10px;
